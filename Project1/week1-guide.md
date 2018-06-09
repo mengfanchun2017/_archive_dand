@@ -1,4 +1,4 @@
-## day1 今日导学
+## week1 本周导学
 
 ### 前面的话
 
@@ -9,7 +9,11 @@
 - 项目完成后需要在最后部分提交
 - 如果网站有奇怪的问题，请安装Chrome浏览器后再试
 
---pic testing--
+Spreadsheets - 电子表格（比如Excel）
+ERD - Entity Relationship Diagram / 实体关系图
+SQL - a language used to interact with a database / 用于与数据库交互的语言
+
+-- Parch & Posey的例子：（包括5个表格）
 ![](media/15285031623501.jpg)
 
 
