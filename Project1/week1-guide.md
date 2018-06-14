@@ -88,6 +88,7 @@ LIMIT 10;
     - SQL是Structured Query Language的缩写，是人与关系型数据库交互的通用语言。
     - 不同的关系型数据库的代码会有一些区别。
     - sqllite是一个轻量化的关系型数据库，下载后，在命令行调用就可以进入（和Uda的工作空间相同了），下载地址：https://sqlite.org/download.html
+    - python和数据库。有很多操作数据库的接口，比如sqlite3是用来操作sqlite库的。其实python一般不直接操作数据库，而是用一个orm框架作为中间层，用操作对象的方法来操作数据库，避免直接写sql语句，这样比较方便，也可以防止sql注入攻击。sqlalchemy是比较常用的orm，另外一些web框架也会提供自己的orm，比如django自带的就很好用。廖雪峰的一篇orm介绍：https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0014021031294178f993c85204e4d1b81ab032070641ce5000
 
 ### /目标3/：浏览项目内容
 这部分请大家看一下项目的内容。当理解项目背景之后，大家能够知道完成项目的3个步骤：
