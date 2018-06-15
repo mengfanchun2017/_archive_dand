@@ -94,8 +94,36 @@ LIMIT 10;
 这部分请大家看一下项目的内容。当理解项目背景之后，大家能够知道完成项目的3个步骤：
 
 - step1：使用SQL语言过滤并下载csv文件
-- step2：使用spreadsheet工具打（就是excel或者google表单）打开csv文件制作可视化图表
+    - 首先我们要选择需要那个城市，数据中有个表提供了可选，为了能够快速浏览中国都有那个城市，我们还可以用ORDER BY来排序，这样中国的城市就都在一起了：
+    
+    ```sql
+    SELECT *
+    FROM city_list
+    ORDER BY country;
+    ```
+    输出就是这个样地，我们就能知道有那个城市可以选了，选一个你喜欢的就好
+    
+    ```
+    Jilin           China
+    Kunming         China
+    Xuzhou          China
+    Xian            China
+    ```
+    那么我们来选，别忘了地点和时间两个限定条件
+    ！特别注意！数据要选30个比较合适（适合使用正态分布的起始数据数，这个后面会讲，大家明白太小了不好使）！
+    
+    ```sql
+    SELECT *
+    FROM city_data
+    WHERE city = 'Shanghai' AND year > '2010'
+    ORDER BY year;
+    ```
+- step2：使用spreadsheet工具打（就是excel或者google表单）打开csv文件制作可视化图表。
+    - 此处注意按照要求是两个csv文件，可以把两个文件内容copy到1个文件，注意列名要有区分，方便出图。
+    - ！一定要另存为xlsx（google就是google的格式），csv文件是不能存图的信息的！
 - step3：将报告生成pdf文件（另存为pdf即可）并提交项目
+    - 这里按照项目要求，把内容写到word（或者google doc），之后另存为pdf，就可以完成了。
+    - 一定注意不能有中文名字，还有认真看项目要求，不要拉问题！
 
 ## 助教叨叨
 
