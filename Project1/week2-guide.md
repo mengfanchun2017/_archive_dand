@@ -18,10 +18,9 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 >   1. spyder的简单教程：https://blog.csdn.net/LucyGill/article/details/78068985
 > 1. 如果想自己安装也可以选择Atom和Sublime两个，和Spyder是一样的，但要单独安装，有点麻烦。当然，有经验的同学用自己习惯的就好了
 > 1. 在本周第4部分也有Atom的使用教程，可以先看或者顺序看：配置Python编程环境 https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74-4486-911c-d1fae2f03c97/modules/2ceb59e6-2fa6-4177-a8b8-b6130f45ac3f/lessons/09be9405-95aa-4a89-b800-9b60ccde5476/concepts/f411e93c-03f8-4d45-b60f-d4c2832b63d6#
-
-Atom 推荐插件：
-1. pylint
-2. 
+> Atom 推荐插件：
+> 1. pylint 可以对输入的语句做详细提示
+> 2. script 使用command + i 可以在atom中运行py
 
 ## 学习计划
 
@@ -55,13 +54,6 @@ Atom 推荐插件：
 ## 本周目标
 
 本节将按照4个学习部分（4个目标）进行难点指导和扩展，每个目标下的/x/就是对应的小节编号。这部分虽然有些多，但在试学项目中有过一些接触，所以呢：**不要怂，就是肝！**
-
-/21/元祖
-
-```python
-length, width, height = 52, 40, 100
-print("The dimensions are {} x {} x {}".format(length, width, height))
-```
 
 ### /目标1/：数据类型和运算符
 此处和试学项目的内容相同，可以略过有不熟悉的再回看。
@@ -123,72 +115,70 @@ print(passed)
     - docstrings的用途请见 https://github.com/mengfanchun2017/DAND-Basic-P0/blob/master/day3-guide.md 最后一段
     - docstrings的显示有两种方法，注意这两种方式都不用知道函数要求的参数是什么：
 
-```python
+    ```python
 help(functions)
-print(functions)
-```
+print(functions.__doc__)
+    ```
     - 单引号和双引号都是OK的
 - /11Lambda表达式/
     - 当一个简单函数只会使用一次的时候，可以使用匿名函数的方式进行表达。比如下面这个例子，double为赋值对象，涉及2个参数x，y（就是lambada 后面跟的），计算的时候吧两个参数乘积为结果（函数的内容就是冒号后面的东西）
     - 这里重点要讲下map()函数，map函数的作用就是根据函数，对指定的序列做计算
         - 语法是这样的（注意先是要怎么处理数据的函数，后是要处理的数）：
 
-```python
+        ```python
 #map函数
 map(function, iterable, ...)
-```
+        ```
         - 当然这个function也是可以使用lambada一次完成的，两种方式对比如下：
 
-```python
-#使用函数
-def square(x) :            
-    return x ** 2
-map(square, [1,2,3,4,5]) 
-#使用lambada
-map(lambda x: x ** 2, [1, 2, 3, 4, 5])
-#两种方式的结果是相同的：
-[1, 4, 9, 16, 25]
-
-#注意map是可以有多个输入的
-map(lambda x, y: x + y, [1, 3, 5, 7, 9], [2, 4, 6, 8, 10])
-#结果为
-[3, 7, 11, 15, 19]
-```
+        ```python
+        #使用函数
+        def square(x) :            
+            return x ** 2
+        map(square, [1,2,3,4,5]) 
+        #使用lambada
+        map(lambda x: x ** 2, [1, 2, 3, 4, 5])
+        #两种方式的结果是相同的：
+        [1, 4, 9, 16, 25]
+        
+        #注意map是可以有多个输入的
+        map(lambda x, y: x + y, [1, 3, 5, 7, 9], [2, 4, 6, 8, 10])
+        #结果为
+        [3, 7, 11, 15, 19]
+        ```
         - 接下来我们就能看懂教室里的例子了：
 
-```python
-numbers = [
-          [34, 63, 88, 71, 29],
-          [90, 78, 51, 27, 45],
-          [63, 37, 85, 46, 22],
-          [51, 22, 34, 11, 18]
-          ]
-#首先numbers是一个嵌套的列表，有4个元素，每个元素（每行）又包括4个元素   
-
-averages = list(map(lambda x :sum(x)/len(x),numbers))
-#此处的list是将map生成的4行平均数存为一个列表
-#lambada的内容是：sum(num_list)/len(num_list)，用每个元素的加和除以每个元素内部的个数
-#最后numbers是输入
-```
+        ```python
+        numbers = [
+                  [34, 63, 88, 71, 29],
+                  [90, 78, 51, 27, 45],
+                  [63, 37, 85, 46, 22],
+                  [51, 22, 34, 11, 18]
+                  ]
+        #首先numbers是一个嵌套的列表，有4个元素，每个元素（每行）又包括4个元素   
+        
+        averages = list(map(lambda x :sum(x)/len(x),numbers))
+        #此处的list是将map生成的4行平均数存为一个列表
+        #lambada的内容是：sum(num_list)/len(num_list)，用每个元素的加和除以每个元素内部的个数
+        #最后numbers是输入
+        ```
     - filter函数和map类似，请看这个说明：http://www.runoob.com/python/python-func-filter.html
-- /14迭代器和生成器（选学）/ 这部分有点绕，选学，想看更详细的可以参考这2个：
-- https://www.zhihu.com/question/20829330
-- https://www.zhihu.com/question/20829330
+- /14迭代器和生成器（选学）/ 这部分有点绕，选学，想看更详细的可以参考：https://www.zhihu.com/question/20829330
 
 ### /目标4/：脚本编写
 - /8在脚本中接受原始输入/格式化字符串：
     - 这里出现了个有点奇怪的print函数：
     
-```python
-    name = input("Enter your name: ")
-    print("Hello there, {}!".format(name.title()))
-```
+    ```python
+        name = input("Enter your name: ")
+        print("Hello there, {}!".format(name.title()))
+    ```
     有点奇怪啊，不就是让用户输入个名字，不是应该这样的么？
 
-```python
-    name = input("Enter your name: ")
-    print("Hello there, ", name, "!")
-```
+    ```python
+        name = input("Enter your name: ")
+        print("Hello there, ", name, "!")
+    ```
     对的，实际上输出是一样的，后面这个我们比较熟悉，把字符和变量串在一起输出。但是观察下上下对比，是不是上面的这个比较简单呢？这种新的方法叫做：**print格式化字符串。**大家对比观察一下，其实就是在print里面放了个{},并在后面加了个.format(name.title)。这个语句的意思是，打印到{}的时候，把后面这个.format()里的东西打印出来，name.title就是把输入的name的第一个字母改为大写。
     默认{} {} {}...会按照后面.format(a, b, c)来替换,但也可以指定。比如{0}指定的是a，{1}指定的是b，以此类推。举个例子就知道了：
     
@@ -458,8 +448,6 @@ requests==2.11.1
 ```
 
 - /28在线资源/ 一定要看！提升软能力！
-
-IDE vs Interactive Shell （option）
 
 ## 项目内容
 
