@@ -17,6 +17,11 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 >   1. Anaconda的安装和Jupyter Notebook的安装配置请见可选内容：https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/e566ad37-6119-4448-a6bc-7ade73ef3992
 >   1. spyder的简单教程：https://blog.csdn.net/LucyGill/article/details/78068985
 > 1. 如果想自己安装也可以选择Atom和Sublime两个，和Spyder是一样的，但要单独安装，有点麻烦。当然，有经验的同学用自己习惯的就好了
+> 1. 在本周第4部分也有Atom的使用教程，可以先看或者顺序看：配置Python编程环境 https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74-4486-911c-d1fae2f03c97/modules/2ceb59e6-2fa6-4177-a8b8-b6130f45ac3f/lessons/09be9405-95aa-4a89-b800-9b60ccde5476/concepts/f411e93c-03f8-4d45-b60f-d4c2832b63d6#
+
+Atom 推荐插件：
+1. pylint
+2. 
 
 ## 学习计划
 
@@ -49,6 +54,8 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 
 ## 本周目标
 
+本节将按照4个学习部分（4个目标）进行难点指导和扩展，每个目标下的/x/就是对应的小节编号。这部分虽然有些多，但在试学项目中有过一些接触，所以呢：**不要怂，就是肝！**
+
 /21/元祖
 
 ```python
@@ -56,93 +63,407 @@ length, width, height = 52, 40, 100
 print("The dimensions are {} x {} x {}".format(length, width, height))
 ```
 
-### /目标1/：完成项目准备：SQL和移动平均值
-所有部分包括（1-48）小节（不用害怕，每节很短的，2天差不多就看完了），记得完成所有的练习。
+### /目标1/：数据类型和运算符
+此处和试学项目的内容相同，可以略过有不熟悉的再回看。
 
-### /目标2/：复习目标1中的知识点
-对应本周/SQL初探/的内容，重点内容如下，其中/xx/中x为对应相关视频小结，便于大家回看复习。
+### /目标2/：控制流
+此处就不是选学了，对于任何一种编程语言，控制流（循环）是非常重要的，请按以下顺序完成：
+- 完成课程1-16内容
+- 完成试学项目的选看内容 https://github.com/mengfanchun2017/DAND-Basic-P0/blob/master/day6-guide.md
+- 完成课程17-22部分，之后看下面扩展
+- /17 Zip和Enumerate/
+    - 我们先来说zip，就是拉链的意思，可以把进行组合和拆分，课程里的例子非常详细。其实zip函数可以进行行列转换，感兴趣的话可以看这个：https://blog.csdn.net/shomy_liu/article/details/46968651
+    - 接下来是Enumerate函数，其实就是简化for的一个内置函数，让你的循环更漂亮！
+    - 最后是List Comprehension列表推导式：可以把一个设定初始空值，用条件循环填充的循环，简化成一个赋值语句，对比以下，注意else语句的位置是在前面：
 
-- Spreadsheets - 电子表格（比如Excel）
-- ERD - Entity Relationship Diagram / 实体关系图。（了解）大家注意其中有PK和FK，其实这是对右侧column的限制（比如说所有id都是PK，是Primary Key，说明这个列是主键，几种column的标识如下：
-    - 主键约束 SQL中constraint PK_字段 primary key(字段),
-    - 唯一约束 constraint UK_字段 unique key(字段),
-    - 默认约束 constrint DF_字段 default('默认值') for 字段,
-    - 检查约束 constraint CK_字段 check(约束。如：len(字段)>1),
-    - 主外键关系 constraint FK_主表_从表 foreign(外键字段) references 主表(主表主键字段)
+```python
+#for loop:
+capitalized_cities = []
+for city in cities:
+capitalized_cities.append(city.title())
     
-![](media/15285031623501.jpg)
-- /2/SQL - a language used to interact with a database / 用于与数据库交互的语言
-- /28/派生列：Derived Column。我们将现有的列组合，生成的新列称为派生列。在生成以后，可以用AS为这列起名（否则筛选出的结果这列名字是？Column这样的）
+#list comprehension:
+capitalized_cities = [city.title() for city in cities]
 
-```sql
-SELECT standard_qty / (standard_qty + gloss_qty + poster_qty) AS stand_ratio
+#list comprehension else:
+squares = [x**2 if x % 2 == 0 else x + 3 for x in range(9)]
 ```
 
-- /31/逻辑运算符：使用WHERE时，后面的运算符有两种。第一种是表示大小判断的算术运算符，第二种是可以用于进行文本之间判断的逻辑运算符，逻辑运算符包括：
-    - LIKE 表示符合通配符规则的都选出来。其中%表示其他可能的数字。
-    - IN 表示按照后面的值精确匹配（比如过滤出特定顾客的订单），可以是（x，y）这样的多值。
-    
-    ```sql
-    WHERE name LIKE '%one%';
-    WHERE channel IN ('organic', 'adwords');
-    ```
-- /47/SQL语句的顺序是：SFWOL（每行缩写）
+书中练习的解释（要先做完在看呦）：
 
-```sql
-SELECT col1, col2
-FROM table1
-WHERE col3  > 5 AND col4 LIKE '%os%'
-ORDER BY col5
-LIMIT 10;
+```python
+#练习1
+names = ["Rick Sanchez", "Morty Smith", "Summer Smith", "Jerry Smith", "Beth Smith"]
+first_names = [name.split()[0].lower() for name in names]
+##此处split会把Rick Sanchez分解为Rick和Sanchez，通过[0]就是选定了Rick
+print(first_names)
+#['rick', 'morty', 'summer', 'jerry', 'beth']
+
+#练习3
+scores = {
+             "Rick Sanchez": 70,
+             "Morty Smith": 35,
+             "Summer Smith": 82,
+             "Jerry Smith": 23,
+             "Beth Smith": 98
+          }
+
+passed = [name for name, score in scores.items() if score >= 65]
+##scores.items()就是把最前面的scores字典拆分成index（人名，Rick Sanchez）和value（70），这样的话就赋值给前面的name，score
+print(passed)
+
+#输出
+['Beth Smith', 'Summer Smith', 'Rick Sanchez']
 ```
 
-- /47/SQL 语句为什么要大写：其实Select、 SELECT、 SeleCT这样都是能正常运行的。但是大家想过没有，为什么都可以运行？因为SQL语句在执行的时候会先把语句都转换成大写的。如果写了小写的，会在执行时候先进行转换。增加执行的时间，当语句很多的时候影响执行效率。一般大公司会对此做要求。而且在很长代码的时候大写更容易辨认。
-- /Plus/数据库的一致性：本节中提到了SQL之所以能够高效的处理数据库中的数据，是因为数据库的列都是同一类别的数据（也叫Feature）。对于数据库做一点扩展：数据一致性就是数据保持一致，在分布式系统中，可以理解为多个节点中数据的值是一致的。
-    - 强一致性：当更新操作完成之后，任何多个后续进程或者线程的访问都会返回最新的更新过的值。这种是对用户最友好的，就是用户上一次写什么，下一次就保证能读到什么。根据 CAP 理论，这种实现需要牺牲可用性。
-    - 弱一致性：系统并不保证续进程或者线程的访问都会返回最新的更新过的值。系统在数据写入成功之后，不承诺立即可以读到最新写入的值，也不会具体的承诺多久之后可以读到。
-    - 最终一致性：弱一致性的特定形式。系统保证在没有后续更新的前提下，系统最终返回上一次更新操作的值。在没有故障发生的前提下，不一致窗口的时间主要受通信延迟，系统负载和复制副本的个数影响。DNS 是一个典型的最终一致性系统。
-    - 其实一致性是缘由CAP定理：一致性（Consistency）、可用性（Availability）和分区耐受性（Partition tolerance），3个属性只可能同时满足2个.
-- /7/SQL代码是Statements，由clauses组成(SELECT、FROM可以简单的理解一个大写的是一个clauses，很多clauses组成了Statements)。
-- /Plus/配置自己的SQL环境：
-    - SQL是Structured Query Language的缩写，是人与关系型数据库交互的通用语言。
-    - 不同的关系型数据库的代码会有一些区别。
-    - sqllite是一个轻量化的关系型数据库，下载后，在命令行调用就可以进入（和Uda的工作空间相同了），下载地址：https://sqlite.org/download.html
-    - python和数据库。有很多操作数据库的接口，比如sqlite3是用来操作sqlite库的。其实python一般不直接操作数据库，而是用一个orm框架作为中间层，用操作对象的方法来操作数据库，避免直接写sql语句，这样比较方便，也可以防止sql注入攻击。sqlalchemy是比较常用的orm，另外一些web框架也会提供自己的orm，比如django自带的就很好用。廖雪峰的一篇orm介绍：https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/0014021031294178f993c85204e4d1b81ab032070641ce5000
+### /目标3/：函数
+- /5变量作用域/
+    - 如果遇到UnboundLocalError说明函数中对函数外定义的变量进行了修改。Python 不允许函数修改不在函数作用域内的变量。这个原则仅适用于整数和字符串，列表、字典、集合、类中可以在子程序中（子函数）通过修改局部变量达到修改全局变量的目的。
+- /8文档/
+    - docstrings的用途请见 https://github.com/mengfanchun2017/DAND-Basic-P0/blob/master/day3-guide.md 最后一段
+    - docstrings的显示有两种方法，注意这两种方式都不用知道函数要求的参数是什么：
 
-### /目标3/：浏览项目内容
-这部分请大家看一下项目的内容。当理解项目背景之后，大家能够知道完成项目的3个步骤：
+```python
+help(functions)
+print(functions)
+```
+    - 单引号和双引号都是OK的
+- /11Lambda表达式/
+    - 当一个简单函数只会使用一次的时候，可以使用匿名函数的方式进行表达。比如下面这个例子，double为赋值对象，涉及2个参数x，y（就是lambada 后面跟的），计算的时候吧两个参数乘积为结果（函数的内容就是冒号后面的东西）
+    - 这里重点要讲下map()函数，map函数的作用就是根据函数，对指定的序列做计算
+        - 语法是这样的（注意先是要怎么处理数据的函数，后是要处理的数）：
 
-- step1：使用SQL语言过滤并下载csv文件
-    - 首先我们要选择需要那个城市，数据中有个表提供了可选，为了能够快速浏览中国都有那个城市，我们还可以用ORDER BY来排序，这样中国的城市就都在一起了：
+```python
+#map函数
+map(function, iterable, ...)
+```
+        - 当然这个function也是可以使用lambada一次完成的，两种方式对比如下：
+
+```python
+#使用函数
+def square(x) :            
+    return x ** 2
+map(square, [1,2,3,4,5]) 
+#使用lambada
+map(lambda x: x ** 2, [1, 2, 3, 4, 5])
+#两种方式的结果是相同的：
+[1, 4, 9, 16, 25]
+
+#注意map是可以有多个输入的
+map(lambda x, y: x + y, [1, 3, 5, 7, 9], [2, 4, 6, 8, 10])
+#结果为
+[3, 7, 11, 15, 19]
+```
+        - 接下来我们就能看懂教室里的例子了：
+
+```python
+numbers = [
+          [34, 63, 88, 71, 29],
+          [90, 78, 51, 27, 45],
+          [63, 37, 85, 46, 22],
+          [51, 22, 34, 11, 18]
+          ]
+#首先numbers是一个嵌套的列表，有4个元素，每个元素（每行）又包括4个元素   
+
+averages = list(map(lambda x :sum(x)/len(x),numbers))
+#此处的list是将map生成的4行平均数存为一个列表
+#lambada的内容是：sum(num_list)/len(num_list)，用每个元素的加和除以每个元素内部的个数
+#最后numbers是输入
+```
+    - filter函数和map类似，请看这个说明：http://www.runoob.com/python/python-func-filter.html
+- /14迭代器和生成器（选学）/ 这部分有点绕，选学，想看更详细的可以参考这2个：
+- https://www.zhihu.com/question/20829330
+- https://www.zhihu.com/question/20829330
+
+### /目标4/：脚本编写
+- /8在脚本中接受原始输入/格式化字符串：
+    - 这里出现了个有点奇怪的print函数：
     
-    ```sql
-    SELECT *
-    FROM city_list
-    ORDER BY country;
-    ```
-    输出就是这个样地，我们就能知道有那个城市可以选了，选一个你喜欢的就好
+```python
+    name = input("Enter your name: ")
+    print("Hello there, {}!".format(name.title()))
+```
+    有点奇怪啊，不就是让用户输入个名字，不是应该这样的么？
+
+```python
+    name = input("Enter your name: ")
+    print("Hello there, ", name, "!")
+```
+    对的，实际上输出是一样的，后面这个我们比较熟悉，把字符和变量串在一起输出。但是观察下上下对比，是不是上面的这个比较简单呢？这种新的方法叫做：**print格式化字符串。**大家对比观察一下，其实就是在print里面放了个{},并在后面加了个.format(name.title)。这个语句的意思是，打印到{}的时候，把后面这个.format()里的东西打印出来，name.title就是把输入的name的第一个字母改为大写。
+    默认{} {} {}...会按照后面.format(a, b, c)来替换,但也可以指定。比如{0}指定的是a，{1}指定的是b，以此类推。举个例子就知道了：
     
-    ```
-    Jilin           China
-    Kunming         China
-    Xuzhou          China
-    Xian            China
-    ```
-    那么我们来选，别忘了地点和时间两个限定条件
-    ！特别注意！数据要选30个比较合适（适合使用正态分布的起始数据数，这个后面会讲，大家明白太小了不好使）！
+```python
+    ##format methord
+    print('---test1:---')
+    print('I am lucky to eat {} {} {} {}!'.format(4,'eggs', 1, 'spam'))
+    print('---test2:---')
+    print('I am lucky to eat {2} {1} {3} {0}!'.format(4,'eggs', 1, 'spam'))
+    print('---test3:(option)---')
+    print('I am lucky to eat {2:.2f} {1} {3} {0}!'.format(4,'eggs', 1, 'spam'))
+    print('---test4:(option)---')
+    print('I am lucky to eat {2:.2f} {1:#^20} {3} {0}!'.format(4,'eggs', 1, 'spam'))
+```
+输出是这样的：其中test3，4是更为复杂的应用，感兴趣的话看这两个链接：https://blog.csdn.net/i_chaoren/article/details/77922939
+https://www.cnblogs.com/wilber2013/p/4641616.html
     
-    ```sql
-    SELECT *
-    FROM city_data
-    WHERE city = 'Shanghai' AND year > '2010'
-    ORDER BY year;
-    ```
-- step2：使用spreadsheet工具打（就是excel或者google表单）打开csv文件制作可视化图表。
-    - 此处注意按照要求是两个csv文件，可以把两个文件内容copy到1个文件，注意列名要有区分，方便出图。
-    - ！一定要另存为xlsx（google就是google的格式），csv文件是不能存图的信息的！
-- step3：将报告生成pdf文件（另存为pdf即可）并提交项目
-    - 这里按照项目要求，把内容写到word（或者google doc），之后另存为pdf，就可以完成了。
-    - 一定注意不能有中文名字，还有认真看项目要求，不要拉问题！
+```
+---test1:---
+I am lucky to eat 4 eggs 1 spam!
+---test2:---
+I am lucky to eat 1 eggs spam 4!
+---test3:(option)---
+I am lucky to eat 1.00 eggs spam 4!
+---test4:(option)---
+I am lucky to eat 1.00 ########eggs######## spam 4!
+```
+       
+这一节后面还有个eval是把用户输入的内容当作python代码处理。扩展下也可以这样使用，把str字符转化为响应的内容(>>>是输入的代码），大家注意a和b的type是不一样的：
+    
+```python
+     >>> a = "{1: 'a', 2: 'b'}"
+     >>> type(a)
+     <type 'str'>
+     
+     >>> b = eval(a)
+     >>> print b
+     {1: 'a', 2: 'b'}
+     >>> type(b)
+     <type 'dict'>
+```
+    
+- /13处理错误/ 大家理解try、except、else、finally4个语句的执行条件就好了。
+    - try：这是 try 语句中的唯一必需子句。该块中的代码是 Python 在 try 语句中首先运行的代码。
+    - except：如果 Python 在运行 try 块时遇到异常，它将跳到处理该异常的 except 块。
+    - else：如果 Python 在运行 try 块时没有遇到异常，它将在运行 try 块后运行该块中的代码。
+    - finally：在 Python 离开此 try 语句之前，在任何情形下它都将运行此 finally 块中的代码，即使要结束程序，例如：如果 Python 在运行 except 或 else 块中的代码时遇到错误，在停止程序之前，依然会执行此finally 块。
+    - 对于/15/的例子做个简单的说明（以注释方式）：
+    
+```python
+    def create_groups(items, num_groups):
+    #定义函数，2个输入items（多少个东西），分成num_groups(分成多少个组）
+    try:
+        size = len(items) // num_groups
+    #上来是计算每组大小
+    except ZeroDivisionError:
+        print("WARNING: Returning empty list. Please use a nonzero number.")
+        return []
+    #但是当发生ZeroDivisionError时（除数为0的时候的错误），就显示错误并返回空值
+    else:
+        groups = []
+        for i in range(0, len(items), size):
+        #是说从0到items的最大数（就是len(items)这个的结果），按照size（在try语句中得出的每组大小）进行循环
+            groups.append(items[i:i + size])
+            #每一个循环，把当前的组存追加存放到groups里面
+        return groups
+    #如果没报错，就是按照上面这一段把每组都有什么写到groups里面
+    finally:
+        print("{} groups returned.".format(num_groups))
+    #无论怎么处理的，都打印一行提示，使用的是格式化字符串的方式
+    
+print("Creating 6 groups...")
+for group in create_groups(range(32), 6):
+    print(list(group))
+print("\nCreating 0 groups...")
+for group in create_groups(range(32), 0):
+    print(list(group))
+```
+
+输出是这样的：
+    
+```
+Creating 6 groups...
+6 groups returned.
+[0, 1, 2, 3, 4]
+[5, 6, 7, 8, 9]
+[10, 11, 12, 13, 14]
+[15, 16, 17, 18, 19]
+[20, 21, 22, 23, 24]
+[25, 26, 27, 28, 29]
+[30, 31]
+
+Creating 0 groups...
+WARNING: Returning empty list. Please use a nonzero number.
+0 groups returned.
+```
+    
+因为函数输出的是一个嵌套的列表，所以要用上面的方式把列表的每一组元素显示出来，我们加一句print就能看明白了：
+    
+```python
+print(create_groups(range(38),3))
+```
+    
+输出是这样的：
+    
+```
+3 groups returned.
+[range(0, 12), range(12, 24), range(24, 36), range(36, 38)]
+```
+
+另外，即是except有报错输出，也是可以通except as的方式访问并输出的，这一块知道就行了。
+
+- /17读写文件/ 注意append和write区别，和with的用法
+    - 追加文件是用f.append(),使用f.write()将会覆盖文件
+    - 为了避免忘记f.close()关闭一个文件，可以使用with的方式：
+
+```python
+with open('my_path/my_file.txt', 'r') as f:
+    file_data = f.read()
+#和下面的语句是一样的
+f = open('my_path/my_file.txt', 'w')
+file_data = f.read()
+f.close()
+```
+
+- /18读写文件/ 注意这个地方有个新的.split(',')方法，用处是把line里面的内容用，split开，关于readline相关的用法，总结为以下几个例子：
+
+```python
+print('{0:-^30}'.format('print read'))
+#print函数会在结尾自动加入换行
+with open('print.format.py') as song:
+    print(song.read(1))
+    print(song.read(8))
+    print(song.read(8))
+    #print(song.read())
+
+print('{0:-^30}'.format('print read end none'))
+with open('print.format.py') as song:
+    print(song.read(1), end = '')
+    print(song.read(8), end = '')
+    print(song.read(8))
+    #print(song.read())
+
+print('{0:-^30}'.format('print readline'))
+with open('print.format.py') as song:
+    print(song.readline())
+    print(song.readline())
+    print(song.readline(1), end = '\n\n')
+    #可以看出readlline()是每次读取一行（/n换行跟随上一行，不会算成下一行）
+    #如果readline(x),就是读出这行的x个字符
+    #这种方式时结尾的/n不会打印
+    #结尾\n\n 才会换行，一个的话会追加到x个字符后面
+
+print('{0:-^30}'.format('print readlines'))
+with open('print.format.py') as song:
+    print(song.readlines(), end = '\n\n')
+    #readlines是把所有行读入到一个列表中
+
+print('{0:-^30}'.format('for line in file'))
+test_lines = []
+with open('print.format.py') as song:
+#line可以替换成i，只不过line比较明确
+#这里重点是，对于open的文件，for 循环是每次循环一行
+    for line in song:
+        test_lines.append(line.strip())
+    print(test_lines,end = '\n\n')
+
+print('{0:-^30}'.format('split lines'))
+def create_cast_list(filename):
+    cast_list = []
+    #use with to open the file filename
+    with open("circus.csv") as f:
+        for line in f:
+            name=line.split(',')[0]
+            cast_list.append(name.strip())
+        #下面的是最后一个循环的输出，输出做对比就明白很多了：
+        print('{0:-^30}'.format('under is split testing'))
+        print('originial: {0:#^20}'.format(line), end = '')
+        nameall = line.split(',')
+        nameallfirst = line.split(',')[0]
+        print(name)
+        print(nameall)
+        print(nameallfirst)
+    #use the for loop syntax to process each line
+    #and add the actor name to cast_list
+
+    return cast_list
+
+cast_list = create_cast_list('circus.csv')
+for actor in cast_list:
+    print(actor)
+```
+
+结果如下，感兴趣的可以自己研究下：
+
+```
+----------print read----------
+#
+#format 
+methord
+
+-----print read end none------
+##format methord
+
+--------print readline--------
+##format methord
+
+print('---test1:---')
+
+p
+
+-------print readlines--------
+['##format methord\n', "print('---test1:---')\n", "print('I am lucky to eat {} {} {} {}!'.format(4,'eggs', 1, 'spam'))\n", '\n', "print('---test2:---')\n", "print('I am lucky to eat {2} {1} {3} {0}!'.format(4,'eggs', 1, 'spam'))\n", '\n', "print('---test3:(option)---')\n", "print('I am lucky to eat {2:.2f} {1} {3} {0}!'.format(4,'eggs', 1, 'spam'))\n", '\n', "print('---test4:(option)---')\n", "print('I am lucky to eat {2:.2f} {1:#^20} {3} {0}!'.format(4,'eggs', 1, 'spam'))\n"]
+
+-------for line in file-------
+['##format methord', "print('---test1:---')", "print('I am lucky to eat {} {} {} {}!'.format(4,'eggs', 1, 'spam'))", '', "print('---test2:---')", "print('I am lucky to eat {2} {1} {3} {0}!'.format(4,'eggs', 1, 'spam'))", '', "print('---test3:(option)---')", "print('I am lucky to eat {2:.2f} {1} {3} {0}!'.format(4,'eggs', 1, 'spam'))", '', "print('---test4:(option)---')", "print('I am lucky to eat {2:.2f} {1:#^20} {3} {0}!'.format(4,'eggs', 1, 'spam'))"]
+
+---------split lines----------
+----under is split testing----
+originial: The Fred Tomlinson Singers,  Amantillado Chorus / ... (7 episodes, 1969-1973)
+The Fred Tomlinson Singers
+['The Fred Tomlinson Singers', '  Amantillado Chorus / ... (7 episodes', ' 1969-1973)\n']
+The Fred Tomlinson Singers
+Graham Chapman
+Eric Idle
+Terry Jones
+Michael Palin
+Terry Gilliam
+John Cleese
+Carol Cleveland
+Ian Davidson
+John Hughman
+The Fred Tomlinson Singers
+```
+
+- /20导入本地模块/ if main
+    - if __name__ == '__main__' 简单的理解就是： 如果模块是被直接运行的，则代码块被运行，如果模块是被导入的，则代码块不被运行
+    - 是为了在导入时候不运行（被调用才运行）的限制
+    - 详细说明：http://blog.konghy.cn/2017/04/24/python-entry-program/
+- /23标准库/
+    - 这里介绍了random标准库的两个用法，总结如下：
+
+```python
+import random
+word_list = ['tatoo', 'happy', 'apple', 'ios', 4]
+
+def generate_password():
+    return str(random.choice(word_list)) + str(random.choice(word_list)) + str(random.choice(word_list))
+    #增加了str确保如果wordlist里面有4这样的数字可以转化为字符
+print(generate_password())
+
+def generate_password2():
+    return ''.join(random.sample(word_list,5))
+    #join方式就不能加str，要求wordlist都是字符，但是既然是wordlist就应该都保证是字符
+    #而不是在写处理代码时候再额外处理不推进str的方式
+print(generate_password2())
+```
+
+- /26第三方库/
+    - 在安装python或者ananconda后，可以使用：`pip install package_name` 来安装需要的包。推荐的一些安装包很实用，链接归档 https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74-4486-911c-d1fae2f03c97/modules/2ceb59e6-2fa6-4177-a8b8-b6130f45ac3f/lessons/09be9405-95aa-4a89-b800-9b60ccde5476/concepts/45252bd7-50b1-41f0-bed5-cef100501c12当然也可以将需要的包放在一个文件中，批量安装`pip install -r requirements.txt` ，requeirement.txt文件示例如下：
+    
+```
+beautifulsoup4==4.5.1
+bs4==0.0.1
+pytz==2016.7
+requests==2.11.1
+```
+
+- /28在线资源/ 一定要看！提升软能力！
+
+IDE vs Interactive Shell （option）
+
+## 项目内容
+
+
 
 ## 助教叨叨
 
