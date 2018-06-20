@@ -18,10 +18,16 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 >   1. spyder的简单教程：https://blog.csdn.net/LucyGill/article/details/78068985
 > 1. 如果想自己安装也可以选择Atom和Sublime两个，和Spyder是一样的，但要单独安装，有点麻烦。当然，有经验的同学用自己习惯的就好了
 > 1. 在本周第4部分也有Atom的使用教程，可以先看或者顺序看：配置Python编程环境 https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74-4486-911c-d1fae2f03c97/modules/2ceb59e6-2fa6-4177-a8b8-b6130f45ac3f/lessons/09be9405-95aa-4a89-b800-9b60ccde5476/concepts/f411e93c-03f8-4d45-b60f-d4c2832b63d6#
-> Atom 推荐插件：
-> 1. pylint 可以对输入的语句做详细提示
-> 2. script 使用command + i 可以在atom中运行py
 
+- 对于Atom的插件再补充一点点：
+    - ![打开安装界面](https://ws2.sinaimg.cn/large/006tKfTcly1fshgle7cbcj30c40aa3yw.jpg)
+    - 搜索并安装（配置也在packages的下面）
+    - ![安装](https://ws2.sinaimg.cn/large/006tKfTcly1fshgqd8gnvj30ip0b7jrn.jpg)
+    - 安装时可能会需要安装这个扩展依赖的别的扩展，一路确认就好了
+    - 推荐扩展：pylint 可以对输入的语句做详细提示，当你输入后会这样：
+    - ![](https://ws1.sinaimg.cn/large/006tKfTcly1fshguqjuzlj308t0a1q2z.jpg)
+    - 推荐扩展：script 使用command + i 可以在atom中运行py
+    
 ## 学习计划
 
 看着还挺丰富的对吧，还记得我们完成项目的3个阶段么？
