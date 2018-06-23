@@ -1,4 +1,4 @@
-# week2/12 本周导学
+# week3a/12 本周导学
 
 ## 前面的话
 
@@ -56,6 +56,9 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 | 周7 | /小结/本周总结 | 总结、笔记、思考 |
 | 周1 | /选学/自主学习修养 | 自主学习（选学部分）或调休 |
 
+- 图例
+- ~~这是选学内容，可以光看导学不看教室内容~~
+
 
 ## 本周目标
 
@@ -63,6 +66,39 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 
 ### /目标1/：数据类型和运算符
 此处和试学项目的内容相同，可以略过有不熟悉的再回看。
+
+- ~~/4.Numpy和Pandas中的一维数组/~~ 了解下哦使用pandas读入csv文件比直接使用unicodecsv读入要快就好了
+- **/5.NumPy 数组/** 对代码def那里的说明：
+
+    - dtpye说明
+
+```python
+def max_employment(countries, employment):
+#定义了一个函数max_employment,需要输入两个参数countries和employment
+
+    max_country = None
+    max_value = 0
+    #将最大城市设为空，将最大值设为0
+    for i in range(len(countries)):
+        country = countries[i]
+        country_employment = employment[i]
+    #开始循环，对countries中的国家，循环读取国家名和就业率
+        if country_employment > max_value:
+            max_country = country
+            max_value = country_employment
+        #如果就业率比最大值还大，就把新发现的作为新的最大值和拥有最大值的国家
+            
+     return (max_country, max_value)
+     #函数结束，返回两个找到的最大值和对应国家
+```
+
+- /8.练习：计算整体完成率/ ~~按位与与逻辑与~~，此处只看看练习，了解numpy的向量化运算就可以了。感兴趣的可以看下面3个链接：
+    - 区别：http://www.cnblogs.com/wudongyang/p/4340003.html
+    - numpy逻辑或说明：https://docs.scipy.org/doc/numpy/reference/generated/numpy.logical_or.html
+    - numpy逻辑或说明：https://docs.scipy.org/doc/numpy/reference/generated/numpy.logical_not.html
+```python
+
+```
 
 ### /目标2/：控制流
 此处就不是选学了，对于任何一种编程语言，控制流（循环）是非常重要的，请按以下顺序完成：
@@ -212,18 +248,6 @@ I am lucky to eat 1.00 eggs spam 4!
 ---test4:(option)---
 I am lucky to eat 1.00 ########eggs######## spam 4!
 ```
-print再扩展一点，如果看到这样的家伙 + variable + ，是一种在字符串中加变量的方法，其实和逗号分隔是等价的:
-
-```python
-print('hi ' + name + ' !')
-print("hi " + name + " !")
-print('hi', name, '!')
-print("hi", name, "!")
-#这4个的输出都是一样的：（注意下代码前后的空格是不一样的，所以前面的也会用到）
-hi handsome !
-```
-
-其实普通的就print，需要处理复杂的就.format (.format还有一种简化写法，不管他）。print就都OK了，详细的带入列表和字符串的方法：https://stackoverflow.com/questions/17153779/how-can-i-print-variable-and-string-on-same-line-in-python
        
 这一节后面还有个eval是把用户输入的内容当作python代码处理。扩展下也可以这样使用，把str字符转化为响应的内容(>>>是输入的代码），大家注意a和b的type是不一样的：
     
