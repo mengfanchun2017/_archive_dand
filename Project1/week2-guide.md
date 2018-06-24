@@ -135,6 +135,7 @@ print(functions.__doc__)
 #map函数
 map(function, iterable, ...)
         ```
+        
         - 当然这个function也是可以使用lambada一次完成的，两种方式对比如下：
 
         ```python
@@ -152,6 +153,7 @@ map(function, iterable, ...)
         #结果为
         [3, 7, 11, 15, 19]
         ```
+        
         - 接下来我们就能看懂教室里的例子了：
 
         ```python
@@ -168,6 +170,7 @@ map(function, iterable, ...)
         #lambada的内容是：sum(num_list)/len(num_list)，用每个元素的加和除以每个元素内部的个数
         #最后numbers是输入
         ```
+        
     - filter函数和map类似，请看这个说明：http://www.runoob.com/python/python-func-filter.html
 - /14迭代器和生成器（选学）/ 这部分有点绕，选学，想看更详细的可以参考：https://www.zhihu.com/question/20829330
 
