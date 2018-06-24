@@ -125,6 +125,7 @@ print(passed)
 help(functions)
 print(functions.__doc__)
     ```
+    
     - 单引号和双引号都是OK的
 - /11Lambda表达式/
     - 当一个简单函数只会使用一次的时候，可以使用匿名函数的方式进行表达。比如下面这个例子，double为赋值对象，涉及2个参数x，y（就是lambada 后面跟的），计算的时候吧两个参数乘积为结果（函数的内容就是冒号后面的东西）
@@ -135,6 +136,7 @@ print(functions.__doc__)
 #map函数
 map(function, iterable, ...)
         ```
+        
         - 当然这个function也是可以使用lambada一次完成的，两种方式对比如下：
 
         ```python
