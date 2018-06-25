@@ -49,15 +49,17 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 
 | 学习时间 | 学习资源 | 学习重点 |
 | --- | --- | --- |
-| 周2 | /助教/发布当周导学 | 浏览导学文件内容开始学习 |
-| 周3、周4 | /Uda/线上内容 | 学习Uda Classroom内容 |
+| 周3 | /助教/发布当周导学 | 浏览导学文件内容开始学习 |
+| 周4 | /Uda/线上内容 | 学习Uda Classroom内容 |
 | 周5 | /助教/1v1预约 | 难点可预约1v1语音指导 |
 | 周6 20:30-21:30 | /助教/视频讲解 | 讲解本周导学内容、回答疑难问题 |
 | 周7 | /小结/本周总结 | 总结、笔记、思考 |
 | 周1 | /选学/自主学习修养 | 自主学习（选学部分）或调休 |
 
-**图例：**
-- ~~这是选学内容，可以光看导学不看教室内容~~
+**重点提示：**[]([]())
+
+- 每周任务会拆分成不同目标，对应的是课程中的Lesson，每个Lesson中的小节将通过{编号.内容}进行对应
+- {}前面将会放置1到3个*，代表重要性从低到高。请优先学习高优先级的任务
 
 
 ## 本周目标
@@ -66,10 +68,13 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 
 ### /目标1/：xx
 
-- ~~/4.Numpy和Pandas中的一维数组/~~ 了解下哦使用pandas读入csv文件比直接使用unicodecsv读入要快就好了
-- **/5.NumPy 数组/** 对代码def那里的说明：
+#### *{4.Numpy和Pandas中的一维数组}
 
-    - dtpye说明
+了解下哦使用pandas读入csv文件比直接使用unicodecsv读入要快就好了。
+
+#### **{5.NumPy 数组}
+
+ 对代码def那里的说明：
 
 ```python
 def max_employment(countries, employment):
@@ -91,21 +96,22 @@ def max_employment(countries, employment):
      #函数结束，返回两个找到的最大值和对应国家
 ```
 
-- /8.练习：计算整体完成率/ ~~按位与与逻辑与~~，此处只看看练习，了解numpy的向量化运算就可以了。感兴趣的可以看下面3个链接：
-    - 区别：http://www.cnblogs.com/wudongyang/p/4340003.html
-    - numpy逻辑或说明：https://docs.scipy.org/doc/numpy/reference/generated/numpy.logical_or.html
-    - numpy逻辑或说明：https://docs.scipy.org/doc/numpy/reference/generated/numpy.logical_not.html
+#### **{8.练习：计算整体完成率}
+
+按位与与逻辑与，此处只需要看看练习，了解numpy的向量化运算就可以了。感兴趣的可以看下面3个链接：
+- 区别：http://www.cnblogs.com/wudongyang/p/4340003.html
+- numpy逻辑或说明：https://docs.scipy.org/doc/numpy/reference/generated/numpy.logical_or.html
+- numpy逻辑或说明：https://docs.scipy.org/doc/numpy/reference/generated/numpy.logical_not.html
+
+#### **{9.标准化数据/学会调用numpy的功能}
+
+首先说明一下为什么我们要标准化呢？因为在很多数据进行比较的时候，范围、比例等都会有很大的变化，而这些体现在数值上来讲，人根本就没有什么感觉（看到就发懵了，不好判断）。那么我们怎么办来比较不同的数据呢：**我们把大家按照比例缩放，都放到一个区域中呗，比如所有的数据都在0-1之间，那么我看到接近1的就知道很高了，接近0的就很低了，其他的不用考虑。**前面的说明只是一个粗浅的举例，这种方式有很规则和应用。
+
+细抠的话还有标准化和归一化等等细节，在机器学习中接触比较多，大家有兴趣看链接：https://blog.csdn.net/fontthrone/article/details/74067064
+
+那么接下来这部分的例子就是要衡量各个国家的就业率，通过标准化，我们能够看出不同国家做的好坏，代码解释如下：
 
 ```python
-
-```
-
-- /9.标准化数据/学会调用numpy的功能
-    - 首先说明一下为什么我们要标准化呢？因为在很多数据进行比较的时候，范围、比例等都会有很大的变化，而这些体现在数值上来讲，人根本就没有什么感觉（看到就发懵了，不好判断）。那么我们怎么办来比较不同的数据呢：**我们把大家按照比例缩放，都放到一个区域中呗，比如所有的数据都在0-1之间，那么我看到接近1的就知道很高了，接近0的就很低了，其他的不用考虑。**前面的说明只是一个粗浅的举例，这种方式有很规则和应用。
-    - 细抠的话还有标准化和归一化等等细节，在机器学习中接触比较多，大家有兴趣看链接：https://blog.csdn.net/fontthrone/article/details/74067064
-    - 那么接下来这部分的例子就是要衡量各个国家的就业率，通过标准化，我们能够看出不同国家做的好坏，代码解释如下：
-
-    ```python
 #其实这里的函数没有必要，只用一行就ok了
 def standardize_data(values):
     standardize_values = (values - values.mean()) / values.std()
@@ -113,11 +119,13 @@ def standardize_data(values):
     #但是其中values.mean()是一个阵列所有元素的均值，是一个固定值；同样values.std()是标准差，也是一个固定值。
     #标准差这里我们第四个项目再讲，大家看明白是怎么计算就好了
     return standardize_values
-    ```
+```
 
-    - 关于numpy强大的数学运算功能，请大家参见：https://www.tutorialspoint.com/numpy/numpy_statistical_functions.htm
-- /10.练习：NumPy索引数组/ 了解Array的索引数组使用方式，可以在一个数组后面加```[条件]```对数组进行过滤
-- 
+关于numpy强大的数学运算功能，请大家参见：https://www.tutorialspoint.com/numpy/numpy_statistical_functions.htm
+
+#### *{10.练习：NumPy索引数组}
+
+了解Array的索引数组使用方式，可以在一个数组后面加```[条件]```对数组进行过滤.
 
 ### /目标2/：控制流
 此处就不是选学了，对于任何一种编程语言，控制流（循环）是非常重要的，请按以下顺序完成：
