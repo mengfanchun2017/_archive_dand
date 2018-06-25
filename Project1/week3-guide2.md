@@ -2,7 +2,7 @@
 
 ## 前面的话
 
-同学们，第1周我们就干掉了一个项目，一定很兴奋吧！如果进度拉下了请优先提交项目再开始本周的学习。这周开始的4周内，我们将会完成第二个项目，从时间安排来讲，大家也能看到是个大部头，那么我们来拆解一下：
+同学们，第2周我们进入到了项目2的第一周，学习了Python的基础知识。这一周我们将开始学习Python中的NumPy和Pandas两个第三方库，这两个库是我们对数据进行分析的杀手锏。保留了第二个项目的介绍如下：
 
 **项目2:探索美国共享单车数据**
 
@@ -19,29 +19,29 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 > 1. 如果想自己安装也可以选择Atom和Sublime两个，和Spyder是一样的，但要单独安装，有点麻烦。当然，有经验的同学用自己习惯的就好了
 > 1. 在本周第4部分也有Atom的使用教程，可以先看或者顺序看：配置Python编程环境 https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74-4486-911c-d1fae2f03c97/modules/2ceb59e6-2fa6-4177-a8b8-b6130f45ac3f/lessons/09be9405-95aa-4a89-b800-9b60ccde5476/concepts/f411e93c-03f8-4d45-b60f-d4c2832b63d6#
 
-- 对于Atom的插件再补充一点点：
-    - ![打开安装界面](https://ws2.sinaimg.cn/large/006tKfTcly1fshgle7cbcj30c40aa3yw.jpg)
-    - 搜索并安装（配置也在packages的下面）
-    - ![安装](https://ws2.sinaimg.cn/large/006tKfTcly1fshgqd8gnvj30ip0b7jrn.jpg)
-    - 安装时可能会需要安装这个扩展依赖的别的扩展，一路确认就好了
-    - 推荐扩展：pylint 可以对输入的语句做详细提示，当你输入后会这样：
-    - ![](https://ws1.sinaimg.cn/large/006tKfTcly1fshguqjuzlj308t0a1q2z.jpg)
-    - 推荐扩展：script 使用command + i 可以在atom中运行py
+对于Atom的插件再补充一点点：
+
+![打开安装界面](https://ws2.sinaimg.cn/large/006tKfTcly1fshgle7cbcj30c40aa3yw.jpg)
+
+- 搜索并安装（配置也在packages的下面）
+
+![安装](https://ws2.sinaimg.cn/large/006tKfTcly1fshgqd8gnvj30ip0b7jrn.jpg)
+
+- 安装时可能会需要安装这个扩展依赖的别的扩展，一路确认就好了
+- 推荐扩展：pylint 可以对输入的语句做详细提示，当你输入后会这样：
+
+![](https://ws1.sinaimg.cn/large/006tKfTcly1fshguqjuzlj308t0a1q2z.jpg)
+
+- 推荐扩展：script 使用command + i 可以在atom中运行py
     
 ## 学习计划
 
-看着还挺丰富的对吧，还记得我们完成项目的3个阶段么？
-
-> 1. 第一阶段，攻克所有重难点，完成项目梗概（高强度学习阶段）；
-> 2. 第二阶段，提交和修改（提交阶段）；
-> 3. 第三阶段，进度慢点同学的查漏补缺（灵活假期），这样前紧后松的节奏来安排的。
-
-这4周我们讲完成**/4. Python入门/**部分的所有内容，拆分后的每周工作是这样的：
+看着还挺丰富的对吧，这4周我们讲完成**/4. Python入门/**部分的所有内容，拆分后的每周工作和每日工作是这样的：
 
 | 时间 | 学习重点 | 对应内容（按照名字找就好了） |
 | --- | --- | --- |
 | 第1周 | Python基础内容 | 数据类型和运算符、控制流、函数、脚本编写 |
-| 第2周 | Python数据处理内容 | Numpy & Pandas - 第一、二部分 |
+| **第2周** | **Python数据处理内容** | **Numpy & Pandas - 第一、二部分** |
 | 第3周 | 运用前2周的知识完成项目 | 项目：探索美国共享单车数据 |
 | 第4周 | 项目修改与通过 | 修改项目、查缺补漏、休息调整 |
 
@@ -66,7 +66,7 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 
 本节将按照4个学习部分（4个目标）进行难点指导和扩展，每个目标下的/x/就是对应的小节编号。这部分虽然有些多，但在试学项目中有过一些接触，所以呢：**不要怂，就是肝！**
 
-### /目标1/：xx
+### /目标1/：Numpy & Pandas 第一部分
 
 #### *{4.Numpy和Pandas中的一维数组}
 
@@ -74,7 +74,12 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 
 #### **{5.NumPy 数组}
 
- 对代码def那里的说明：
+ Numpy中的Arrays和list列表很像，区别如下：
+ 
+  - Arrays中的元素要都是同一类别（数字，字符只能有一种）
+  - 可以使用Numpy中的很多函数，比如平均值mean(), 标准差std()。虽然list也可以使用这些函数，但Arrays运行起来更快
+  - Arrays可以扩展到多维
+  - 代码练习中的 if True：就会执行后面一小段程序，如果是 if False：就不会执行，是一种测试的习惯，大家可以更改True 或 False 来决定运行那一块代码。对代码def那里的说明如下：
 
 ```python
 def max_employment(countries, employment):
@@ -126,6 +131,89 @@ def standardize_data(values):
 #### *{10.练习：NumPy索引数组}
 
 了解Array的索引数组使用方式，可以在一个数组后面加```[条件]```对数组进行过滤.
+
+#### *{12.练习：原地与非原地}
+
+了解list和numpy array在对于元素修改的不同之处。
+
+#### ***{13.练习：Pandas Series}
+
+从这节开始我们将会学习Pandas库，Pandas库里的Series和之前学习的Numpy Array是类似的。**Pandas是Python处理数据最重要的库，以下几节需要多看几遍。**相比之下，有更多扩展性，比如说：
+
+Series.describe()方法，对于Series的数据内容自动计算平均值、标准偏差、中位数和一些其他的统计数据。做总体描述，便于观察数据情况。
+
+Series包括了Array的大部分功能，总结如下（假设这个Series命名为S）：
+- 访问元素 Accessing Elements - S[0], S[3:7]
+- 循环 Looping - for x in S
+- 功能计算 Convenient Functions - S.mean(), S.max()
+- 向量运算 Vectorized Operation - S1 + S2
+
+此处的练习还用到了上周的逻辑判断的内容，讲解一下函数部分：
+
+```python
+def variable_correlation(variable1, variable2):
+#此处定义了函数，两个变量，就是life_expectancy和gdp了
+    both_above = (variable1 > variable1.mean()) & \
+        (variable2 > variable2.mean())
+    #显示看都大于平均值的。首先看两个小括号，第一个是用变量1的每个值和变量1的平均值比较（.mean()就是求平均值），第二个小括弧是比较变量2的。两个都比较好了之后，在做与操作（就是说都是Ture的话，结果就为True），其中 \ 是python中的换行，为了不超过一行79个字符的限制
+    both_below = (variable1 < variable1.mean()) & \
+        (variable2 < variable2.mean())
+    #同上，改为判断是不是都低于平均值
+
+    is_same_direction = both_above | both_below
+    #接下来，根据要求吧都高于和都低于的进行与操作，就能看出同方向变化的量是谁了（这里的意思是看看两个指标是不是相关啊）
+    num_same_direction = is_same_direction.sum()
+    #接着求出有多少个是相关的，运用的是.sum()就是求和，因为Ture是1所以所有True的加起来就是17了
+    num_different_direction = len(variable1) - num_same_direction
+    #最后，那么不相关的就是用总数减去相关的就好了，len求总数（就是看这个序列有多少个元素）
+
+    return (num_same_direction, num_different_direction)
+    #函数的最后，返回这两个值17个相关，3个不相关。感觉预期生命和GDP还是有关系的对不对。（这个练习可以当成一个mini项目了）
+```
+
+#### ***{14.练习：Series索引}
+
+这节里面一句话亮了：**Numpy arrays是增强版的 Python lists，Pandas series像是Python lists 与 dictionary的结合。lists列表是根据顺序位置获取值的，而dictionay字典是通过key-value对应来获取值的，而在series中这两种方式都可以，对应的是iloc和loc方式。**
+
+这里面要注意的一个是里面使用的argmax()已经被idxmax()替代了，代码解释如下：
+
+```python
+def max_employment(employment):
+    employment_pd = pd.Series(employment, index = countries)
+    #将employment的数据转换为Series，索引使用countries列表中的数据
+    max_country = employment_pd.idxmax()
+    #使用idmax找到最大的索引
+    max_value = employment_pd.loc[max_country]
+    #使用.loc[index]将最大索引对应的数值赋给max_value
+    return (max_country, max_value)
+    #返回max_country与max_value
+```
+
+#### **{17.练习：Pandas Series apply()}
+
+- 本节大家记住Panda series和Python lists在类似的，可以使用for循环。
+- 并且学了一个.apply()的方法。可以将()的函数作用于所有serie的元素中，并生成新的serie。
+- 还有做练习的时候用到一个.split方法，是将输入分隔使用的，我将在下面代码中用注释讲解，感兴趣的也可以看官方文档：https://docs.python.org/2/library/stdtypes.html#str.split 中文介绍文档：https://my.oschina.net/hkmax/blog/146553
+
+```python
+def reverse_names(names):
+    splited = names.split()
+    #首先使用split将名字分为两个名字比如‘Lao Meng’就会变成['Lao', 'Meng']
+    #当变成一个列表之后呢，就可以使用[索引号]分别选择‘Lao’和‘Meng’了
+    new_names = splited[1] + ' ' + splited[0]
+    #splited[1]代表‘Meng’，splited[0]代表‘Lao’
+    #通过对new_names赋值，改变了名字的前后顺序
+    #注意中间加了一个‘ ’空格
+    return new_names
+    #最后函数返回new_names新的名字
+    
+print(names.apply(reverse_names)) 
+#使用apply调用刚刚的函数，那么每个series中的值都会被这个函数处理一遍   
+```
+
+#### *{18.练习：在Pandas中绘图}
+
+**完全作为选修内容，在项目2中不要求。**大家知道import的seaborn是一个用于绘图的库就好了。一个中文的说明：http://blog.mazhangjing.com/2018/03/29/learn_seaborn/#233-多变量多图形拟合叠加
 
 ### /目标2/：控制流
 此处就不是选学了，对于任何一种编程语言，控制流（循环）是非常重要的，请按以下顺序完成：
