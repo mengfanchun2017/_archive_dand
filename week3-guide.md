@@ -459,7 +459,83 @@ print(grades_df)
 
 #### ***{16.练习：Pandas groupby()}
 
-#### ***{17.练习：每小时入站和出战数}
+.groupby()方法的用处是根据需要把数据集拆分为子集，比如说练习中的是将整个数据拆分为周1到周7，一同7个子集。之后就可以得到周1到周7的每天均值，进行数据分析。
+
+练习中的if False：后面的代码框不会运行，当改成if True：之后就会运行，这个Uda练习的一个特点，比较方便进行测试。另外if 0:和if 1:也是一样的效果。
+
+```python
+filename = 'nyc-subway-weather.csv'
+#因为下载的csv文件名是-而不是_，将代码中的文件名改为上面
+#为了简化，将文件放到与本py文件一个目录就可执行
+subway_df = pd.read_csv(filename)
+print(subway_df.head())
+#使用.head()检查数据的前5行
+print(subway_df.groupby('day_week').mean())
+#根据‘day_week'也就是一周7天，对数据集进行拆分，并求各个拆分组的均值（就是把所有数据按照周一到周日分成7份，并对每份求均值）。可以考察每周到底哪一天系统运作比较忙。
+print(subway_df.groupby('day_week').mean()['ENTRIESn_hourly'])
+#对上面的输出中的['ENTRIESn_hourly']内容单独展示
+```
+
+#### ***{17.练习：每小时入站和出站数}
+
+本部分为本周最后的必学部分，就是把这周的东西放在一起，最后输出每小时的初入站人数。里面的内容前面分步都接触过，整合起来，成就感有没有！
+
+```python
+import numpy as np
+import pandas as pd
+
+values = np.array([1, 3, 2, 4, 1, 6, 4])
+example_df = pd.DataFrame({
+    'value': values,
+    'even': values % 2 == 0,
+    'above_three': values > 3
+}, index=['a', 'b', 'c', 'd', 'e', 'f', 'g'])
+
+#print(example_df)
+
+# Change False to True for each block of code to see what it does
+
+# Standardize each group
+if 0:
+    def standardize(xs):
+        return (xs - xs.mean()) / xs.std()
+    grouped_data = example_df.groupby('even')
+    print(grouped_data)
+    print()
+    #只打印groupby的输出是一个提示，因为没有指定要打印分组之后的什么东西
+    print(grouped_data['value'].apply(standardize))
+    #使用.apply将grouped_data分组后的value的值进行标准化计算
+
+# Find second largest value in each group
+if 1:
+    def second_largest(xs):
+        sorted_xs = xs.sort_values(inplace=False, ascending=False)
+        #如果报错'Series' object has no attribute 'sort'
+        #是因为pandas版本已经比实例中的高
+        #将sort改为sort_values
+        return sorted_xs.iloc[1]
+    # 先对输出排序，再使用.iloc[1]输出排序后的第二个元素
+    grouped_data = example_df.groupby('even')
+    print(grouped_data['value'].apply(second_largest))
+
+# --- Quiz ---
+# DataFrame with cumulative entries and exits for multiple stations
+ridership_df = pd.DataFrame({
+    'UNIT': ['R051', 'R079', 'R051', 'R079', 'R051', 'R079', 'R051', 'R079', 'R051'],
+    'TIMEn': ['00:00:00', '02:00:00', '04:00:00', '06:00:00', '08:00:00', '10:00:00', '12:00:00', '14:00:00', '16:00:00'],
+    'ENTRIESn': [3144312, 8936644, 3144335, 8936658, 3144353, 8936687, 3144424, 8936819, 3144594],
+    'EXITSn': [1088151, 13755385,  1088159, 13755393,  1088177, 13755598, 1088231, 13756191,  1088275]
+})
+
+def get_hourly_entries_and_exits(entries_and_exits):
+    return entries_and_exits - entries_and_exits.shift(1)
+    # 使用之前的shift方法
+
+print(ridership_df.groupby('UNIT')['ENTRIESn', 'EXITSn'].apply(get_hourly_entries_and_exits))
+# 按照UNIT进行分组，并调用函数计算每小时的值
+# 注意如果不指定对['ENTRIESn', 'EXITSn']做操作的话会报错
+# 因为其他列包含数值，使用.apply()会报错的
+```
 
 #### *{18.练习：合并Pandas DataFrame}
 
@@ -490,7 +566,7 @@ print(grades_df)
 
 ## 资源列表
 
-**导学资源：**
+**导学文件：**
 
 - 00-试学导学内容：https://github.com/mengfanchun2017/DAND-Basic-P0/blob/master/day7-guide.md
 - 01-week1导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week1-guide.md
@@ -499,7 +575,8 @@ print(grades_df)
 
 **项目文件：**
 
-- 项目2文件：
+- 项目2文件：https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project2/bikeshare-new-2.zip
+- 项目2中的py3版本文件（有的练习是py2环境的，当本地做遇到问题可以参考）命名规则lx_y_z.py(x是课程号，y是小节号，z是小节内容简称：https://github.com/mengfanchun2017/DAND-Basic/tree/master/Project2/project2py3solution
 
 **扩展资源：**
 
