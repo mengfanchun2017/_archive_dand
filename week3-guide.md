@@ -21,7 +21,7 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
     
 ## 学习计划
 
-看着还挺丰富的对吧，这4周我们讲完成**/4. Python入门/**部分的所有内容，拆分后的每周工作和每日工作是这样的：
+看着还挺丰富的对吧，这4周我们讲完成 **/4. Python入门/** 部分的所有内容，拆分后的每周工作和每日工作是这样的：
 
 | 时间 | 学习重点 | 对应内容（按照名字找就好了） |
 | --- | --- | --- |
@@ -52,7 +52,7 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 
 ## 本周目标
 
-**不要怂，就是肝！**对应Numpy & Pandas 第一部分与第二部分两课，需要完成是两个目标。
+**不要怂，就是肝！** 对应Numpy & Pandas 第一部分与第二部分两课，需要完成是两个目标。
 
 ### /目标1/：Numpy & Pandas 第一部分
 
@@ -98,7 +98,7 @@ def max_employment(countries, employment):
 
 #### **{9.标准化数据/学会调用numpy的功能}
 
-首先说明一下为什么我们要标准化呢？因为在很多数据进行比较的时候，范围、比例等都会有很大的变化，而这些体现在数值上来讲，人根本就没有什么感觉（看到就发懵了，不好判断）。那么我们怎么办来比较不同的数据呢：**我们把大家按照比例缩放，都放到一个区域中呗，比如所有的数据都在0-1之间，那么我看到接近1的就知道很高了，接近0的就很低了，其他的不用考虑。**前面的说明只是一个粗浅的举例，这种方式有很规则和应用。
+首先说明一下为什么我们要标准化呢？因为在很多数据进行比较的时候，范围、比例等都会有很大的变化，而这些体现在数值上来讲，人根本就没有什么感觉（看到就发懵了，不好判断）。那么我们怎么办来比较不同的数据呢： **我们把大家按照比例缩放，都放到一个区域中呗，比如所有的数据都在0-1之间，那么我看到接近1的就知道很高了，接近0的就很低了，其他的不用考虑。** 前面的说明只是一个粗浅的举例，这种方式有很规则和应用。
 
 细抠的话还有标准化和归一化等等细节，在机器学习中接触比较多，大家有兴趣看链接：https://blog.csdn.net/fontthrone/article/details/74067064
 
@@ -126,7 +126,7 @@ def standardize_data(values):
 
 #### ***{13.练习：Pandas Series}
 
-从这节开始我们将会学习Pandas库，Pandas库里的Series和之前学习的Numpy Array是类似的。**Pandas是Python处理数据最重要的库，以下几节需要多看几遍。**相比之下，有更多扩展性，比如说：
+从这节开始我们将会学习Pandas库，Pandas库里的Series和之前学习的Numpy Array是类似的。 **Pandas是Python处理数据最重要的库，以下几节需要多看几遍。** 相比之下，有更多扩展性，比如说：
 
 Series.describe()方法，对于Series的数据内容自动计算平均值、标准偏差、中位数和一些其他的统计数据。做总体描述，便于观察数据情况。
 
@@ -161,7 +161,7 @@ def variable_correlation(variable1, variable2):
 
 #### ***{14.练习：Series索引}
 
-这节里面一句话亮了：**Numpy arrays是增强版的 Python lists，Pandas series像是Python lists 与 dictionary的结合。lists列表是根据顺序位置获取值的，而dictionay字典是通过key-value对应来获取值的，而在series中这两种方式都可以，对应的是iloc和loc方式。**
+这节里面一句话亮了： **Numpy arrays是增强版的 Python lists，Pandas series像是Python lists 与 dictionary的结合。lists列表是根据顺序位置获取值的，而dictionay字典是通过key-value对应来获取值的，而在series中这两种方式都可以，对应的是iloc和loc方式。** 
 
 这里面要注意的一个是里面使用的argmax()已经被idxmax()替代了，代码解释如下：
 
@@ -201,7 +201,7 @@ print(names.apply(reverse_names))
 
 #### *{18.练习：在Pandas中绘图}
 
-**完全作为选修内容，在项目2中不要求。**大家知道import的seaborn是一个用于绘图的库就好了。一个中文的说明：http://blog.mazhangjing.com/2018/03/29/learn_seaborn/#233-多变量多图形拟合叠加
+**完全作为选修内容，在项目2中不要求。** 大家知道import的seaborn是一个用于绘图的库就好了。一个中文的说明：http://blog.mazhangjing.com/2018/03/29/learn_seaborn/#233-多变量多图形拟合叠加
 
 ### /目标2/：：Numpy & Pandas 第二部分
 
@@ -384,8 +384,8 @@ print(mean_riders_for_max_station(ridership_df))
 
 本节内容在项目2里不要求，在项目4中会有涉及（有精力的细究）本节的简要说明：
 
-- **相关性分析：**数据分析的一个重要使用场景就是看两个参数之间有没有相关性。比如说同一个车站一周的人多少变化，和是否上班日有关系么？还是和是否下雨有关？又或者和温度有没有关系？
-- **相关性分析工具：**在统计学中有一个工具是计算两个相关性的叫做 Pearson's R。链接课程里面有。还记得前面计算 预期寿命 和 GDP 之间的关系时。通过计算，我们知道两个指标同向（都高于均值，或都低于均值）的有17个，而不同向的只有3个。这个就和R的这种方式类似。
+- **相关性分析：** 数据分析的一个重要使用场景就是看两个参数之间有没有相关性。比如说同一个车站一周的人多少变化，和是否上班日有关系么？还是和是否下雨有关？又或者和温度有没有关系？
+- **相关性分析工具：** 在统计学中有一个工具是计算两个相关性的叫做 Pearson's R。链接课程里面有。还记得前面计算 预期寿命 和 GDP 之间的关系时。通过计算，我们知道两个指标同向（都高于均值，或都低于均值）的有17个，而不同向的只有3个。这个就和R的这种方式类似。
 
 ```python
 def correlation(x, y):
@@ -403,7 +403,7 @@ def correlation(x, y):
 
 #### *{10.练习：DataFrame向量化运算}
 
-这节里面有句亮点，我一定要放出来：**我觉得函数说明晦涩难懂，所以我决定直接试一下函数，以了解它的用处。**因为用了dataframe的.shift()方法，只用一行就解决问题了！不用去写循环了！
+这节里面有句亮点，我一定要放出来： **我觉得函数说明晦涩难懂，所以我决定直接试一下函数，以了解它的用处。** 因为用了dataframe的.shift()方法，只用一行就解决问题了！不用去写循环了！
 
 ```python
 def get_hourly_entries_and_exits(entries_and_exits):
@@ -441,7 +441,7 @@ print(grades_df)
 
 #### *{12.13.练习：DataFrame apply()}
 
-**此节选学。**其实DataFrame也有.apply()方法，和Series作用相同，使用场景是那些使用.applymap()会对结果产生影响的情况（因为apply可以对指定列或行做操作，不是像applymay那样对所有的元素）。
+**此节选学。** 其实DataFrame也有.apply()方法，和Series作用相同，使用场景是那些使用.applymap()会对结果产生影响的情况（因为apply可以对指定列或行做操作，不是像applymay那样对所有的元素）。
 
 课程中对于ddof=0 的参数说明的非常详细：
 
@@ -451,11 +451,11 @@ print(grades_df)
 
 #### *{14.练习：向Series添加DataFrame}
 
-**此节选学。**可以作为向量化运算的扩展，练习完全是运行一遍哥哥if代码框就好了，不用自己写。
+**此节选学。** 可以作为向量化运算的扩展，练习完全是运行一遍哥哥if代码框就好了，不用自己写。
 
 #### *{15.练习：再次归一化每一列}
 
-**此节选学。**挺复杂的一节，甚至可以放到毕业后复盘再回来看。引入了.sub() .div()两个方法。
+**此节选学。** 挺复杂的一节，甚至可以放到毕业后复盘再回来看。引入了.sub() .div()两个方法。
 
 #### ***{16.练习：Pandas groupby()}
 
@@ -539,8 +539,7 @@ print(ridership_df.groupby('UNIT')['ENTRIESn', 'EXITSn'].apply(get_hourly_entrie
 
 #### *{18.练习：合并Pandas DataFrame}
 
-**此节选学。**
-合并的相关操作，引入了.merge()方法，可以遇到再研究。
+**此节选学。** 合并的相关操作，引入了.merge()方法，可以遇到再研究。
 
 #### *{19.练习：使用DataFrame绘制图形}
 
@@ -560,7 +559,7 @@ print(ridership_df.groupby('UNIT')['ENTRIESn', 'EXITSn'].apply(get_hourly_entrie
 - 搭建本地anaconda环境（Python3版本）确保Spyder可以使用
 - 下载bikeshare-new-2.zip项目文件。如果教室里面不能下载，请尝试下载下面的链接：https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project1/Project1Files/bikeshare-new-2.zip
 
-**Project2/week2的项目要求**（本周要求和，做完了画第二个勾勾）
+**Project2/week2的项目要求** （本周要求和，做完了画第二个勾勾）
 
 - 用spyder打开项目文件浏览
 - 了解项目文件中有几个函数，函数名和输入是什么（不用看明白和尝试做）
