@@ -539,7 +539,8 @@ print(ridership_df.groupby('UNIT')['ENTRIESn', 'EXITSn'].apply(get_hourly_entrie
 
 #### *{18.练习：合并Pandas DataFrame}
 
-**此节选学。**合并的相关操作，引入了.merge()方法，可以遇到再研究。
+**此节选学。**
+合并的相关操作，引入了.merge()方法，可以遇到再研究。
 
 #### *{19.练习：使用DataFrame绘制图形}
 
