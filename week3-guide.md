@@ -581,5 +581,6 @@ print(ridership_df.groupby('UNIT')['ENTRIESn', 'EXITSn'].apply(get_hourly_entrie
 **扩展资源：**
 
 - 官方数据结构说明：http://pandas.pydata.org/pandas-docs/stable/dsintro.html#panel
+- 官方DataFrame说明（也有所有方法的汇总，超级有用）：https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html
 - 控制流总结：https://bop.mol.uno/09.control_flow.html
 
