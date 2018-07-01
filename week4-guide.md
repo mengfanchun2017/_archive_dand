@@ -58,6 +58,48 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 
 #### {1.拆分项目功能}
 
+要完成项目，不要一下就掉到代码中去，我们首要明白的是我们要解决什么问题，我们有什么数据，我们怎么拆分实现不同的功能。
+
+项目的说明页面非常详细：https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74-4486-911c-d1fae2f03c97/modules/134150b9-81b0-40d1-9c2c-bb288bb49d55/lessons/e5bef1dd-5031-45c3-aaf7-8536f6f3cf8a/concepts/d233dd24-607b-4bb1-a17d-dfa94768104b
+
+**数据文件如下：**
+
+- 我们有3个城市的共享单车数据（由Motivate提供）
+- 数据集包括以下内容：
+
+> 起始时间 Start Time（例如 2017-01-01 00:07:57）
+结束时间 End Time（例如 2017-01-01 00:20:53）
+骑行时长 Trip Duration（例如 776 秒）
+起始车站 Start Station（例如百老汇街和巴里大道）
+结束车站 End Station（例如塞奇威克街和北大道）
+用户类型 User Type（订阅者 Subscriber/Registered 或客户Customer/Casual）
+性别 Gender (只有纽约和芝加哥数据有）
+出生年份 Birth Year(只有纽约和芝加哥数据有）
+
+**项目目标（问题）如下：**
+
+- 通过分析收到的数据文件，得出共享单车运行数据中的趋势，辅助进行商业决策
+- 本次分析过程基于收到的数据，属于探索性的分析阶段，目的在于根据不同特征的到共享单车的趋势数据
+- 本次分析不涉及分析两个变量中的相关关系（项目4就有了，不要着急学霸们）
+- 根据项目模版，需要回答一下问题：
+
+> 起始时间（Start Time 列）中哪个月份最常见？
+起始时间中，一周的哪一天（比如 Monday, Tuesday）最常见？ 提示：可以使用 datetime.weekday() （点击查看文档）
+起始时间中，一天当中哪个小时最常见？
+总骑行时长（Trip Duration）是多久，平均骑行时长是多久？
+哪个起始车站（Start Station）最热门，哪个结束车站（End Station）最热门？
+哪一趟行程最热门（即，哪一个起始站点与结束站点的组合最热门）？
+每种用户类型有多少人？
+每种性别有多少人？
+出生年份最早的是哪一年、最晚的是哪一年，最常见的是哪一年？
+
+**如何完成项目：**
+
+- 首先看下3、11、12节的完成指南
+- 接下来要决定是在13节项目空间完成并提交，还是下载文件到本地再在15节提交（需要本地环境）**！注意2选1，只在一个地方提交就可以了！**
+- 如果是在13节处完成项目，请参看14节的说明
+- 如果是本地完成，下载的数据和模版文件链接（2018年7月版本）：https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project2/bikeshare-new-2.zip
+
 #### {2.分析项目模板文件}
 
 ```python
@@ -137,9 +179,39 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 -- # 详细请参见week2导学后面扩展内容
 ```
 
-了解下哦使用pandas读入csv文件比直接使用unicodecsv读入要快就好了。
+根据以上拆分，我们发现其实要想完成项目，我们只用把2、4、5、6、7部分完成就可以了（在数字编号后面有个T的部分）。本导学所有内容将会按照以上项目代码框进行讲解。其中实现方法只是讲解一种可选方式，请同学们理解后自己完成。
 
-#### **{5.NumPy 数组}
+### /目标2/：按照函数完成项目文件
+
+根据上一节的模版文件分析，我们只用完成2、4、5、6、7部分的填空题就好了，在这之前，我们分析下最后8的main文件是怎么把这几部分串接起来使用的：
+
+```python
+def main():
+    while True:
+    # 当条件为真时，执行。因为是True所以总是执行这个循环
+    # 除非遇到break才会停止
+    # 本段代码最后有个是否要再分析一遍的提问
+    # 如果回答的不是yes，将会终止循环
+        city, month, day = get_filters()
+        # 调用函数，的到city，month，day的输入
+        df = load_data(city, month, day)
+        #根据输入的内容对数据进行过滤，生成df函数
+        time_stats(df)
+        # 调用函数，对时间进行处理
+        station_stats(df)
+        # 调用函数，对车站进行处理
+        trip_duration_stats(df)
+        # 调用函数，对旅程进行处理
+        user_stats(df)
+        # 调用函数，对旅程进行处理
+        
+        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        if restart.lower() != 'yes':
+            break
+        # 此处的仪式是如果yes再循环一遍
+        # 如果不是，则结束```
+
+#### {5.NumPy 数组}
 
  Numpy中的Arrays和list列表很像，区别如下：
 
