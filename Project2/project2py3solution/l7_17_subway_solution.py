@@ -61,3 +61,5 @@ def get_hourly_entries_and_exits(entries_and_exits):
 
 print(ridership_df.groupby('UNIT')['ENTRIESn', 'EXITSn'].apply(get_hourly_entries_and_exits))
 # 按照UNIT进行分组，并调用函数计算每小时的值
+# 注意如果不指定对['ENTRIESn', 'EXITSn']做操作的话会报错
+# 因为其他列包含数值，使用.apply()会报错的

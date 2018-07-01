@@ -1,4 +1,4 @@
-# week3a/12 本周导学
+# week4/12 本周导学
 
 ## 前面的话
 
@@ -37,9 +37,10 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 | 周3 | /助教/发布当周导学 | 浏览导学文件内容开始学习 |
 | 周4 | /Uda/线上内容 | 学习Uda Classroom内容 |
 | 周5 | /助教/1v1预约 | 难点可预约1v1语音指导 |
-| 周6 20:30-21:30 | /助教/视频讲解 | 讲解本周导学内容、回答疑难问题 |
-| 周7 | /小结/本周总结 | 总结、笔记、思考 |
-| 周1 | /选学/自主学习修养 | 自主学习（选学部分）或调休 |
+| 周6 | /助教/视频讲解 20:30-21:30 | 讲解本周导学内容、回答疑难问题 |
+| 周7 | /助教/根据视频课程学习 | 完成本周内容内容 |
+| 周1 | /小结/本周总结 | 总结、笔记、思考 |
+| 周2 | /选学/自主学习修养 | 自主学习（选学部分）或调休 |
 
 **重点提示：**
 
@@ -49,21 +50,105 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 - 标有*的是选学内容，请大家本周任务全部完成后再学习。
 - 本周虽然没有项目提交，但是内容还是比较多的，如果同学是编程新手的话，一定记得多看、多试、多问，大家一起加油。
 
-
 ## 本周目标
 
 **不要怂，就是肝！** 对应Numpy & Pandas 第一部分与第二部分两课，需要完成是两个目标。
 
-### /目标1/：Numpy & Pandas 第一部分
+### /目标1/：分析项目模板文件
 
-#### *{4.Numpy和Pandas中的一维数组}
+#### {1.拆分项目功能}
+
+#### {2.分析项目模板文件}
+
+```python
+- /1/ prepare block
+-- imports # 导入需要第三方库
+-- CITY_DATA # 定义CITY_DATA包括3个城市的文件
+--- # CITY_DATA包括3城市chicago，new york city，washington
+--- # 采用字典结构存储数据chicago': 'chicago.csv
+
+- /2T/ def get_filters()
+-- # 函数输入参数为空
+-- # 此函数是和用户互动得到数据筛选输入的
+-- # 通过input方式请用户输入要求
+--- /T1.1/ # 那个城市？
+--- /T1.2/ # 那个月份（只有1-6月）？
+--- /T1.3/ # 周几？
+
+- /3/ def load_data(city, month, day)
+-- # 函数输入为city，month，day
+-- # 此处没有todo
+-- # return df 所以要结合别的调用使用
+
+- /4T/ def time_stats(df)
+-- # 函数输入为df（过滤后的数据）
+-- # 使用print通知用户进行将要完成的事情
+-- # 计算不同颗粒度时间内容最繁忙时段
+--- /T4.1/ #月份
+--- /T4.2/ #日
+--- /T4.3/ #小时
+-- # 使用 time函数报告运行所用时间
+
+- /5T/ def station_stats(df)
+-- # 函数输入为df（过滤后的数据）
+-- # 使用print通知用户进行将要完成的事情
+-- # 计算不同内容最繁忙车站
+--- /T5.1/ #开始
+--- /T5.2/ #结束
+--- /T5.3/ #综合考虑
+-- # 使用 time函数报告运行所用时间
+
+- /6T/ def trip_duration_stats(df)
+-- # 函数输入为df（过滤后的数据）
+-- # 使用print通知用户进行将要完成的事情
+-- # 计算行程数据
+--- /T6.1/ #总旅行时间
+--- /T6.2/ #平均旅行时间
+-- # 使用 time函数报告运行所用时间
+
+- /7T/ def user_stats(df)
+-- # 函数输入为df（过滤后的数据）
+-- # 使用print通知用户进行将要完成的事情
+-- # 计算用户数据
+--- /T7.1/ #用户数计算
+--- /T7.2/ #用户性别计算
+--- /T7.3/ #用户其他信息计算
+-- # 使用 time函数报告运行所用时间
+
+- /8/ def main()
+-- # 主函数是调用其他函数的主程序
+-- # 不用编辑但逻辑要弄通
+-- # while True 是一种在测试时常用的方式
+--- # 当不想执行的时候改为 while Flase
+--- # 1和0等价
+--- # 此处可以删掉，也可不管
+-- # 此处以下是通过调用6个函数完成所有功能
+--- city, month, day = get_filters() # 赋值
+--- df = load_data(city, month, day) # 生成df数据
+--- time_stats # 处理时间数据
+--- station_stats(df) # 处理车站数据
+--- trip_duration_stats(df) # 处理旅程数据
+--- user_stats(df) # 处理旅客数据
+-- # 通过restart再运行一遍程序功能
+
+- /9/ if __name__ == "__main__"
+-- # 库文件标准结尾
+-- # 能够保证本文件作为第三方库的被导入时只运行要求的函数
+-- # 详细请参见week2导学后面扩展内容
+```
+
+
+
+> 
+>
+> ---
 
 了解下哦使用pandas读入csv文件比直接使用unicodecsv读入要快就好了。
 
 #### **{5.NumPy 数组}
 
  Numpy中的Arrays和list列表很像，区别如下：
- 
+
   - Arrays中的元素要都是同一类别（数字，字符只能有一种）
   - 可以使用Numpy中的很多函数，比如平均值mean(), 标准差std()。虽然list也可以使用这些函数，但Arrays运行起来更快
   - Arrays可以扩展到多维
@@ -582,4 +667,6 @@ print(ridership_df.groupby('UNIT')['ENTRIESn', 'EXITSn'].apply(get_hourly_entrie
 
 - 官方数据结构说明：http://pandas.pydata.org/pandas-docs/stable/dsintro.html#panel
 - 控制流总结：https://bop.mol.uno/09.control_flow.html
+
+
 

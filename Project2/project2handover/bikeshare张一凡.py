@@ -57,8 +57,6 @@ def time_stats(df):
     popular_month=month.[df['month'].mode()[0]]
     print('the most popular month is:',popular months)
     
-   
-    
 
     # TO DO: display the most common day of week
 	day=['monday','tuesday','wednesday','thuraday','friday','saturday','sunday']
