@@ -137,12 +137,6 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 -- # 详细请参见week2导学后面扩展内容
 ```
 
-
-
-> 
->
-> ---
-
 了解下哦使用pandas读入csv文件比直接使用unicodecsv读入要快就好了。
 
 #### **{5.NumPy 数组}

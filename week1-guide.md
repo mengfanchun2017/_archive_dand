@@ -51,7 +51,12 @@
     - 检查约束 constraint CK_字段 check(约束。如：len(字段)>1),
     - 主外键关系 constraint FK_主表_从表 foreign(外键字段) references 主表(主表主键字段)
     
+    
 ![](media/15285031623501.jpg)
+
+
+
+
 - /2/SQL - a language used to interact with a database / 用于与数据库交互的语言
 - /28/派生列：Derived Column。我们将现有的列组合，生成的新列称为派生列。在生成以后，可以用AS为这列起名（否则筛选出的结果这列名字是？Column这样的）
 
