@@ -239,7 +239,7 @@ print('\n(pretty) Most Popular Start Hour:', popular_hour)
 
 输出是这个样子滴：
 
-```python
+```
 original data type:
 <class 'str'>
 
@@ -287,7 +287,7 @@ print(user_types)
 
 输出是这样的，可以看到User Type这列一共有两种值，和每种值的个数：
 
-```python
+```
 Subscriber    330
 Customer       70
 Name: User Type, dtype: int64
@@ -380,7 +380,7 @@ def main():
 
 大概的输出是这样的，注意 > 后面都是我输入的：
 
-```python
+```
 Hello! Let's explore some US bikeshare data!
 
 q1/3: which city do you want to know? chicago,                      new york city or washington? > chicago
@@ -513,7 +513,7 @@ def time_stats(df):
 
 当运行后，main()函数会调用time_stats(df)函数，输出是这个样子的（因为有使用了time方法，所以会输出执行时间）：
 
-```python
+```
 This took 0.04229283332824707 seconds.
 ----------------------------------------
 max freq month is:
@@ -541,7 +541,7 @@ max freq hour is:
 
 输出是这个样子的：
 
-```python
+```
 max freq start station is:
 Streeter Dr & Grand Ave
 
@@ -566,7 +566,7 @@ Lake Shore Dr & Monroe St --- Streeter Dr & Grand Ave
 
 输出是这样的：
 
-```python
+```
 total trip time is:
 280871787
 mean trip time is:
@@ -593,7 +593,7 @@ mean trip time is:
 
 输出是这样的：
 
-```python
+```
 Calculating User Stats...
 
 user types is:
