@@ -378,6 +378,19 @@ def main():
         # 如果不是，则结束
 ```
 
+大概的输出是这样的，注意 > 后面都是我输入的：
+
+```python
+Hello! Let's explore some US bikeshare data!
+
+q1/3: which city do you want to know? chicago,                      new york city or washington? > chicago
+
+q2/3: which month do you want to know? choose from all,                   january, february, ... , june. > january
+
+q3/3: which day do you want to know? choose from all,                   monday, ... , sunday. > all
+```
+
+
 #### {2.get_filters() 函数}
 
 这个函数的作用就是让用户输入city，month，day3个参数，在输入的时候要注意判断是否输入有效。在项目模版中的docstring（就是开始“”“包围起来的内容）解释的很详细（为了便于理解，官方模版的注释都已经删除，请结合两个文件一起学习）：
@@ -469,93 +482,144 @@ def time_stats(df):
     start_time = time.time()
     # 此处可以忽略，是调用time函数用于计算代码的执行时间
     
-    # TO DO: display the most common month
+    # 为了能够计算时间要变换为pandas里面的时间格式
+    # 就是使用.to_datatime()这个方法转换格式
+    df['Start Time'] = pd.to_datetime(df['Start Time'])
     
-    #
+    # TO DO: display the most common month
+    df['month'] = df['Start Time'].dt.month
+    max_month = df['month'].mode()[0]
 
     # TO DO: display the most common day of week
-
+    df['day'] = df['Start Time'].dt.day
+    max_day = df['day'].mode()[0]
 
     # TO DO: display the most common start hour
-
+    df['hour'] = df['Start Time'].dt.hour
+    max_hour = df['hour'].mode()[0]
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     # 后面的time.time() - start_time就是用当前时间剪去开始运行时的时间
     # 可以看出这段代码运行了多长时间
     print('-'*40)
-    # 打印40个 - 作为分隔
+    print('max freq month is:')
+    print(max_month)
+    print('max freq day is:')
+    print(max_day)
+    print('max freq hour is:')
+    print(max_hour)
+    #以上是3个频率的输出
+```
+
+当运行后，main()函数会调用time_stats(df)函数，输出是这个样子的（因为有使用了time方法，所以会输出执行时间）：
+
+```python
+This took 0.04229283332824707 seconds.
+----------------------------------------
+max freq month is:
+1
+max freq day is:
+21
+max freq hour is:
+17
 ```
 
 #### {5.station_stats(df)函数}
 
-大家注意到了小括弧中的df没，这说明这个函数是要输入的，而这个输入就是df这个数据集（当然是根据filter已经筛选过的数据集了）
+与4节大同小异，请同学们自己完成。提示如下：
 
 ```python
-def station_stats(df):
-    """Displays statistics on the most popular stations and trip."""
+# 问题3是问那个车站组合出现最多
+    # 为了回答这个问题，我们可以在数据新建1列
+    # 例子命名为combine_sation
+    # 由Start Station的数据加上End Station合并
+    # 为了便于识别，我加上了 - - - 作为标签
+    # 再之后就一样是使用mode()进行统计了
+    df['combine_station'] = df['Start Station'] + ' --- ' + df['End Station']
+    max_combine = df['combine_station'].mode()[0]
+```
 
-    print('\nCalculating The Most Popular Stations and Trip...\n')
-    start_time = time.time()
+输出是这个样子的：
 
-    # TO DO: display most commonly used start station
+```python
+max freq start station is:
+Streeter Dr & Grand Ave
 
+max freq end station is:
+Streeter Dr & Grand Ave
 
-    # TO DO: display most commonly used end station
-
-
-    # TO DO: display most frequent combination of start station and end station trip
-
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+max freq combine statuion is:
+Lake Shore Dr & Monroe St --- Streeter Dr & Grand Ave
 ```
 
 #### {6.trip_duration_stats(df)函数}
 
-大家注意到了小括弧中的df没，这说明这个函数是要输入的，而这个输入就是df这个数据集（当然是根据filter已经筛选过的数据集了）
+与4节大同小异，请同学们自己完成。提示如下：
 
 ```python
-"""Displays statistics on the total and average trip duration."""
+# 使用.sum()方法求和
+    total_trip_time = df['Trip Duration'].sum()
 
-    print('\nCalculating Trip Duration...\n')
-    start_time = time.time()
-
-    # TO DO: display total travel time
-
-
-    # TO DO: display mean travel time
-
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    # 使用.mean()方法求平均值
+    mean_trip_time = df['Trip Duration'].mean()
 ```
+
+输出是这样的：
+
+```python
+total trip time is:
+280871787
+mean trip time is:
+936.23929
+```
+
 
 #### {7.usr_stats(df)函数}
 
-大家注意到了小括弧中的df没，这说明这个函数是要输入的，而这个输入就是df这个数据集（当然是根据filter已经筛选过的数据集了）
+这部分与{7.8.显示用户类型细分}方法相同，还扩展了一个性别的统计。之后使用min、max统计了最大最小值，提示如下：
 
 ```python
-"""Displays statistics on bikeshare users."""
+# 使用.value_counts方法进行统计
+    user_types = df['User Type'].value_counts()
 
-    print('\nCalculating User Stats...\n')
-    start_time = time.time()
+    # 同样使用.value_counts方法进行统计
+    gender_types = df['Gender'].value_counts()
 
-    # TO DO: Display counts of user types
-
-
-    # TO DO: Display counts of gender
-
-
-    # TO DO: Display earliest, most recent, and most common year of birth
-
-
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    # 计算最大最小值使用的是.min方法和.max方法
+    earliest = df['Birth Year'].min()
+    recent = df['Birth Year'].max()
+    common = df['Birth Year'].mode()[0]
 ```
 
-## 项目内容
+输出是这样的：
 
-本首是Python项目的第2周，主要还是理解项目和准备项目文件，请大家做到以下几点：
+```python
+Calculating User Stats...
+
+user types is:
+Subscriber    238889
+Customer       61110
+Dependent          1
+Name: User Type, dtype: int64
+
+gender types is:
+Male      181190
+Female     57758
+Name: Gender, dtype: int64
+
+recent year of birth is:
+1899.0
+
+recent year of birth is:
+2016.0
+
+common year of birth is:
+1989.0
+```
+
+## 项目推进
+
+本首是Python项目的第3周，大家可以开始先做项目2了，本周目标是尽量完成项目2，能提交最好。下周是项目2的最后一周，可以用来修改项目和集中讨论。大家加油了！
 
 **Project2/week1的项目要求：**（应该已经做完）
 
@@ -563,10 +627,17 @@ def station_stats(df):
 - 搭建本地anaconda环境（Python3版本）确保Spyder可以使用
 - 下载bikeshare-new-2.zip项目文件。如果教室里面不能下载，请尝试下载下面的链接：https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project1/Project1Files/bikeshare-new-2.zip
 
-**Project2/week2的项目要求** （本周要求和，做完了画第二个勾勾）
+**Project2/week2的项目要求** （上周的要求，本导学已经给出了答案，加油加油！）
 
-- 用spyder打开项目文件浏览
+- 能够打开项目文件（用Uda线上的可以，但建议可以试试用spyder本地打开项目文件浏览）
 - 了解项目文件中有几个函数，函数名和输入是什么（不用看明白和尝试做）
+
+**Project2/week3的项目要求** （肝！少年！）
+
+- 浏览本导学文件
+- 做完项目中的练习
+- 根据导学文件，按照函数一个个，一步步的完成项目
+- 能提交最好了！
 
 ## 资源列表
 
@@ -576,6 +647,7 @@ def station_stats(df):
 - 01-week1导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week1-guide.md
 - 02-week2导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week2-guide.md
 - 03-week3导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week3-guide.md
+- https://github.com/mengfanchun2017/DAND-Basic/blob/master/week4-guide.md
 
 **项目文件：**
 
@@ -586,6 +658,8 @@ def station_stats(df):
 
 - 官方数据结构说明：http://pandas.pydata.org/pandas-docs/stable/dsintro.html#panel
 - 控制流总结：https://bop.mol.uno/09.control_flow.html
+
+
 
 
 
