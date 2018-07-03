@@ -102,7 +102,7 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 
 #### {2.分析项目模板文件}
 
-```python
+```
 - /1/ prepare block
 -- imports # 导入需要第三方库
 -- CITY_DATA # 定义CITY_DATA包括3个城市的文件
