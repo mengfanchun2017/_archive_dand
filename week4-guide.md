@@ -98,7 +98,7 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 - 接下来要决定是在13节项目空间完成并提交，还是下载文件到本地再在15节提交（需要本地环境）**！注意2选1，只在一个地方提交就可以了！**
 - 如果是在13节处完成项目，请参看14节的说明
 - 如果是本地完成，下载的数据和模版文件链接（2018年7月版本）：https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project2/bikeshare-new-2.zip
-- **第4节是检查数据的基本语句，选修！**我们再项目4再讲相关内容。
+- **第4节是检查数据的基本语句，选修！** 我们再项目4再讲相关内容。
 
 #### {2.分析项目模板文件}
 
