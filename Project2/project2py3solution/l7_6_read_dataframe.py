@@ -16,12 +16,15 @@ ridership_df = pd.DataFrame(
            '05-06-11', '05-07-11', '05-08-11', '05-09-11', '05-10-11'],
     columns=['R003', 'R004', 'R005', 'R006', 'R007']
 )
+
+print(ridership_df.head())
+
 # 用index定义行名，用columns定义列名
 
 # Change False to True for each block of code to see what it does
 
 # DataFrame creation
-if 0:
+if 1:
     # You can create a DataFrame out of a dictionary mapping column names to values
     df_1 = pd.DataFrame({'A': [0, 1, 2], 'B': [3, 4, 5]})
     print (df_1)
