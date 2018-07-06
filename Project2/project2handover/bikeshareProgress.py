@@ -187,18 +187,17 @@ def user_stats(df):
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
-    # TO DO: Display counts of user types
-    # 使用.
+    # 使用.value_counts方法进行统计
     user_types = df['User Type'].value_counts()
 
-    # TO DO: Display counts of gender
+    # 同样使用.value_counts方法进行统计
     gender_types = df['Gender'].value_counts()
 
-    # TO DO: Display earliest, most recent, and most common year of birth
+    # 计算最大最小值使用的是.min方法和.max方法
     earliest = df['Birth Year'].min()
     recent = df['Birth Year'].max()
     common = df['Birth Year'].mode()[0]
-    
+
     print('user types is:')
     print(user_types)
     print('\ngender types is:')
