@@ -102,6 +102,22 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 
 #### {2.分析项目模板文件}
 
+对于一个工程文件（很大很长的代码文件），可能有上千行代码，如果从头看起来会让人不知所措，实际的代码文件处理起来是这样的（此处由小ai的神助补充）：
+
+> 其实程序员这个工种，写代码的时间应该是不多的，从头开始写一个项目的情况也很少见，大部分时间是在看别人写的代码，然后在里面加一点点新的东西。所以看代码的能力是很重要的。
+> 
+> 看代码的第一步其实就是找到程序的入口。其实在大多数语言里面，都是main()这个函数，这也是为什么它叫main的原因.
+> 
+> 这个项目只有一个文件，你会有时间读完它。但是如果给你1000万行的一个项目，你肯定不能一个文件一个文件来读了。所以咱们都是要找到一个程序的主入口。先看看咱们这个程序的功能是啥，这样就抓住了主线。
+> 
+> 我记得做考研英语阅读的时候也是，我一般都先看最后一段，然后看每一段的第一句，这样就抓住了文章的主旨，不会因为看不懂几个句子和单子就蒙圈了。
+> 
+> 读代码也是，从main函数一路看下去，每个函数是什么功能，从它的名字就可以看个大概，了解程序的主要功能和流程。这样你就不会因为看不懂某个函数的实现而陷入迷茫。
+> 
+> 一般程序里面只有main函数里面可能会写一个死循环，其他地方最好还是不要写while true，万一忘记break，程序就挂死了
+
+**总结下来就是：读代码能力非常重要，从main函数开始一路看下去，可以避免看不懂某个函数而陷入迷茫（看来看不懂别人的函数也是会发生啊）。**
+
 ```
 - /1/ prepare block
 -- imports # 导入需要第三方库
@@ -113,13 +129,14 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 -- # 函数输入参数为空
 -- # 此函数是和用户互动得到数据筛选输入的
 -- # 通过input方式请用户输入要求
---- /T1.1/ # 那个城市？
---- /T1.2/ # 那个月份（只有1-6月）？
---- /T1.3/ # 周几？
+--- /T2.1/ # 那个城市？
+--- /T2.2/ # 那个月份（只有1-6月）？
+--- /T2.3/ # 周几？
 
-- /3/ def load_data(city, month, day)
+- /3T/ def load_data(city, month, day)
 -- # 函数输入为city，month，day
--- # 此处没有todo
+-- # 此处没有todo但是要写加载数据
+--- /T3.1/ 加载数据（和练习一毛一样的）
 -- # return df 所以要结合别的调用使用
 
 - /4T/ def time_stats(df)
@@ -157,7 +174,7 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 --- /T7.3/ #用户其他信息计算
 -- # 使用 time函数报告运行所用时间
 
-- /8/ def main()
+- /8-FirstLook！/ def main()
 -- # 主函数是调用其他函数的主程序
 -- # 不用编辑但逻辑要弄通
 -- # while True 是一种在测试时常用的方式
@@ -647,7 +664,7 @@ common year of birth is:
 - 01-week1导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week1-guide.md
 - 02-week2导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week2-guide.md
 - 03-week3导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week3-guide.md
-- https://github.com/mengfanchun2017/DAND-Basic/blob/master/week4-guide.md
+- 04-week4导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week4-guide.md
 
 **项目文件：**
 
