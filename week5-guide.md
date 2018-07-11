@@ -111,31 +111,158 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 ### /目标3/：项目文件优化（看懂即可）
 
 对于上周week4导学中的项目讲解，其实已经达到了项目通过的水平，但是编程这件事，我们还是可以尽量优化一下，对比上周的项目讲解，我们还有这几个地方可以改进：
-> gender数据不完全：3个城市的数据文件中，washington是没有性别数据的，选中的话会报错虽然可以使用try/except优化输出
-> 上周的文件有不符合pep编程规范的地方（Atom中的Pylint可以提示），需要修改更加专业。关于Pep请参考之前的一个介绍：https://github.com/mengfanchun2017/DAND-Basic-P0/blob/master/day5-guide.md
-> 对于输出显示并不友好，看着有点晕，是否可以使用pprint进行调整
+> 1. gender数据不完整：3个城市的数据文件中，washington是没有性别数据的，选中的话会报错虽然可以使用try/except优化输出
+> 1. 对于输出显示并不友好，看着有点晕，调整输出显示
+> 1. 上周的文件有不符合pep编程规范的地方（Atom中的Pylint可以提示），需要修改更加专业（本小节请大家自己研究）。关于Pep请参考之前的一个介绍：https://github.com/mengfanchun2017/DAND-Basic-P0/blob/master/day5-guide.md
 
-## 项目推进
+#### {1.gender数据不完整} 
 
-本首是Python项目的第3周，大家可以开始先做项目2了，本周目标是尽量完成项目2，能提交最好。下周是项目2的最后一周，可以用来修改项目和集中讨论。大家加油了！
+使用try/except可以对出错进行判断并处理，不会造成程序停止：
+```python
+try:
+    gender_types = df['Gender'].value_counts()
+except KeyError:
+    print('>>>The city you choose do not have /Gender/ data:')
+else:
+    print('\n>>>gender types is:')
+    print(gender_types)
+finally:
+    pass
+```    
 
-**Project2/week1的项目要求：**（应该已经做完）
+具体的try/except用法在week2导学中有讲解，摘录如下：
+- try：这是 try 语句中的唯一必需子句。该块中的代码是 Python 在 try 语句中首先运行的代码。
+- except：如果 Python 在运行 try 块时遇到异常，它将跳到处理该异常的 except 块。
+- else：如果 Python 在运行 try 块时没有遇到异常，它将在运行 try 块后运行该块中的代码。
+- finally：在 Python 离开此 try 语句之前，在任何情形下它都将运行此 finally 块中的代码，即使要结束程序，例如：如果 Python 在运行 except 或 else 块中的代码时遇到错误，在停止程序之前，依然会执行此finally 块。
 
-- 完成/项目：探索美国共享单车数据/的1-3节内容
-- 搭建本地anaconda环境（Python3版本）确保Spyder可以使用
-- 下载bikeshare-new-2.zip项目文件。如果教室里面不能下载，请尝试下载下面的链接：https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project1/Project1Files/bikeshare-new-2.zip
+举个 lesson2 13节的例子做个简单的说明（以注释方式）：
 
-**Project2/week2的项目要求** （上周的要求，本导学已经给出了答案，加油加油！）
+```python
+def create_groups(items, num_groups):
+#定义函数，2个输入items（多少个东西），分成num_groups(分成多少个组）
+    try:
+        size = len(items) // num_groups
+    #上来是计算每组大小
+    except ZeroDivisionError:
+        print("WARNING: Returning empty list. Please use a nonzero number.")
+        return []
+    #但是当发生ZeroDivisionError时（除数为0的时候的错误），就显示错误并返回空值
+    else:
+        groups = []
+        for i in range(0, len(items), size):
+        #是说从0到items的最大数（就是len(items)这个的结果），按照size（在try语句中得出的每组大小）进行循环
+            groups.append(items[i:i + size])
+            #每一个循环，把当前的组存追加存放到groups里面
+        return groups
+    #如果没报错，就是按照上面这一段把每组都有什么写到groups里面
+    finally:
+        print("{} groups returned.".format(num_groups))
+    #无论怎么处理的，都打印一行提示，使用的是格式化字符串的方式
+    
+print("Creating 6 groups...")
+for group in create_groups(range(32), 6):
+    print(list(group))
+print("\nCreating 0 groups...")
+for group in create_groups(range(32), 0):
+    print(list(group))
+```
 
-- 能够打开项目文件（用Uda线上的可以，但建议可以试试用spyder本地打开项目文件浏览）
-- 了解项目文件中有几个函数，函数名和输入是什么（不用看明白和尝试做）
+输出是这样的：
 
-**Project2/week3的项目要求** （肝！少年！）
+```
+Creating 6 groups...
+6 groups returned.
+[0, 1, 2, 3, 4]
+[5, 6, 7, 8, 9]
+[10, 11, 12, 13, 14]
+[15, 16, 17, 18, 19]
+[20, 21, 22, 23, 24]
+[25, 26, 27, 28, 29]
+[30, 31]
 
-- 浏览本导学文件
-- 做完项目中的练习
-- 根据导学文件，按照函数一个个，一步步的完成项目
-- 能提交最好了！
+Creating 0 groups...
+WARNING: Returning empty list. Please use a nonzero number.
+0 groups returned.
+```
+
+#### {2.输出优化}
+
+这里比较偏向个性化，可以使用print较复杂一点的方式，除了之前介绍的格式化字符串方法，还可以使用print的.center(),.ljust()方式进行行级排版。不是很复杂，有兴趣的同学可以搜索一下。最后我的输出是这样的：
+
+```
+##Hello! Let's explore some US bikeshare data!##
+
+---------------Step1 : Get input----------------
+
+q1/3: which city do you want to know?                      
+option:<chicago,new york city,washington> 
+washington
+
+q2/3: which month do you want to know?                       
+option:<all,january,february,march,april,may,june>                      
+jan
+---warning: I do not have data about that month.
+---Or you type a wrong name
+---Input Again
+
+q2/3: which month do you want to know?                       
+option:<all,january,february,march,april,may,june>                      
+january
+
+q3/3: which day do you want to know?                     
+option:<all,monday,tuesday,wednesday, ... ,sunday>                    
+all
+
+>>>>>>>>>Got Inputs:>>>>>>>>>>
+>>>city requirement: washington
+>>>month requirement: january
+>>>day requirement: all
+
+---------------Step2 : Computing----------------
+
+...Calculating The Most Frequent Times of Travel...
+
+(Took 0.04522085189819336 seconds.)
+>>>max freq month is:  1
+>>>max freq day is:  12
+>>>max freq hour is:  17
+
+...Calculating The Most Popular Stations and Trip...
+
+(This took 0.025053977966308594 seconds.)
+>>>max freq start station is:
+Columbus Circle / Union Station
+
+>>>max freq end station is:
+Columbus Circle / Union Station
+
+>>>max freq combine statuion is:
+Columbus Circle / Union Station --- 8th & F St NE
+
+...Calculating Trip Duration...
+
+(Took 0.0006821155548095703 seconds.)
+>>>total trip time is:
+26948288.554999996
+>>>mean trip time is:
+896.6921290719757
+
+...Calculating User Stats...
+
+>>>user types is:
+Subscriber    26246
+Customer       3807
+Name: User Type, dtype: int64
+>>>The city you choose do not have /Gender/ data:
+>>>The city you choose do not have /Year/ data:
+(Took 0.006235837936401367 seconds.)
+
+
+### Proceeding complete.                         
+### Would you like to restart?                         
+### Enter yes to restart or any key to quit.
+```
 
 ## 资源列表
 

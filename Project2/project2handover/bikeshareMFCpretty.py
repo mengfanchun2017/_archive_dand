@@ -16,23 +16,29 @@ def get_filters():
     """
 
     city_option = ['chicago', 'new york city', 'washington']
-    mon_option = ['all', 'january', 'february', 'march', 'april', 'may', 'june']
-    day_option = ['all', 'monday', 'tuesday',  'wednesday', 'thursday', 'friday', 'saturday', 'sunday' ]
+    mon_option = ['all', 'january', 'february', 'march', 'april', 'may', 
+                  'june']
+    day_option = ['all', 'monday', 'tuesday',  'wednesday', 
+                  'thursday', 'friday', 'saturday', 'sunday' ]
     #三个输入的备选
     
     while True:
-        city = input('q1/3: which city do you want to know? chicago, \
-                     new york city or washington? \n>>> ')
+        city = input('q1/3: which city do you want to know? \
+                     \noption:<chicago,new york city,washington> \n>>> ')
+        # 在input中如果加入了\换行符会在输出中换行，保持不换行会突破79个字符，怎么解
+        # 这里在第二行前增加了\n用两行输出了
         if city in city_option:
             break
         else:
-            print('---warning: I do not have data about that city.\n---Or you type a wrong name\n---Input Again')
+            print('---warning: I do not have data about that city.\
+                  \n---Or you type a wrong name\n---Input Again')
     #要求输入city并检查是否合法
 
     while True:
     # 总是循环执行，直到遇到break
-        month = input('q2/3: which month do you want to know? choose from all, \
-                  january, february, ... , june. > ')
+        month = input('q2/3: which month do you want to know? \
+                      \noption:<all,january,february,march,april,may,june>\
+                      \n>>> ')
         # \ 是代码换行的意思，python的编程规范是每行不超过79个字符
         if month in mon_option:
             break
@@ -41,18 +47,21 @@ def get_filters():
     # 当经过判断 month 变量在可选范围内，就break结束while循环
 
     while True:
-        day = input('q3/3: which day do you want to know? choose from all, \
-                  monday, ... , sunday. > ')
+        day = input('q3/3: which day do you want to know? \
+                    \noption:<all,monday,tuesday,wednesday, ... ,sunday>\
+                    \n>>> ')
         if day in day_option:
             break
         else:
-            print('---warning: I do not have data about that day.\n---Or you type a wrong name\n---Input Again')
+            print('---warning: I do not have data about that day.\
+                  \n---Or you type a wrong name\n---Input Again')
     
     str_got_input = 'Got Inputs:'
+    print('')
     print(str_got_input.center(30,'>'))
     #str有.ljust .center .rjust等方式不使用变量的话很方便
     #http://www.tutorialspoint.com/python/string_ljust.htm
-    #print('analyzing --- ', city)
+
     print('>>>city requirement:',city)
     print('>>>month requirement:',month)
     print('>>>day requirement:',day)
@@ -72,6 +81,7 @@ def load_data(city, month, day):
 
 
     df['Start Time'] = pd.to_datetime(df['Start Time'])
+    
     # 将时间从字符格式转为datetime格式
 
     df['month'] = df['Start Time'].dt.month
@@ -130,12 +140,9 @@ def time_stats(df):
     # 后面的time.time() - start_time就是用当前时间剪去开始运行时的时间
     # 可以看出这段代码运行了多长时间
     
-    print('>>>max freq month is:')
-    print(max_month)
-    print('>>>max freq day is:')
-    print(max_day)
-    print('>>>max freq hour is:')
-    print(max_hour)
+    print('>>>max freq month is: ',max_month)
+    print('>>>max freq day is: ',max_day)
+    print('>>>max freq hour is: ',max_hour)
     #以上是3个频率的输出
 
 
@@ -203,7 +210,7 @@ def user_stats(df):
     user_types = df['User Type'].value_counts()
     print('>>>user types is:')
     print(user_types)
-
+    
     # TO DO: Display counts of gender
     try:
         gender_types = df['Gender'].value_counts()
@@ -214,22 +221,23 @@ def user_stats(df):
         print(gender_types)
     finally:
         pass
+    # 也可以使用 ’Gender‘ in df.columns 做循环判断，这种方法不适用于try/except
+    # 因为不会报错
 
     # TO DO: Display earliest, most recent, and most common year of birth
     try:
-        len(df['Birth Year'])
+        earliest = df['Birth Year'].min()
     except KeyError:
         print('>>>The city you choose do not have /Year/ data:')
     else:
-        earliest = df['Birth Year'].min()
         recent = df['Birth Year'].max()
         common = df['Birth Year'].mode()[0]
         print('\n>>>earliest year of birth is:')
-        print(earliest)
+        print(int(earliest))
         print('\n>>>recent year of birth is:')
-        print(recent)
+        print(int(recent))
         print('\n>>>common year of birth is:')
-        print(common)
+        print(int(common))
 
     print("(Took %s seconds.)" % (time.time() - start_time))
 
@@ -237,7 +245,7 @@ def main():
     while True:
         
         str_title = 'Hello! Let\'s explore some US bikeshare data!'
-        print(str_title.center(79,'#'))
+        print(str_title.center(48,'#'))
         print('')
         
         str_input = 'Step1 : Get input'
@@ -255,7 +263,9 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
 
-        restart = input('\n###Would you like to restart? Enter yes or no.\n')
+        restart = input('\n### Proceeding complete. \
+                        \n### Would you like to restart? \
+                        \n### Enter yes to restart or any key to quit.\n')
         if restart.lower() != 'yes':
             break
 
