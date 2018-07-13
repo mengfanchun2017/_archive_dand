@@ -341,16 +341,18 @@ def get_filters():
 1989.0
 ```
 
-那么为什么年份的结果会是1899.0的这种方式呢，其实这是因为原始数据中都是1899.0这样的，所以在被读入的时候会变成float，所以输出就是小数了。
+那么为什么年份的结果会是1899.0的这种方式呢，其实这是因为原始数据中都是1899.0这样的，所以在被读入的时候会变成float，所以输出就是小数了。但是如果使用excel打开csv的话，这一列是整数，所以容易让人迷惑：
+
+![](http://pb6cho8f0.bkt.clouddn.com/15314456313490.jpg)
 
 比较简单的解决方式是在输出那里加一个int转换成整数：
 ```python
 print('\n>>>earliest year of birth is:')
-        print(int(earliest))
-        print('\n>>>recent year of birth is:')
-        print(int(recent))
-        print('\n>>>common year of birth is:')
-        print(int(common))
+print(int(earliest))
+print('\n>>>recent year of birth is:')
+print(int(recent))
+print('\n>>>common year of birth is:')
+print(int(common))
 ```
 
 也可以使用.to_datatime()将这一列转换成pandas中的时间格式，但是需要加参数，因为原本是float格式，不加参数会转换出奇怪的结果，有兴趣的同学可以自己研究下。其实pandas中的readcsv是可以定义列格式的，不过使用比较复杂也容易出错（要定义每一列的格式），了解下就好了。
