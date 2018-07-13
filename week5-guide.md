@@ -36,6 +36,7 @@
 ## 本周目标
 
 **不要怂，就是肝！大家High起来！** 3个目标对应的是：
+
 > /目标1/：整体项目回顾
 > /目标2/：知识点梳理
 > /目标3/：项目文件优化（看懂即可）
@@ -49,7 +50,7 @@
 > - 项目概述：请先看下这一页，对项目有个感触：
 https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74-4486-911c-d1fae2f03c97/modules/134150b9-81b0-40d1-9c2c-bb288bb49d55/lessons/e5bef1dd-5031-45c3-aaf7-8536f6f3cf8a/concepts/8846274e-0239-4eef-8619-f9854a068ca8
 
-**如果下载文件打不开，请试试我传送的：**https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project1/Project1Files/bikeshare-new-2.zip
+**如果下载文件打不开，请试试我传送的：** https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project2/bikeshare-new-2.zip
 
 #### {2.项目分析思路}
 
@@ -119,6 +120,7 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 #### {1.gender数据不完整} 
 
 使用try/except可以对出错进行判断并处理，不会造成程序停止：
+
 ```python
 try:
     gender_types = df['Gender'].value_counts()
@@ -329,13 +331,12 @@ def get_filters():
 #### {4.输出年为整数}
 
 整体函数的输出中有一段是这样的：
+
 ```
 >>>earliest year of birth is:
 1899.0
-
 >>>recent year of birth is:
 2016.0
-
 >>>common year of birth is:
 1989.0
 ```
@@ -363,6 +364,7 @@ print('\n>>>earliest year of birth is:')
 - 02-week2导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week2-guide.md
 - 03-week3导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week3-guide.md
 - 04-week4导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week4-guide.md
+- 05-week4导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week5-guide.md
 
 **项目文件：**
 
