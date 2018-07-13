@@ -366,7 +366,7 @@ print(int(common))
 - 02-week2导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week2-guide.md
 - 03-week3导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week3-guide.md
 - 04-week4导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week4-guide.md
-- 05-week4导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week5-guide.md
+- 05-week5导学：https://github.com/mengfanchun2017/DAND-Basic/blob/master/week5-guide.md
 
 **项目文件：**
 
