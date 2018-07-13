@@ -113,6 +113,7 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 对于上周week4导学中的项目讲解，其实已经达到了项目通过的水平，但是编程这件事，我们还是可以尽量优化一下，对比上周的项目讲解，我们还有这几个地方可以改进：
 > 1. gender数据不完整：3个城市的数据文件中，washington是没有性别数据的，选中的话会报错虽然可以使用try/except优化输出
 > 1. 对于输出显示并不友好，看着有点晕，调整输出显示
+> 1. 对于用户的3个输入，也可以写一个小函数调用3回。3次区别并不大，当输入比较多的时候（或者要从很多种备选中选择的时候）会比较简洁
 > 1. 上周的文件有不符合pep编程规范的地方（Atom中的Pylint可以提示），需要修改更加专业（本小节请大家自己研究）。关于Pep请参考之前的一个介绍：https://github.com/mengfanchun2017/DAND-Basic-P0/blob/master/day5-guide.md
 
 #### {1.gender数据不完整} 
@@ -263,6 +264,95 @@ Name: User Type, dtype: int64
 ### Would you like to restart?                         
 ### Enter yes to restart or any key to quit.
 ```
+
+#### {3.使用循环获得用户输入}
+
+我们先写一个函数，实现检查用户输入是不是在指定的可选范围内：
+- 函数的输入是3个变量
+- 变量1是输入的提示词
+- 变量2是当输入有错的时候的提示词（不在列表中）
+- 变量3是进行判断的列表
+
+```python
+def phrase_input(input_prompt,err_prompt,option_list):
+    
+    user_input = input(input_prompt)
+    while user_input not in option_list:
+        user_input = input(err_prompt)
+    return user_input
+```
+
+之后就可以在filter_data()函数中调用3次，生成输出了，修改之后的代码和解释如下：
+
+```python
+def get_filters():
+    
+    city_option = ['chicago', 'new york city', 'washington']
+    #直接指定城市的话不太灵活，可以根据CITY_DATA的keys（）进行判断
+    #.keys()方法就是吧CITY_DATA中的key输出成一个列表，和下面这句等价：
+    #city_option = ['chicago', 'new york city', 'washington']
+    month_option = ['all', 'january', 'february', 'march', 'april', 'may', 
+                  'june']
+    day_option = ['all', 'monday', 'tuesday',  'wednesday', 
+                  'thursday', 'friday', 'saturday', 'sunday' ]
+    
+    #将city、month、day、err的输出分离出来
+    city_prompt = 'q1/3: which city do you want to know? \
+                     \noption:<chicago,new york city,washington> \n>>> '
+    month_prompt = 'q2/3: which month do you want to know? \
+                      \noption:<all,january,february,march,april,may,june>\
+                      \n>>> '
+    day_prompt = 'q3/3: which day do you want to know? \
+                    \noption:<all,monday,tuesday,wednesday, ... ,sunday>\
+                    \n>>> '
+    err_prompt = '---warning: I do not have that data.\
+                  \n---Or you type a wrong name\n---Input Again\n>>> '
+    
+    #调用3次函数，将结果负责给city、month、day三个变量                 
+    city = phrase_input(city_prompt,err_prompt,city_option)
+    month = phrase_input(month_prompt,err_prompt,month_option)
+    day = phrase_input(day_prompt,day_option)
+    
+    #输出结果
+    str_got_input = 'Got Inputs:'
+    print('')
+    print(str_got_input.center(30,'>'))
+    #str有.ljust .center .rjust等方式不使用变量的话很方便
+    #http://www.tutorialspoint.com/python/string_ljust.htm
+    print('>>>city requirement:',city)
+    print('>>>month requirement:',month)
+    print('>>>day requirement:',day)
+    
+    return city, month, day
+```
+
+#### {4.输出年为整数}
+
+整体函数的输出中有一段是这样的：
+```
+>>>earliest year of birth is:
+1899.0
+
+>>>recent year of birth is:
+2016.0
+
+>>>common year of birth is:
+1989.0
+```
+
+那么为什么年份的结果会是1899.0的这种方式呢，其实这是因为原始数据中都是1899.0这样的，所以在被读入的时候会变成float，所以输出就是小数了。
+
+比较简单的解决方式是在输出那里加一个int转换成整数：
+```python
+print('\n>>>earliest year of birth is:')
+        print(int(earliest))
+        print('\n>>>recent year of birth is:')
+        print(int(recent))
+        print('\n>>>common year of birth is:')
+        print(int(common))
+```
+
+也可以使用.to_datatime()将这一列转换成pandas中的时间格式，但是需要加参数，因为原本是float格式，不加参数会转换出奇怪的结果，有兴趣的同学可以自己研究下。其实pandas中的readcsv是可以定义列格式的，不过使用比较复杂也容易出错（要定义每一列的格式），了解下就好了。
 
 ## 资源列表
 
