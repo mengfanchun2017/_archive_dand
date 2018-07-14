@@ -289,7 +289,7 @@ def phrase_input(input_prompt,err_prompt,option_list):
 ```python
 def get_filters():
     
-    city_option = ['chicago', 'new york city', 'washington']
+    city_option = CITY_DATA.keys()
     #直接指定城市的话不太灵活，可以根据CITY_DATA的keys（）进行判断
     #.keys()方法就是吧CITY_DATA中的key输出成一个列表，和下面这句等价：
     #city_option = ['chicago', 'new york city', 'washington']
