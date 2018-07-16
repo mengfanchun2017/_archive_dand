@@ -78,12 +78,72 @@
 
 又是一份共享单车的数据！这节请看看，就当复习了。
 
-#### 1.9提问
+#### *{9.提问/10.数据集问题}
 
-肿瘤数据 https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
-肿瘤数据
+在第9节介绍了一份肿瘤数据：
+https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
+原始数据是.data格式，第10节练习中的工作空间中可以导入服务器端的csv文件对数据进行观察和提问。
 
-### 探索数据集
+#### *{11.数据整理和EDA}
+
+本节讨论了数据分析流程中的第2步：Wrangling（数据整理）和第3步：EDA（探索性数据分析）之间的关系和交互过程。本部分说明包含了几个子类的说明，将相应节号整合加入便于理解：
+
+**Wrangling：主要解决**
+- Gather收集数据 **{12：收集数据}** 可以下载、从API获取、网页获取（爬虫）或者使用公司的数据库。
+- Assess评估数据，见14节练习
+- Clean
+
+**EDA：**
+- Explor
+- Augment
+
+#### ***{13.阅读csv文件}
+
+本节对pandas.read_csv()做了超级详细的扩展，推荐在Uda工作空间中完成（因为文件是在Uda工作空间中，不建议在本地做）。我们抓个其中的电厂的例子做说明，如果只是简单的读入csv文件，输入输出是这样子的：
+
+![](http://pb6cho8f0.bkt.clouddn.com/15317053757797.jpg)
+
+原始输出，根本看不出是什么意思，我们可以查看下数据说明：
+> Features consist of hourly average ambient variables 
+- Temperature (T) in the range 1.81°C and 37.11°C,
+- Ambient Pressure (AP) in the range 992.89-1033.30 milibar,
+- Relative Humidity (RH) in the range 25.56% to 100.16%
+- Exhaust Vacuum (V) in teh range 25.36-81.56 cm Hg
+- Net hourly electrical energy output (EP) 420.26-495.76 MW
+
+那么我们就可以在读取csv的时候把列的名称做扩展了说明，这样看就好多了：
+![](http://pb6cho8f0.bkt.clouddn.com/15317058792920.jpg)
+
+那么接下来我们就可以使用.to_csv()方法把数据集存储为新的csv文件就可以了，这里注意有个index的问题要考虑下：
+![](http://pb6cho8f0.bkt.clouddn.com/15317070506224.jpg)
+
+里面新出来的这个index是行的名字，扩展看懂下面这个就行了：
+![](http://pb6cho8f0.bkt.clouddn.com/15317071182748.jpg)
+
+#### **{14.评估和理解}
+
+本节的重点是对dataframe的一些信息的获取，可以用于评估所收到数据情况，有以下几个小点：
+- 通过.shape检查数据的维度信息：下面的输出是说df是个有569行和32列的二维数据： ![](http://pb6cho8f0.bkt.clouddn.com/15317083917660.jpg)
+- 通过.dtypes检查各列的类型：（注意diagnosis本身是str字符串格式，这是由于str在dataframe中以对象方式呈现，如果深入到一个元素使用type(df['diagnosis'][0])检查的话还是会显示str） ![](http://pb6cho8f0.bkt.clouddn.com/15317085582097.jpg)
+- 通过.info()检查所有列的数量
+- 通过.describe()检查数据集每列的统计学信息：（一个8个） ![](http://pb6cho8f0.bkt.clouddn.com/15317088183840.jpg)
+- 通过.columns .index可以看到数据集的行列信息，注意columns的输出是一个列表，所以可以遍历访问： ![](http://pb6cho8f0.bkt.clouddn.com/15317091581005.jpg)
+- 通过.loc[] .iloc[]选择所需数据，第一种是key value对应，第二种是通过索引。简单的说是这样选：[行范围,列范围]具体看例子： ![](http://pb6cho8f0.bkt.clouddn.com/15317123678205.jpg)
+- 挑选不连续的列：在选择时可以用列表挑选需要的列，两种实现方式（后面的用了变量方便修改）： ![](http://pb6cho8f0.bkt.clouddn.com/15317133705558.jpg)
+- 但是上面的方法不能在不连续的列中混入范围的选择，如果列很多的时候要这样处理：![](http://pb6cho8f0.bkt.clouddn.com/15317140410209.jpg)
+- 官方文档： https://pandas.pydata.org/pandas-docs/stable/indexing.html
+
+#### *{15.评估和理解练习}
+
+通过练习有一点扩展，总结如下：
+- 通过.xx选择df中的列，一下两种方式是等价的： ![](http://pb6cho8f0.bkt.clouddn.com/15317151657673.jpg)
+- 通过.unique()筛选唯一的值，可以用len直接求出有几个，其实也可以使用.nunique()直接得出： ![](http://pb6cho8f0.bkt.clouddn.com/15317155640172.jpg)
+15317154270712.jpg)
+- 通过.value_counts()统计一列中的数值个数： ![](http://pb6cho8f0.bkt.clouddn.com/15317152664251.jpg)
+- 通过.isnull()统计缺失值。在df中有isnull的方法可以检查缺失值（也有notnull）。要在后面加个sum()就可以检查个数了(当然也可以对所有列做处理）： ![](http://pb6cho8f0.bkt.clouddn.com/15317185145596.jpg)
+- 注意.isnull()是对值做判断，所以无论是否为空都有一个结果，所以对isnull()做value_count()也是可以的，注意两种对比： ![](http://pb6cho8f0.bkt.clouddn.com/15317186518065.jpg)
+
+#### 探索数据集
 
 中文数据集说明：
 https://github.com/udacity/new-dand-basic-china/blob/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/%E9%A1%B9%E7%9B%AE-%E6%8E%A2%E7%B4%A2%E6%95%B0%E6%8D%AE%E9%9B%86/%E6%8E%A2%E7%B4%A2%E6%95%B0%E6%8D%AE%E9%9B%86%20-%20%E5%A4%87%E9%80%89%E6%95%B0%E6%8D%AE%E9%9B%86.md
