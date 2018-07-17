@@ -115,6 +115,7 @@ https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/0ad43cea-8e74
 > 1. gender数据不完整：3个城市的数据文件中，washington是没有性别数据的，选中的话会报错虽然可以使用try/except优化输出
 > 1. 对于输出显示并不友好，看着有点晕，调整输出显示
 > 1. 对于用户的3个输入，也可以写一个小函数调用3回。3次区别并不大，当输入比较多的时候（或者要从很多种备选中选择的时候）会比较简洁
+> 1. 年统计输出为1988.0的问题处理（年么，还是输出1988比较好看对不对）
 > 1. 对于用户输入的友好响应（如果用户输入ChICago，也能正确完成分析）
 > 1. 上周的文件有不符合pep编程规范的地方（Atom中的Pylint可以提示），需要修改更加专业（本小节请大家自己研究）。关于Pep请参考之前的一个介绍：https://github.com/mengfanchun2017/DAND-Basic-P0/blob/master/day5-guide.md
 
