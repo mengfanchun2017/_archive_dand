@@ -56,7 +56,7 @@
 
 #### **{3.数据分析的应用}
 
-提供了5个链接，对于数据分析能干什么又了很好的说明：
+提供了5个链接，对于数据分析能干什么做了说明：
 - 百万数据告诉你第一次约会用来了解对方的最佳问题
 - 看看沃尔玛如何使用大数据分析来增加销量
 - 你还可以了解Bill James 如何将数据分析应用于棒球
@@ -66,12 +66,16 @@
 #### *{5.数据分析过程概述}
 
 1. 提问
+    - 好奇心是最好的老师
 2. 整理数据
-    - Gather
-    - Assess
-    - Clean
+    - Gather 收集
+    - Assess 评估
+    - Clean 清理
 3. 执行EDA（探索性数据分析）
+    - 包括画图进行观察
 4. 得出结论（或做出预测）
+    - 通过机器学习得出
+    - 通过推断统计学和作图得出（项目4呦，我们到时候再学习）
 5. 传达结果
 
 #### ***{6.数据分析过程练习}
@@ -85,7 +89,6 @@ https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
 原始数据是.data格式，第10节练习中的工作空间中可以导入服务器端的csv文件对数据进行观察和提问。
 
 #### *{11.数据整理和EDA}
-
 本节讨论了数据分析流程中的第2步：Wrangling（数据整理）和第3步：EDA（探索性数据分析）之间的关系和交互过程。本部分说明包含了几个子类的说明，将相应节号整合加入便于理解：
 
 **Wrangling：主要解决**
@@ -98,7 +101,6 @@ https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
 - Augment
 
 #### ***{13.阅读csv文件}
-
 本节对pandas.read_csv()做了超级详细的扩展，推荐在Uda工作空间中完成（因为文件是在Uda工作空间中，不建议在本地做）。我们抓个其中的电厂的例子做说明，如果只是简单的读入csv文件，输入输出是这样子的：
 
 ![](http://pb6cho8f0.bkt.clouddn.com/15317053757797.jpg)
@@ -121,7 +123,6 @@ https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
 ![](http://pb6cho8f0.bkt.clouddn.com/15317071182748.jpg)
 
 #### **{14.评估和理解}
-
 本节的重点是对dataframe的一些信息的获取，可以用于评估所收到数据情况，有以下几个小点：
 - 通过.shape检查数据的维度信息：下面的输出是说df是个有569行和32列的二维数据： ![](http://pb6cho8f0.bkt.clouddn.com/15317083917660.jpg)
 - 通过.dtypes检查各列的类型：（注意diagnosis本身是str字符串格式，这是由于str在dataframe中以对象方式呈现，如果深入到一个元素使用type(df['diagnosis'][0])检查的话还是会显示str） ![](http://pb6cho8f0.bkt.clouddn.com/15317085582097.jpg)
@@ -134,7 +135,6 @@ https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
 - 官方文档： https://pandas.pydata.org/pandas-docs/stable/indexing.html
 
 #### *{15.评估和理解练习}
-
 通过练习有一点扩展，总结如下：
 - 通过.xx选择df中的列，一下两种方式是等价的： ![](http://pb6cho8f0.bkt.clouddn.com/15317151657673.jpg)
 - 通过.unique()筛选唯一的值，可以用len直接求出有几个，其实也可以使用.nunique()直接得出： ![](http://pb6cho8f0.bkt.clouddn.com/15317155640172.jpg)
@@ -142,6 +142,104 @@ https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
 - 通过.value_counts()统计一列中的数值个数： ![](http://pb6cho8f0.bkt.clouddn.com/15317152664251.jpg)
 - 通过.isnull()统计缺失值。在df中有isnull的方法可以检查缺失值（也有notnull）。要在后面加个sum()就可以检查个数了(当然也可以对所有列做处理）： ![](http://pb6cho8f0.bkt.clouddn.com/15317185145596.jpg)
 - 注意.isnull()是对值做判断，所以无论是否为空都有一个结果，所以对isnull()做value_count()也是可以的，注意两种对比： ![](http://pb6cho8f0.bkt.clouddn.com/15317186518065.jpg)
+- 通过.quantile()查询相应百分位的值。如果要多个要放在一个列表中，并且小数点前的0可以省略： ![](http://pb6cho8f0.bkt.clouddn.com/15317324651608.jpg)
+
+#### ***{17.清理示例}
+总算来了，清理数据是本周的重点，大家这一节一定要好好学。首先我们要知道清理数据常见的3种情况：
+1. 缺失值
+2. 冗余数据
+3. 数据类型错误
+
+我们先从缺失值下手处理这个问题，按照书中的例子，对于duration这样的数字组成的数据列，一种方法是直接把平均值填充到NaN（标示空值的位置）：
+```python
+# 方法1，先定义mean变量，再使用fillna(mean)将空值填充为mean的值
+mean = df['view_duration'].mean()
+df['view_duration'] = df['view_duration'].fillna(mean)
+# # 此处要用 = 将后面处理后的数据写入原数据
+
+# 方法2，在fillna中增加inplace参数，表示替换
+# # 并且直接把mean的计算融入fillna的参数中
+df['view_duration'].fillna(df['view_duration'].mean(), inplace=True)
+```
+
+接下来我们处理数据重复的问题：
+```python
+# 使用.duplicated()处理
+# # 注意.duplicated()输出是一个个True / False的列表，所以要想知道有多少个，需要使用sum()或者.sum()进行统计
+df.duplicated().sum()
+
+# 最后使用.drop_duplicateds()清理数据，同样可以使用inplace = True进行替换
+df.drop_duplicateds(inplace=True)
+# # 另外如果只是对一列中的重复值统计和去掉的话使用subset
+# # df.drop_duplicateds(subset=['colname'], inplace=True)
+# # 另外也可以使用keep参数定义保留那一个重复数据
+# # https://stackoverflow.com/questions/23667369/drop-all-duplicate-rows-in-python-pandas
+```
+
+最后的改变数据格式的方式我们已经在项目2中使用过了，还记得 pd.to_datatime() 这个方法么？详情请见week4导学内容。如果你将转换之后的数据保存为csv下次打开后还不是datetime格式，因为csv无法数据类型。但是这种情况可以通过在读取csv的时候使用parse_dates参数解决。感兴趣的请戳（选学）： https://stackoverflow.com/questions/17465045/can-pandas-automatically-recognize-dates
+
+#### **{18.清理练习}
+
+对于清理，还有一个小练习，建议有精力的不要放过，同样由于csv文件的原因请在工作空间完成，有一点做个扩展：
+
+```python
+# 用均值填充缺失值
+# # 使用循环将除了前2列之外的进行均值填充处理
+# # 第一列是用户id，第二列是诊断评级
+for i in df.columns[2:]:
+    # 使用df.columns遍历列
+    # 2: 表示的是从第2列到最后一列（排除了0、1列）
+    df[i].fillna(df[i].mean(), inplace = True)
+    # # 使用上节的方法完成填充
+# 用 info() 确认修改
+df.info()
+# 这一次就可以看到所有列的飞空数字是一样的了（info显示每列后面的是非空数据）
+```
+
+后面的去掉重复数据方面，就是一样的了，使用这个数据我们可以观察一下，duplicated是找到所有列都一样的，如果只看一列，数据是不同的（正好有分类信息，会重复很多），对比如下： ![](http://pb6cho8f0.bkt.clouddn.com/15317435414801.jpg)
+
+#### ***{20.使用Pandas绘图}
+
+Pandas中的绘图功能其实是封装了matplotlib中的功能，所以呢就不用再import一遍了。简单的例子如下（基于已经导入的df数据）：
+
+```python
+# 为了能够在jupyter中显示图形要增加下面这句：
+% matplotlib inline
+
+# 可以直接在数据集上调用，会每个列出一个图，比如
+# # .plot() 折线图
+# # .hist() 直方图
+# # 可以在()中定义数据的大小
+df.hist(figsize=(8,8));
+# # 默认会把图形建立的一些信息一起输出，可以在结尾加上;隐藏信息，只出现图
+# # .hist()和.plot(kind='hist')是相同的
+
+# 对于education这样的分类的列，可以使用.value_counts()先把各列数据统计出来，再画图
+df['education'].value_counts().plot(kind='bar')
+
+# 放大招！有个.scatter_matrix()可以让你看到每两个变量之间散点的关系，便于进行初步观察
+# # 注意使用方法是将数据集作为参数输入
+# # 还会展示每个变量的直方图
+pd.plotting.scatter_matrix(df, figsize=(15,15));
+# # 如果只想看特定的两个变量，这样写：
+df.plot(x='compactness', y='concavity', kind='scatter')
+```
+
+#### *{23.得出结论示例}
+
+这里呢大家明白筛选是怎么回事就好（在项目2用过呦），最后的把两个图放在一起显示的代码本周不要求。
+```python
+# 这里是使用过滤将df中满足条件诊断为M的存为新的数据df  —m
+df_m = df[df['diagnosis'] == 'M']
+```
+#### *{24.练习：得出结论}
+
+本节是对上一节可视化的练习，后面需要使用.idmin()方法，了解一下：
+![](http://pb6cho8f0.bkt.clouddn.com/15317846263153.jpg)
+
+#### *{26.传达结果示例}
+
+#### *{27.传达结果练习}
 
 #### 探索数据集
 

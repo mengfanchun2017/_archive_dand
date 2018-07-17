@@ -238,6 +238,8 @@ def user_stats(df):
         print(int(recent))
         print('\n>>>common year of birth is:')
         print(int(common))
+    finally:
+        pass
 
     print("(Took %s seconds.)" % (time.time() - start_time))
 

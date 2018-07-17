@@ -5,10 +5,10 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
-
-def phrase_input(input_prompt,err_prompt,option_list):
+def phrase_input(input_prompt, err_prompt, option_list):
+# 如果想使用 err_prompt = err_show 这种带有default的参数输入，需要先定义err_show
     
-    user_input = input(input_prompt)
+    user_input = input(input_prompt).lower()
     while user_input not in option_list:
         user_input = input(err_prompt)
     return user_input
@@ -16,7 +16,7 @@ def phrase_input(input_prompt,err_prompt,option_list):
 
 def get_filters():
     
-    city_option = ['chicago', 'new york city', 'washington']
+    city_option = CITY_DATA.keys()
     #直接指定城市的话不太灵活，可以根据CITY_DATA的keys（）进行判断
     #.keys()方法就是吧CITY_DATA中的key输出成一个列表，和下面这句等价：
     #city_option = ['chicago', 'new york city', 'washington']
@@ -26,21 +26,21 @@ def get_filters():
                   'thursday', 'friday', 'saturday', 'sunday' ]
     
     #将city、month、day、err的输出分离出来
-    city_prompt = 'q1/3: which city do you want to know? \
+    city_show = 'q1/3: which city do you want to know? \
                      \noption:<chicago,new york city,washington> \n>>> '
-    month_prompt = 'q2/3: which month do you want to know? \
+    month_show = 'q2/3: which month do you want to know? \
                       \noption:<all,january,february,march,april,may,june>\
                       \n>>> '
-    day_prompt = 'q3/3: which day do you want to know? \
+    day_show = 'q3/3: which day do you want to know? \
                     \noption:<all,monday,tuesday,wednesday, ... ,sunday>\
                     \n>>> '
-    err_prompt = '---warning: I do not have that data.\
+    err_show = '---warning: I do not have that data.\
                   \n---Or you type a wrong name\n---Input Again\n>>> '
     
     #调用3次函数，将结果负责给city、month、day三个变量                 
-    city = phrase_input(city_prompt,err_prompt,city_option)
-    month = phrase_input(month_prompt,err_prompt,month_option)
-    day = phrase_input(day_prompt,day_option)
+    city = phrase_input(city_show,err_show,city_option)
+    month = phrase_input(month_show,err_show,month_option)
+    day = phrase_input(day_show,day_option,day_option)
     
     #输出结果
     str_got_input = 'Got Inputs:'
