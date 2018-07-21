@@ -97,15 +97,19 @@ red_df = red_df.rename(columns = {'total_sulfer-dioxide':'total_sulfer_dioxide'}
 #### **{11.使用可视化探索数据}
 
 这里就是把本周课程中的作图方法使用一遍：首先是所有列的hist（我把figsize调整了下）：
+
 ![](http://pb6cho8f0.bkt.clouddn.com/15321384655734.jpg)
 
 接下来是散点图，我想到了那个scatter_matrix大招，结果由于参数太多了，执行超慢，而且太小了啥也看不出来（来个大显示器？给报销么...)，放弃：
+
 ![](http://pb6cho8f0.bkt.clouddn.com/15321387172057.jpg)
 
 最后那就只能两个两个对比了：
+
 ![](http://pb6cho8f0.bkt.clouddn.com/15321387707633.jpg)
 
 但是有这么多要对比的，肿么办呢，我来写个循环（注意输出比较多是可以滚动看的）：
+
 ![](http://pb6cho8f0.bkt.clouddn.com/15321390062591.jpg)
 
 #### *{Pandas Groupby}
@@ -114,11 +118,13 @@ red_df = red_df.rename(columns = {'total_sulfer-dioxide':'total_sulfer_dioxide'}
 ![](http://pb6cho8f0.bkt.clouddn.com/15321404532846.jpg)
 
 但是我又觉得这种把红酒白酒混合在一起的方式有点太混了，于是决定在groupby中多加一个color参数（注意多个参数要写成一个列表），就可以区分出来了：
+
 ![](http://pb6cho8f0.bkt.clouddn.com/15321406462284.jpg)
 
 #### *{13.使用Groupby得出结论}
 
 当使用groupby的时候，可以在后面指定要考察的列（而不是所有列），并且可以加上as_index = False指定不以groupby作为index（会按数字排列）：
+
 ![](http://pb6cho8f0.bkt.clouddn.com/15321412868935.jpg)
 
 接下来的问题2有一点点复杂，我梳理一下：
@@ -173,9 +179,11 @@ Name: pH, dtype: float64
 
 [2.72, 3.11, 3.21, 3.32, 4.01]
 ```
+
 ![](http://pb6cho8f0.bkt.clouddn.com/15321441473886.jpg)
 
 那么最后就可以回答问题了：
+
 ![](http://pb6cho8f0.bkt.clouddn.com/15321442143769.jpg)
 
 #### **{14.15.Pandas Query}
@@ -250,6 +258,7 @@ plt.ylabel('Quality', fontsize=12)
 # 有了这两行就可以看到两个轴的标签了
 # 注意这两行要放在最下面，因为plot会输出xlabel所以要在最后覆盖一下
 ```
+
 ![](http://pb6cho8f0.bkt.clouddn.com/15321485000881.jpg)
 
 接下来，我我们看看能不能再加点东西，就平均值对比数据太少了，我们看看每个质量级别的对比吧(使用counts和groupby，示例使用pH数据）：
@@ -262,6 +271,7 @@ plt.ylabel('Count', fontsize = 16)
 plt.title('Counts by Wine Color and Quality', fontsize = 18)
 # 我把title也拆出来了为了能够指定大小，这样plot也比较短
 ```
+
 ![](http://pb6cho8f0.bkt.clouddn.com/15321493985538.jpg)
 
 ps:seaborn可以画出超帅气的图来，我们将在下周进行讲解，有兴趣的可以看下官方文档和样例库：
