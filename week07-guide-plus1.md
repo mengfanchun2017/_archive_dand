@@ -1,4 +1,12 @@
-# week6/12 plus1
+# Week7 数据分析案例
+
+[TOC]
+
+# 学习地图
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/GMTm7iL1RMivZIBZuPruIg_thumb_13f.jpg)
+
+本周是数据分析课项目3的第二周，
 
 ## 本周知识点
 
