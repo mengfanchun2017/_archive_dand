@@ -53,8 +53,25 @@
 - 燃料经济性的介绍：https://en.wikipedia.org/wiki/Fuel_economy_in_automobiles 
 - 数据下载链接：
 - 数据Feature的说明：https://www.fueleconomy.gov/feg/EPAGreenGuide/GreenVehicleGuideDocumentation.pdf
+- ！注意！链接下载的是txt文件，而且是使用tab分割的。建议本案例在workspace上完成。如果需要自己下砸的话读入文件要注意：
 
-#### *{2.课程概述}
+## || 5 数据评估
+
+
+```python
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+% matplotlib inline
+df08 = pd.read_csv('all_alpha_08.txt', sep = '\t')
+df18 = pd.read_csv('all_alpha_18.txt', sep = '\t')
+# 注意原文件链接为xlsx、zip和txt（不是csv，csv课程中没给出链接）
+# 使用read_csv读入，发现没有分列，看样子是tab分割
+# 加个 sep = '\t'指定使用tab分割解决
+# （mac 遇到奇怪问题下载的文件都很奇怪，可能和单位网有关）
+```
+
+## *{2.课程概述}
 
 着节是项目3的开始，看完之后应该对整体的课程设计和需要的SQL知识（项目1）、python知识（项目2）有所了解。并且提供了不少额外资源的链接。
 
