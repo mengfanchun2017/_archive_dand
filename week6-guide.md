@@ -180,10 +180,35 @@ df.drop_duplicateds(inplace=True)
 
 #### **{18.清理练习}
 
-对于清理，还有一个小练习，建议有精力的不要放过，同样由于csv文件的原因请在工作空间完成，有一点做个扩展：
+对于清理，还有一个小练习，建议有精力的不要放过，同样由于csv文件的原因请在工作空间完成，有2点做个扩展：
 
 ```python
-# 用均值填充缺失值
+# 扩展1：重命名列
+# # 可以直接通过赋值重命名df的列，但元素数要一致
+# # 首先定义一个空列
+new_labels = []
+# # 之后用一个循环把原先列中带_mean的列名都改为不带_mean的
+for col in df.columns:
+    print(col)
+    if '_mean' in col:
+    # 判断如果带_mean
+        new_labels.append(col[:-5])  
+        # 那么就把不包括最后5个字母的列名存为新列名
+    else:
+        new_labels.append(col)
+        # 如果没有_mean的话就保持原名字
+        
+print(new_labels)
+# 检查下是否改好了
+
+df.columns = new_labels
+# 将新的列名赋值
+df.head()
+# 检查下是不是改过来了，大功告成！ 
+```
+
+```python
+# 扩展2：用均值填充缺失值
 # # 使用循环将除了前2列之外的进行均值填充处理
 # # 第一列是用户id，第二列是诊断评级
 for i in df.columns[2:]:
