@@ -41,17 +41,18 @@
 | 周1 | /小结/本周总结 | 总结、笔记、思考 |
 | 周2 | /选学/自主学习修养 | 自主学习（选学部分）或调休 |
 
-![](http://pb6cho8f0.bkt.clouddn.com/15318421868203.jpg)
-
 ## 本周目标
 
 **不要怂，就是肝！大家High起来！** 本周目标对应的是（根据内容可能会有拆分）：
 > /目标1/：数据分析过程燃料经济型案例（本文件）
 > /目标2/：了解python画图的扩展（week07-guide-plus文件）
 
-# /目标1/：数据分析过程燃料经济型案例
+# /目标1/：数据分析过程燃料经济性案例
 
-
+今天的案例是根据环保局发布的数据对燃料经济性做分析。
+- 燃料经济性的介绍：https://en.wikipedia.org/wiki/Fuel_economy_in_automobiles 
+- 数据下载链接：
+- 数据Feature的说明：https://www.fueleconomy.gov/feg/EPAGreenGuide/GreenVehicleGuideDocumentation.pdf
 
 #### *{2.课程概述}
 
