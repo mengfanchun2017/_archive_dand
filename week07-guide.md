@@ -51,12 +51,17 @@
 
 今天的案例是根据环保局发布的数据对燃料经济性做分析。
 - 燃料经济性的介绍：https://en.wikipedia.org/wiki/Fuel_economy_in_automobiles 
-- 数据下载链接：
+- 数据下载链接：https://www.fueleconomy.gov/feg/download.shtml/
 - 数据Feature的说明：https://www.fueleconomy.gov/feg/EPAGreenGuide/GreenVehicleGuideDocumentation.pdf
-- ！注意！链接下载的是txt文件，而且是使用tab分割的。建议本案例在workspace上完成。如果需要自己下砸的话读入文件要注意：
+- 本次案例是对比2008年和2018年汽车的能源消耗数据
+- ！注意！链接下载的是txt文件，而且是使用tab分割的。建议本案例在workspace上完成。如果需要自己下砸的话读入文件要注意。
+- 我传送的源数据链接（最新版和working space中的有些不同）
+    - https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project3/files/all_alpha_08.txt
+    - https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project3/files/all_alpha_18.txt
 
-## || 5 数据评估
+## |5 数据评估
 
+注意出了import外，自己下载文件本地做的readcsv是这样的：
 
 ```python
 import pandas as pd
@@ -71,225 +76,322 @@ df18 = pd.read_csv('all_alpha_18.txt', sep = '\t')
 # （mac 遇到奇怪问题下载的文件都很奇怪，可能和单位网有关）
 ```
 
-## *{2.课程概述}
+除了检查na数据的数量，我们还可以检查下比例,结果看着比较帅气和整洁：：
+
+```python
+# 看下占的百分比
+round(nucheck/df08.shape[0],3)
+# round(float,n) 的作用是把float小数，保留到小数点后n位
+# 当然了 nucheck是求出的丢失值的数量，df08.shape[0]是所有项，案例1有讲
+```
+
+```
+Model                   0.000
+Displ                   0.000
+Cyl                     0.090
+Trans                   0.090
+Drive                   0.042
+```
+
+非空唯一值的解法，我比较懒使用循环，而且使用unique：
+
+```python
+for i in df08.columns:
+    print(i, end = ' : ')
+    print(df08[i].nunique())
+# 可以使用格式化字符串来更好的显示，略过
+```
+
+```
+Model : 436
+Displ : 47
+Cyl : 8
+Trans : 14
+Drive : 2
+```
+
+## |6 清理列标签
+
+对于判断两个数据集的列是否一样：
+
+```python
+# 先检查一下有没有列不同的
+df08.columns == df18.columns
+# 输出是个boolean的列表，比较直观
+
+# 也可以用这个，比较安静的，因为加了.all()所以只会出一个True或者False
+(df08.columns == df18.columns).all()
+```
+
+```
+array([ True,  True,  True,  True,  True,  True, False,  True,  True, True,  True,  True,  True,  True])
+
+True
+```
+
+那么到底哪列不同呢，我来写个循环告诉我（懒）：
+
+```python
+# 把08列的名字得出来
+for i in df08.columns:
+    if i not in df18.columns:
+        print(i)
+
+# 把18列的名字得出来
+for i in df18.columns:
+    if i not in df08.columns:
+        print(i)  
+```
+
+```
+Sales Area
+Cert Region
+```
+
+那么我们来替换一下，而且顺手把不同形式的列名修改一下（有的是空格，有的是下划线）：
+
+```python
+# 将08的替换为18的
+df08.rename(columns = 
+            lambda x: x.replace('Sales Area', 'Cert Region'), 
+            inplace = True)
+# 这里使用的是lambda x:
+# 就是对columns执行后面的操作 x.replace
+# 而x.replace的操作是把后面小括弧中的前面替换成后面
+
+# 还有就是把列中的空格替换成下滑线
+# 因为很多处理要对空格判断，不要有比较好
+# 全部变为小写是习惯，了解一下吧
+df08.rename(columns=lambda x:
+             x.strip().lower().replace(" ", "_"),
+             inplace=True)
+# .strip是去除单词首尾的空格
+# .lower是变为小写
+# .replace是把小括弧里的做替换
+df08.columns
+```
 
 着节是项目3的开始，看完之后应该对整体的课程设计和需要的SQL知识（项目1）、python知识（项目2）有所了解。并且提供了不少额外资源的链接。
 
 此处最后一个链接是一本超好的书，可以陪你走到微学位完成，请不要错过（鸟文的，中文的也有），如果链接不可用，可以试试我搬运的：
 
-#### **{3.数据分析的应用}
+## |7 过滤、丢空、去重
 
-提供了5个链接，对于数据分析能干什么做了说明：
-- 百万数据告诉你第一次约会用来了解对方的最佳问题
-- 看看沃尔玛如何使用大数据分析来增加销量
-- 你还可以了解Bill James 如何将数据分析应用于棒球
-- 数据分析如何帮助设计药物
-- 这篇Facebook 博客(需科学上网) 和另一篇文章 介绍如何用数据分析社交媒体上的意识形态
+在案例1中有讲，注意unique、drop、isnull、dropna等的用法
 
-#### *{5.数据分析过程概述}
+## |9 修正数据1
 
-1. 提问
-    - 好奇心是最好的老师
-2. 整理数据
-    - Gather 收集
-    - Assess 评估
-    - Clean 清理
-3. 执行EDA（探索性数据分析）
-    - 包括画图进行观察
-4. 得出结论（或做出预测）
-    - 通过机器学习得出
-    - 通过推断统计学得出（项目4的重点呦，我们到时候再学习）
-5. 传达结果
-    - 一图胜千言，交出图来！
-
-#### ***{6.数据分析过程练习}
-
-又是一份共享单车的数据！这节请看看，就当复习了。
-
-#### *{9.提问/10.数据集问题}
-
-在第9节介绍了一份肿瘤数据：
-https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
-原始数据是.data格式，第10节练习中的工作空间中可以导入服务器端的csv文件对数据进行观察和提问。
-
-#### *{11.数据整理和EDA}
-本节讨论了数据分析流程中的第2步：Wrangling（数据整理）和第3步：EDA（探索性数据分析）之间的关系和交互过程。本部分说明包含了几个子类的说明，将相应节号整合加入便于理解：
-
-**Wrangling：主要解决**
-- Gather收集数据 **{12：收集数据}** 可以下载、从API获取、网页获取（爬虫）或者使用公司的数据库。
-- Assess评估数据，见14节练习
-- Clean
-
-**EDA：**
-- Explor
-- Augment
-
-#### ***{13.阅读csv文件}
-本节对pandas.read_csv()做了超级详细的扩展，推荐在Uda工作空间中完成（因为文件是在Uda工作空间中，不建议在本地做）。我们抓个其中的电厂的例子做说明，如果只是简单的读入csv文件，输入输出是这样子的：
-
-![](http://pb6cho8f0.bkt.clouddn.com/15317053757797.jpg)
-
-原始输出，根本看不出是什么意思，我们可以查看下数据说明：
-> Features consist of hourly average ambient variables 
-- Temperature (T) in the range 1.81°C and 37.11°C,
-- Ambient Pressure (AP) in the range 992.89-1033.30 milibar,
-- Relative Humidity (RH) in the range 25.56% to 100.16%
-- Exhaust Vacuum (V) in teh range 25.36-81.56 cm Hg
-- Net hourly electrical energy output (EP) 420.26-495.76 MW
-
-那么我们就可以在读取csv的时候把列的名称做扩展了说明，这样看就好多了：
-![](http://pb6cho8f0.bkt.clouddn.com/15317058792920.jpg)
-
-那么接下来我们就可以使用.to_csv()方法把数据集存储为新的csv文件就可以了，这里注意有个index的问题要考虑下：
-![](http://pb6cho8f0.bkt.clouddn.com/15317070506224.jpg)
-
-里面新出来的这个index是行的名字，扩展看懂下面这个就行了：
-![](http://pb6cho8f0.bkt.clouddn.com/15317071182748.jpg)
-
-#### **{14.评估和理解}
-本节的重点是对dataframe的一些信息的获取，可以用于评估所收到数据情况，有以下几个小点：
-- 通过.shape检查数据的维度信息：下面的输出是说df是个有569行和32列的二维数据： ![](http://pb6cho8f0.bkt.clouddn.com/15317083917660.jpg)
-- 通过.dtypes检查各列的类型：（注意diagnosis本身是str字符串格式，这是由于str在dataframe中以对象方式呈现，如果深入到一个元素使用type(df['diagnosis'][0])检查的话还是会显示str） ![](http://pb6cho8f0.bkt.clouddn.com/15317085582097.jpg)
-- 通过.info()检查所有列的数量
-- 通过.describe()检查数据集每列的统计学信息：（一个8个） ![](http://pb6cho8f0.bkt.clouddn.com/15317088183840.jpg)
-- 通过.columns .index可以看到数据集的行列信息，注意columns的输出是一个列表，所以可以遍历访问： ![](http://pb6cho8f0.bkt.clouddn.com/15317091581005.jpg)
-- 通过.loc[] .iloc[]选择所需数据，第一种是key value对应，第二种是通过索引。简单的说是这样选：[行范围,列范围]具体看例子： ![](http://pb6cho8f0.bkt.clouddn.com/15317123678205.jpg)
-- 挑选不连续的列：在选择时可以用列表挑选需要的列，两种实现方式（后面的用了变量方便修改）： ![](http://pb6cho8f0.bkt.clouddn.com/15317133705558.jpg)
-- 但是上面的方法不能在不连续的列中混入范围的选择，如果列很多的时候要这样处理：![](http://pb6cho8f0.bkt.clouddn.com/15317140410209.jpg)
-- 官方文档： https://pandas.pydata.org/pandas-docs/stable/indexing.html
-
-#### *{15.评估和理解练习}
-通过练习有一点扩展，总结如下：
-- 通过.xx选择df中的列，一下两种方式是等价的： ![](http://pb6cho8f0.bkt.clouddn.com/15317151657673.jpg)
-- 通过.unique()筛选唯一的值，可以用len直接求出有几个，其实也可以使用.nunique()直接得出： ![](http://pb6cho8f0.bkt.clouddn.com/15317155640172.jpg)
-15317154270712.jpg)
-- 通过.value_counts()统计一列中的数值个数： ![](http://pb6cho8f0.bkt.clouddn.com/15317152664251.jpg)
-- 通过.isnull()统计缺失值。在df中有isnull的方法可以检查缺失值（也有notnull）。要在后面加个sum()就可以检查个数了(当然也可以对所有列做处理）： ![](http://pb6cho8f0.bkt.clouddn.com/15317185145596.jpg)
-- 注意.isnull()是对值做判断，所以无论是否为空都有一个结果，所以对isnull()做value_count()也是可以的，注意两种对比： ![](http://pb6cho8f0.bkt.clouddn.com/15317186518065.jpg)
-- 通过.quantile()查询相应百分位的值。如果要多个要放在一个列表中，并且小数点前的0可以省略： ![](http://pb6cho8f0.bkt.clouddn.com/15317324651608.jpg)
-
-#### ***{17.清理示例}
-总算来了，清理数据是本周的重点，大家这一节一定要好好学。首先我们要知道清理数据常见的3种情况：
-1. 缺失值
-2. 冗余数据
-3. 数据类型错误
-
-我们先从缺失值下手处理这个问题，按照书中的例子，对于duration这样的数字组成的数据列，一种方法是直接把平均值填充到NaN（标示空值的位置）：
-```python
-# 方法1，先定义mean变量，再使用fillna(mean)将空值填充为mean的值
-mean = df['view_duration'].mean()
-df['view_duration'] = df['view_duration'].fillna(mean)
-# # 此处要用 = 将后面处理后的数据写入原数据
-
-# 方法2，在fillna中增加inplace参数，表示替换
-# # 并且直接把mean的计算融入fillna的参数中
-df['view_duration'].fillna(df['view_duration'].mean(), inplace=True)
-```
-
-接下来我们处理数据重复的问题：
-```python
-# 使用.duplicated()处理
-# # 注意.duplicated()输出是一个个True / False的列表，所以要想知道有多少个，需要使用sum()或者.sum()进行统计
-df.duplicated().sum()
-
-# 最后使用.drop_duplicateds()清理数据，同样可以使用inplace = True进行替换
-df.drop_duplicateds(inplace=True)
-# # 另外如果只是对一列中的重复值统计和去掉的话使用subset
-# # df.drop_duplicateds(subset=['colname'], inplace=True)
-# # 另外也可以使用keep参数定义保留那一个重复数据
-# # https://stackoverflow.com/questions/23667369/drop-all-duplicate-rows-in-python-pandas
-```
-
-最后的改变数据格式的方式我们已经在项目2中使用过了，还记得 pd.to_datatime() 这个方法么？详情请见week4导学内容。如果你将转换之后的数据保存为csv下次打开后还不是datetime格式，因为csv无法数据类型。但是这种情况可以通过在读取csv的时候使用parse_dates参数解决。感兴趣的请戳（选学）： https://stackoverflow.com/questions/17465045/can-pandas-automatically-recognize-dates
-
-#### **{18.清理练习}
-
-对于清理，还有一个小练习，建议有精力的不要放过，同样由于csv文件的原因请在工作空间完成，有一点做个扩展：
+是这个项目的重点，之前内容没有讲过，我们先来看下cyl的数据其实是这样的：(6 cyl) 其实就是发动机的缸数，越大越腻害，而且只有偶数整数。所以我们要把它变成6，注意输出的上下对比:
 
 ```python
-# 用均值填充缺失值
-# # 使用循环将除了前2列之外的进行均值填充处理
-# # 第一列是用户id，第二列是诊断评级
-for i in df.columns[2:]:
-    # 使用df.columns遍历列
-    # 2: 表示的是从第2列到最后一列（排除了0、1列）
-    df[i].fillna(df[i].mean(), inplace = True)
-    # # 使用上节的方法完成填充
-# 用 info() 确认修改
-df.info()
-# 这一次就可以看到所有列的飞空数字是一样的了（info显示每列后面的是非空数据）
+# 使用str的extract检索里面的数字
+print(df08['cyl'].value_counts())
+df08['cyl'] = df08['cyl'].str.extract('(\d+)').astype(int)
+# （\d+)是匹配任意数字的意思，有兴趣的可以看看reg或者回顾week2格式化字符串
+print(df08['cyl'].value_counts())
+type(df08['cyl'][0])
 ```
 
-后面的去掉重复数据方面，就是一样的了，使用这个数据我们可以观察一下，duplicated是找到所有列都一样的，如果只看一列，数据是不同的（正好有分类信息，会重复很多），对比如下： ![](http://pb6cho8f0.bkt.clouddn.com/15317435414801.jpg)
+```
+(6 cyl)     836
+(4 cyl)     582
+(8 cyl)     516
+(5 cyl)     113
+(12 cyl)     60
+(10 cyl)     29
+(2 cyl)       4
+(16 cyl)      2
+Name: cyl, dtype: int64
 
-#### ***{20.使用Pandas绘图}
+6     836
+4     582
+8     516
+5     113
+12     60
+10     29
+2       4
+16      2
+Name: cyl, dtype: int64
+```
 
-Pandas中的绘图功能其实是封装了matplotlib中的功能，所以呢就不用再import一遍了。简单的例子如下（基于已经导入的df数据）：
+结果2018年的文件到不是字符，但是小数，难不倒我们，使用astype：
 
 ```python
-# 为了能够在jupyter中显示图形要增加下面这句：
-% matplotlib inline
-
-# 可以直接在数据集上调用，会每个列出一个图，比如
-# # .plot() 折线图
-# # .hist() 直方图
-# # 可以在()中定义数据的大小
-df.hist(figsize=(8,8));
-# # 默认会把图形建立的一些信息一起输出，可以在结尾加上;隐藏信息，只出现图
-# # .hist()和.plot(kind='hist')是相同的
-
-# 对于education这样的分类的列，可以使用.value_counts()先把各列数据统计出来，再画图
-df['education'].value_counts().plot(kind='bar')
-
-# 放大招！有个.scatter_matrix()可以让你看到每两个变量之间散点的关系，便于进行初步观察
-# # 注意使用方法是将数据集作为参数输入
-# # 还会展示每个变量的直方图
-pd.plotting.scatter_matrix(df, figsize=(15,15));
-# # 如果只想看特定的两个变量，这样写：
-df.plot(x='compactness', y='concavity', kind='scatter')
+print(df18['cyl'].value_counts())
+df18['cyl'] = df18['cyl'].astype(int)
+# 貌似astype不能使用inplace参数
+print(df18['cyl'].value_counts())
+type(df18['cyl'][0])
 ```
 
-#### *{23.得出结论示例}
-
-这里呢大家明白筛选是怎么回事就好（在项目2用过呦），最后的把两个图放在一起显示的代码本周不要求。
-```python
-# 这里是使用过滤将df中满足条件诊断为M的存为新的数据df  —m
-df_m = df[df['diagnosis'] == 'M']
 ```
-#### *{24.练习：得出结论}
+4.0     1210
+6.0      843
+8.0      418
+12.0      51
+3.0       42
+10.0      16
+2.0        4
+5.0        4
+16.0       2
+Name: cyl, dtype: int64
+4     1210
+6      843
+8      418
+12      51
+3       42
+10      16
+5        4
+2        4
+16       2
+Name: cyl, dtype: int64
+```
 
-本节是对上一节可视化的练习，后面需要使用.idmin()方法，了解一下：
+## |10 修正数据类型2
 
-![](http://pb6cho8f0.bkt.clouddn.com/15317846263153.jpg)
-
-#### *{26.传达结果示例}
-
-这节一路看完就Ok了，新出现的内容有：
-- 定义可视化图形的index，这样两个前后相关的可视化图形在展示上比较统一
+到了这里，发现有的是混合动力车，使用能源、里程、污染什么的使用 a\b 记录的，据说设计这个数据结构的人已经被数据分析师砍死了，悲剧啊，但是还要处理下。有些复杂，看懂即可：
 
 ```python
-ind = df_a['education'].value_count().index
-# 这句话就是创建了ind变量，这个变量等于后面那个index的输出
-# 这个输出是对df_a['education']进行统计得出的，类别最多的排序在前面（使用的就是.value_count()方法）
+# 找出含有 / 的部分
+# 也可以使用query方式
+hb_08 = df08[df08['fuel'].str.contains('/')]
+print(hb_08.shape)
 
-df_a['education'].value_counts()[ind].plot(kind='bar');
-# 这句的意思是我要画个图.plot(kind='bar')
-# 图的内容就是df_a['education']的值分类
-# 这个分类按照从多到少排列（使用的就是.value_count()方法）
-# 但是我又想了想，还是我指定一下排列顺序把，现在改为使用ind排列（刚生成的，其实df_a不加这个结果一样的，因为本身就是自己的顺序么）
+# 拆分为两列，使用copy否则会修改原数据
+# create two copies of the 2008 hybrids dataframe
+df1 = hb_08.copy()  # data on first fuel type of each hybrid vehicle
+df2 = hb_08.copy()  # data on second fuel type of each hybrid vehicle
 
-df_b['education'].value_counts()[ind].plot(kind='bar');
-# 但是这行加[ind]就有用了，因为这里如果不加就回按照   df_b生成的从大到小排列了，两个图各说各话回很乱的
-# 所以引入以df_a顺序生成的[ind]，就能做到排序相同了
+# 确定要拆分的列
+# columns to split by "/"
+split_columns = ['fuel', 'air_pollution_score', 'city_mpg', 'hwy_mpg', 'cmb_mpg', 'greenhouse_gas_score']
+
+# apply split function to each column of each dataframe copy
+for c in split_columns:
+    df1[c] = df1[c].apply(lambda x: x.split("/")[0])
+    df2[c] = df2[c].apply(lambda x: x.split("/")[1])
+    # lambda对每个带/的进行分割，分别赋值第1个和第2个拆分元素
+print(df1.head(3))
+# 看下是否成功
+
+dfnewrows = df1.append(df2)
+print(df1.shape)
+print(dfnewrows.shape)
+dfnewrows.head(3)
+# 检查数量
+
+# 更新df08
+print(df08.shape)
+print(hb_08.index)
+# 检查下要删除的行
+df08.drop(hb_08.index, inplace = True)
+df08 = df08.append(dfnewrows, ignore_index = True)
+# append 没有inplace参数
+df08.shape
+
+# 现在可以转换了(之前由于 \ 的原因，转换会报错）
+df08.air_pollution_score = df08.air_pollution_score.astype(float)
 ```
 
-#### *{27.传达结果练习}
+## |12 使用可视化探索数据
 
-此处有的部分和24相同，大家注意在生成一个序列值的地方可以使用做图显示，能够更好的传达自己想法就可以了。
+画图画图画画图，首先看看环保，，，，温室气体指标评分，10年得分降低了，到底是低好还是高好呢，需要大家去数据源自己研究，我加了个透明度，看着还不错：
 
-#### 探索数据集
+```python
+p08=plt.hist(df08['greenhouse_gas_score'],color='r', alpha = 0.5)
+p18=plt.hist(df18['greenhouse_gas_score'],color='b', alpha = 0.5)
+plt.show()
+# 哇偶，可以看出18年的greenhouse_gas_score有所下降！
+# 企鹅宝宝，，，
+```
 
-中文数据集说明：
+![-c](http://pb6cho8f0.bkt.clouddn.com/15324532898859.jpg)
+
+再看看city、hwy、cmb的里程续航啥关系：
+
+```python
+city=plt.hist(df08['city_mpg'],color='r', alpha = 0.5)
+hwy=plt.hist(df08['hwy_mpg'],color='b', alpha = 0.5)
+cmb = plt.hist(df08['cmb_mpg'],color='g', alpha = 0.5)
+plt.show()
+# 从数据可以推断出city是在城市的速度（miles per hour）
+# hwy是高速的，cmb是联合的
+```
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15324533874247.jpg)
+
+## |13 结论和可视展示 Q1
+
+开始回答问题喽，对于这个案例，都做到这了，给个福利，简单扩展下，便于你去撩人，假装有知识、有担当、有爱心、有态度的上进青年一枚：
+
+- 这部分feature pdf中没有特殊说明，bing出来：
+- CNG 压缩天然气
+- dissel 柴油
+- Gasoline 汽油
+- ethanol 乙醇
+- gas 天然气
+
+瞎想的（可以忽悠不懂的）
+1. CNG是压缩天然气，另外一种是液化天然气LNG（C代表compressed，L代表liquid，LNG可以制造CNG，NG是不经压缩的gas）。后者更环保因为是液态，行驶也更远。但是前一种更加普遍（因为可以使用现在的汽油汽车改装，难道混合动力的都是这个货？）
+2. 乙醇更环保,天燃气是混合物,里面可能包含一些S,N这些元素.当这些元素燃烧时会产生污染气体.乙醇燃烧的产物是二氧化碳和水.再者乙醇是可再生资源,所以目前有很多国家在汽油用填加乙醇,已减少汽油的使用量。
+3. 在18年的数据中还有电力汽车（我的特斯拉啊，看着就帅！，，，，这模型还挺重的）马克思，，哦不马斯克的Solar City了解一下。
+4. 综上所述，由于各年的value不同，我们就分为两个阵营进行比较（谁说要加权来的，你出来，我保证，，，不打死你，，，）Gasoline和diesel作为传统能源，其他都粗暴的归为清洁能源。
+
+言归正传，我们先看看各使用能源分类，再算算2008到2018的比例是否有上升，就知道大家是否在努力了
+
+```python
+df08.groupby(['fuel']).count()
+```
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15324537282521.jpg)
+
+```python
+cleanlist = ['cng', 'ethanol', 'gas', 'electricity']
+# 先制定清洁能源的备选
+
+def cleanratio(df):
+    cnumber = 0
+    fuel_list = list(set(df['fuel'].values))
+    
+    for i in fuel_list:
+        if i.lower() in cleanlist:
+        # 本例子中i不要变化，因为后面还要根据i来匹配
+            cnumber = cnumber + df[df['fuel'] == i].shape[0]
+    return round(cnumber / df.shape[0],4)
+    # 使用round控制小数的精度：round（你要显示的数，你要显示的小数位数）
+            
+print(cleanratio(df08))
+print(cleanratio(df18))
+# 可见从6%增长到了9%
+```
+
+```
+0.0603
+0.0924
+```
+
+## |13 结论和可视展示 Q2
+
+这个问题也不错的：各车辆类别（veh_class）在燃料经济性方面的改进（mpg 的增长）是多少？其实还是使用groupby进行数据的真理，再引入mean看每个种类的平均值就可以了，看懂即可：
+
+```python
+# only plot the classes that exist in both years
+inc.dropna(inplace=True)
+plt.subplots(figsize=(8, 5))
+plt.bar(inc.index, inc)
+plt.title('Improvements in Fuel Economy from 2008 to 2018 by Vehicle Class')
+plt.xlabel('Vehicle Class')
+plt.ylabel('Increase in Average Combined MPG');
+# 美化美化，有兴趣不？
+```
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15324539330924.jpg)
+
+后面的问题就可以不看了，有个merge把两个数据融合的内容，但例子有点不好理解，大家～到此为止就可以了！加油加油！又从头到尾看过了一个数据分析，记得去喷一下呦。
+
+# 探索数据集
+
+最后的任务，选择你P3要做的数据，告诉助教，欢迎群里讨论！中文数据集说明：
 https://github.com/udacity/new-dand-basic-china/blob/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/%E9%A1%B9%E7%9B%AE-%E6%8E%A2%E7%B4%A2%E6%95%B0%E6%8D%AE%E9%9B%86/%E6%8E%A2%E7%B4%A2%E6%95%B0%E6%8D%AE%E9%9B%86%20-%20%E5%A4%87%E9%80%89%E6%95%B0%E6%8D%AE%E9%9B%86.md
 
 
