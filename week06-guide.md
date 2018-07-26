@@ -1,4 +1,13 @@
-# week6/12 项目3开始（Part 1/4）
+# Week6 项目3 Part1/4
+## 数据分析过程
+
+[TOC]
+
+# 学习地图
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/GMTm7iL1RMivZIBZuPruIg_thumb_13f.jpg)
+
+本周是数据分析课项目3的Part1，是项目3的基础内容。课程将会通过几个小的数据贯穿讲解数据分析过程，新加入的知识点是怎样进行数据清理，因为现实世界的数据往往有很多瑕疵，而要想得到良好的分析结果，就要把这些瑕疵处理掉。大家加油！
 
 ## 本周知识点
 
@@ -9,23 +18,10 @@
 - pandas的.value_count()方法
 - dataframe的空值处理
 - pandas绘图
-
-## 前面的话
-
-同学们，这周我们讲开始学习项目3，如何进行数据集的探索。本周将会用到项目2中的Python知识，和项目1中的SQL知识，并且会做一些扩展。本项目新加入的知识点是怎样进行数据清理，因为现实世界的数据往往有很多瑕疵，而要想得到良好的分析结果，就要把这些瑕疵处理掉。大家加油！
     
 ## 学习计划
 
-项目3的4周计划和Uda每日计划如下（本周是第3周）：
-
-| 时间 | 学习重点 | 对应内容（按照名字找就好了） |
-| --- | --- | --- |
-| 第1周 | Python基础内容 | 数据类型和运算符、控制流、函数、脚本编写 |
-| 第2周 | Python数据处理内容 | Numpy & Pandas - 第一、二部分 |
-| 第3周 | 运用前2周的知识完成项目 | 项目：探索美国共享单车数据 |
-| **第4周** | **项目修改与通过** | **修改项目、查缺补漏、休息调整** |
-
-每周的时间还是按照这个进度，注意周六的时间是大家Classin视频讨论的时间，其他的可以灵活调配，记住目标不要拖过一周为妙，加油！
+每周的时间进度如下表，注意周六的时间是大家Classin视频讨论的时间，其他的可以灵活调配，记住目标不要拖过一周为妙，加油！请大家仔细看下前面项目3的学习地图，可以灵活的安排下时间，咬紧项目很重要呦！
 
 | 学习时间 | 学习资源 | 学习重点 |
 | --- | --- | --- |
@@ -37,23 +33,21 @@
 | 周1 | /小结/本周总结 | 总结、笔记、思考 |
 | 周2 | /选学/自主学习修养 | 自主学习（选学部分）或调休 |
 
-![](http://pb6cho8f0.bkt.clouddn.com/15318421868203.jpg)
-
 ## 本周目标
 
 **不要怂，就是肝！大家High起来！** 本周目标对应的是（根据内容可能会有拆分）：
 > /目标1/：数据分析过程（本文件）
 > /目标2/：案例研究1、2（week6-guide-plus文件）
 
-### /目标1/：课程1:数据分析过程
+# /目标1/：课程1:数据分析过程
 
-#### *{2.课程概述}
+## *|2 课程概述
 
 着节是项目3的开始，看完之后应该对整体的课程设计和需要的SQL知识（项目1）、python知识（项目2）有所了解。并且提供了不少额外资源的链接。
 
 此处最后一个链接是一本超好的书，可以陪你走到微学位完成，请不要错过（鸟文的，中文的也有），如果链接不可用，可以试试我搬运的：
 
-#### **{3.数据分析的应用}
+## *|3 数据分析的应用
 
 提供了5个链接，对于数据分析能干什么做了说明：
 - 百万数据告诉你第一次约会用来了解对方的最佳问题
@@ -62,7 +56,7 @@
 - 数据分析如何帮助设计药物
 - 这篇Facebook 博客(需科学上网) 和另一篇文章 介绍如何用数据分析社交媒体上的意识形态
 
-#### *{5.数据分析过程概述}
+## *|5 数据分析过程概述
 
 1. 提问
     - 好奇心是最好的老师
@@ -78,29 +72,29 @@
 5. 传达结果
     - 一图胜千言，交出图来！
 
-#### ***{6.数据分析过程练习}
+## **|6 数据分析过程练习
 
 又是一份共享单车的数据！这节请看看，就当复习了。
 
-#### *{9.提问/10.数据集问题}
+## *|9 提问/10 数据集问题
 
 在第9节介绍了一份肿瘤数据：
 https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
 原始数据是.data格式，第10节练习中的工作空间中可以导入服务器端的csv文件对数据进行观察和提问。
 
-#### *{11.数据整理和EDA}
+## *|11 数据整理和EDA
 本节讨论了数据分析流程中的第2步：Wrangling（数据整理）和第3步：EDA（探索性数据分析）之间的关系和交互过程。本部分说明包含了几个子类的说明，将相应节号整合加入便于理解：
 
-**Wrangling：主要解决**
-- Gather收集数据 **{12：收集数据}** 可以下载、从API获取、网页获取（爬虫）或者使用公司的数据库。
+**Wrangling：主要解决收集数据工作**
+- Gather收集数据 **|12 收集数据** 可以下载、从API获取、网页获取（爬虫）或者使用公司的数据库。
 - Assess评估数据，见14节练习
 - Clean
 
-**EDA：**
-- Explor
-- Augment
+**EDA：主要解决探索数据工作**
+- Explor探索数据
+- Augment增强（好奇怪的名词啊）应该是就是根据探索的方式对一些点深入研究的意思
 
-#### ***{13.阅读csv文件}
+## ***|13 阅读csv文件
 本节对pandas.read_csv()做了超级详细的扩展，推荐在Uda工作空间中完成（因为文件是在Uda工作空间中，不建议在本地做）。我们抓个其中的电厂的例子做说明，如果只是简单的读入csv文件，输入输出是这样子的：
 
 ![](http://pb6cho8f0.bkt.clouddn.com/15317053757797.jpg)
@@ -122,7 +116,7 @@ https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
 里面新出来的这个index是行的名字，扩展看懂下面这个就行了：
 ![](http://pb6cho8f0.bkt.clouddn.com/15317071182748.jpg)
 
-#### **{14.评估和理解}
+## **|14 评估和理解
 本节的重点是对dataframe的一些信息的获取，可以用于评估所收到数据情况，有以下几个小点：
 - 通过.shape检查数据的维度信息：下面的输出是说df是个有569行和32列的二维数据： ![](http://pb6cho8f0.bkt.clouddn.com/15317083917660.jpg)
 - 通过.dtypes检查各列的类型：（注意diagnosis本身是str字符串格式，这是由于str在dataframe中以对象方式呈现，如果深入到一个元素使用type(df['diagnosis'][0])检查的话还是会显示str） ![](http://pb6cho8f0.bkt.clouddn.com/15317085582097.jpg)
@@ -134,7 +128,7 @@ https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
 - 但是上面的方法不能在不连续的列中混入范围的选择，如果列很多的时候要这样处理：![](http://pb6cho8f0.bkt.clouddn.com/15317140410209.jpg)
 - 官方文档： https://pandas.pydata.org/pandas-docs/stable/indexing.html
 
-#### *{15.评估和理解练习}
+## |15 评估和理解练习
 通过练习有一点扩展，总结如下：
 - 通过.xx选择df中的列，一下两种方式是等价的： ![](http://pb6cho8f0.bkt.clouddn.com/15317151657673.jpg)
 - 通过.unique()筛选唯一的值，可以用len直接求出有几个，其实也可以使用.nunique()直接得出： ![](http://pb6cho8f0.bkt.clouddn.com/15317155640172.jpg)
@@ -144,7 +138,7 @@ https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29
 - 注意.isnull()是对值做判断，所以无论是否为空都有一个结果，所以对isnull()做value_count()也是可以的，注意两种对比： ![](http://pb6cho8f0.bkt.clouddn.com/15317186518065.jpg)
 - 通过.quantile()查询相应百分位的值。如果要多个要放在一个列表中，并且小数点前的0可以省略： ![](http://pb6cho8f0.bkt.clouddn.com/15317324651608.jpg)
 
-#### ***{17.清理示例}
+## ***|17 清理示例
 总算来了，清理数据是本周的重点，大家这一节一定要好好学。首先我们要知道清理数据常见的3种情况：
 1. 缺失值
 2. 冗余数据
@@ -178,7 +172,7 @@ df.drop_duplicateds(inplace=True)
 
 最后的改变数据格式的方式我们已经在项目2中使用过了，还记得 pd.to_datatime() 这个方法么？详情请见week4导学内容。如果你将转换之后的数据保存为csv下次打开后还不是datetime格式，因为csv无法数据类型。但是这种情况可以通过在读取csv的时候使用parse_dates参数解决。感兴趣的请戳（选学）： https://stackoverflow.com/questions/17465045/can-pandas-automatically-recognize-dates
 
-#### **{18.清理练习}
+## |18 清理练习
 
 对于清理，还有一个小练习，建议有精力的不要放过，同样由于csv文件的原因请在工作空间完成，有2点做个扩展：
 
@@ -223,7 +217,7 @@ df.info()
 
 后面的去掉重复数据方面，就是一样的了，使用这个数据我们可以观察一下，duplicated是找到所有列都一样的，如果只看一列，数据是不同的（正好有分类信息，会重复很多），对比如下： ![](http://pb6cho8f0.bkt.clouddn.com/15317435414801.jpg)
 
-#### ***{20.使用Pandas绘图}
+## ***|20 使用Pandas绘图
 
 Pandas中的绘图功能其实是封装了matplotlib中的功能，所以呢就不用再import一遍了。简单的例子如下（基于已经导入的df数据）：
 
@@ -250,20 +244,129 @@ pd.plotting.scatter_matrix(df, figsize=(15,15));
 df.plot(x='compactness', y='concavity', kind='scatter')
 ```
 
-#### *{23.得出结论示例}
+## |23 得出结论示例
 
 这里呢大家明白筛选是怎么回事就好（在项目2用过呦），最后的把两个图放在一起显示的代码本周不要求。
 ```python
 # 这里是使用过滤将df中满足条件诊断为M的存为新的数据df  —m
 df_m = df[df['diagnosis'] == 'M']
 ```
-#### *{24.练习：得出结论}
+## |24 练习：得出结论
 
 本节是对上一节可视化的练习，后面需要使用.idmin()方法，了解一下：
 
 ![](http://pb6cho8f0.bkt.clouddn.com/15317846263153.jpg)
 
-#### *{26.传达结果示例}
+根据同学的提问做个扩展，这里有几个问题是说最大？最后一个月？最后3个月这样的，如果看了数据的话，可以直接把值输入，但是如果换了数据我们怎么办？我们要写一段代码能够处理所有这样类型的数据就帅气了，几个代码的解答：
+
+```python
+# 那么我们继续探索，怎么发现最大年，月与日呢？
+# 为了方便以后使用我们定几个个变量max_year，max_month, max_day
+
+max_year = df['week'].dt.year.max()
+# 对于year，我们直接.dt.year后面跟一个max()就可以了
+
+max_month = df[df['week'].dt.year == max_year]['week'].dt.month.max()
+# 这里稍微麻烦些，我要确定在最大年的最大月是多少
+# 如果不加限制的话，肯定输出12月，就没有意义了
+# 还记得dataframe的filter用法么？
+# df[中间是过滤条件]
+# 于是我们用[df['week'].dt.year == max_year]表示年做个限定
+# 最后使用dt.month.max()求出最大月
+
+max_day = df[(df['week'].dt.year == max_year) &
+             (df['week'].dt.month == max_month)]['week'].dt.day.max()
+# 与上面大致相同，就是要加入两个过滤条件
+# [(条件1) & (条件2)]
+
+# 最后检查下是否和数据一致
+print(max_year, max_month, max_day)
+print(df.tail(1))
+
+# 根据这个规则就可以选中这一列了
+df[(df['week'].dt.year == max_year) &
+   (df['week'].dt.month == max_month) &
+   (df['week'].dt.day == max_day)]
+```
+
+![](http://pb6cho8f0.bkt.clouddn.com/15325852474910.jpg)
+
+```python
+# 最后一个月的总销售额
+last_month = df[(df['week'].dt.year == max_year) &
+                (df['week'].dt.month == max_month)]
+print(last_month)
+# 检查没有问题，我们用sum求和
+last_month.sum().sum()
+# 第一个sum是没列求和（每个stroe的），第二个是把A-Estore的再求和
+```
+
+输出是这样的：
+
+```
+storeA    5865.480
+storeB    6756.710
+storeC    4942.105
+storeD    5431.405
+storeE    2580.025
+dtype: float64
+```
+
+同样的，对于指定日期和店的销售额：
+
+```python
+# 2016 年 3 月 13 日的销售额
+df[df['week'] == '2016-03-13'].sum()[1:].sum()
+# 直接filter中输入要的日期就好了
+# 注意这种过滤和上面的year\month\day的过滤不同
+# 当第一次sum以后，会有week这行信息
+# 如果在sum会报错，因为这行不能sum
+# 加一个[1:]把week这行去掉，就好了
+
+# C 店销售额最低的一周
+print(df['storeC'].idxmin())
+# 先使用idxmin找到最小值的索引
+print(df.iloc[df['storeC'].idxmin()])
+# 再打印出来
+# 可以使用.min检查值对不对
+print(df['storeC'].min())
+# 最后要求的是最低一周
+print(df.iloc[df['storeC'].idxmin()]['week'])
+# 就是独立输出week的值了
+```
+
+最后比较好玩的是最后3个月的销售额，写了个函数可以扩展成n个月的：
+
+```python
+# 最后3个月的
+# 简单的就是把3个sum.sum进行加和
+
+def lastmonths(n):
+   # 首先是计算出来最后一个月的
+    current_year = max_year
+    current_month = max_month
+    total = 0
+    while n > 0:
+        total = total + df[(df['week'].dt.year == current_year) & (df['week'].dt.month == current_month)].sum().sum()
+        # 定义下total是由每次循环的总数加和得来的
+        # 注意条件已经变成了current_year和current_month
+        if current_month == 1:
+            current_month = 12
+            current_year = current_year - 1
+            # 这里要做个判断，如果是1月了，就要变化到前一年的12月
+        else:
+            current_month = current_month - 1
+            # 否则的话只月数少1
+        n = n-1
+        # n计数减1
+    return total
+    # 返回总数
+
+lastmonths(5)
+# 调用函数，想看几个月看几个月
+```
+
+## *|26 传达结果示例
 
 这节一路看完就Ok了，新出现的内容有：
 - 定义可视化图形的index，这样两个前后相关的可视化图形在展示上比较统一
@@ -284,13 +387,13 @@ df_b['education'].value_counts()[ind].plot(kind='bar');
 # 所以引入以df_a顺序生成的[ind]，就能做到排序相同了
 ```
 
-#### *{27.传达结果练习}
+## *|27 传达结果练习
 
 此处有的部分和24相同，大家注意在生成一个序列值的地方可以使用做图显示，能够更好的传达自己想法就可以了。
 
-#### 探索数据集
+# 项目3数据集选择
 
-中文数据集说明：
+这次项目中有3个数据可以选择，如果任务完成了，可以看看项目说明，选一个可心的呦：
 https://github.com/udacity/new-dand-basic-china/blob/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/%E9%A1%B9%E7%9B%AE-%E6%8E%A2%E7%B4%A2%E6%95%B0%E6%8D%AE%E9%9B%86/%E6%8E%A2%E7%B4%A2%E6%95%B0%E6%8D%AE%E9%9B%86%20-%20%E5%A4%87%E9%80%89%E6%95%B0%E6%8D%AE%E9%9B%86.md
 
 
