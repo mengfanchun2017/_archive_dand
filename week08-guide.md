@@ -294,12 +294,14 @@ popularity	vote_average	budget_adj	revenue_adj
 # OK 我们接下来就可以画个scater matrix图来看看了
 pd.plotting.scatter_matrix(dfsm, figsize=(20,20));
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330783873904.jpg)
 
 真是超难看（大家自己做的画全屏能看见字），这4个指标中除了vote_average其他的都分布的特别靠左，，，，为什么呢？我来hist直接看下分布情况：
 ```python
 dfsm.hist(figsize=(10,10));
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330785557895.jpg)
 
 这回就明显了，分布超级偏左，我再看看describe检查下，果然是很奇怪，钱除了vote其他列的mean都是那么的少！：
