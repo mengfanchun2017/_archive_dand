@@ -294,17 +294,20 @@ popularity	vote_average	budget_adj	revenue_adj
 # OK 我们接下来就可以画个scater matrix图来看看了
 pd.plotting.scatter_matrix(dfsm, figsize=(20,20));
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330783873904.jpg)
 真是超难看（大家自己做的画全屏能看见字），这4个指标中除了vote_average其他的都分布的特别靠左，，，，为什么呢？我来hist直接看下分布情况：
 ```python
 dfsm.hist(figsize=(10,10));
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330785557895.jpg)
 这回就明显了，分布超级偏左，我再看看describe检查下，果然是很奇怪，钱除了vote其他列的mean都是那么的少！：
 
 ```python
 dfsm.describe()
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330787622390.jpg)
 
 那么我再看详细点，看看每10%的数据都是多少（偷懒写了个循环，结果太多，就不一一展示了），结果发现budget和revenue居然在50%的时候都是0！
@@ -381,6 +384,7 @@ dfsm5k.plot(x='vote_average',
             y='popularity', kind='scatter', alpha=0.3);
 # 要不要美化一下，少年？
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330848065917.jpg)
 
 ```python
@@ -388,6 +392,7 @@ dfsm5k.plot(x='vote_average',
 dfsm5k.plot(x='budget_adj',
             y='revenue_adj', kind='scatter', alpha=0.3);
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330848913402.jpg)
 
 ## |研究问题2 - 是否有Website和Feature的关系
@@ -408,6 +413,7 @@ for i in smlist2:
     dfsm2[i] = df[i]
 dfsm2.head()
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330855044612.jpg)
 
 ```python
@@ -432,6 +438,7 @@ mean = dfsm25k.groupby('has_homepage').mean()
 mean
 # 可以看出来区别还是很大的
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330861287764.jpg)
 
 ```python
@@ -439,6 +446,7 @@ mean
 dfsm25k.groupby('has_homepage').mean().iloc[0].plot(
     kind = 'bar', alpha = 0.7, color = 'b')
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330861623947.jpg)
 
 肿么办，我们把数据集都规整到一个数量级吧，就是按列除，结果就好多了：
@@ -450,6 +458,7 @@ mean_edited['budget_adj'] = mean['budget_adj'] / 10000000
 mean_edited['revenue_adj'] = mean['revenue_adj'] / 10000000
 mean_edited
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330865212104.jpg)
 
 我们可以看下两个分类之间的倍数关系，直接相除就可以了（向量运算，week2导学中有讲）：
@@ -463,6 +472,7 @@ mean_edited.iloc[1] / mean_edited.iloc[0]
 mean_edited.iloc[0].plot(kind = 'bar', color = 'r', alpha = 0.3)
 mean_edited.iloc[1].plot(kind = 'bar', color = 'b', alpha = 0.3)
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330867360513.jpg)
 
 还是老老实实做图吧，如果下面的代码看着有点难，请看下week7-guide-plus1的matplotlib彩蛋：
@@ -502,6 +512,7 @@ fig.suptitle('Compare Features on Homepage or Not',
              fontsize = 24, color = 'red');
 # 记住在最后的语句后面加个；就不会显示图之外的信息，比较友好
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330869084198.jpg)
 
 # /目标3/：得出结论（TMDB数据）
@@ -553,6 +564,7 @@ fig.suptitle('Scater on Vote/Pop and Budg/Rev',
 # # https://pythonspot.com/en/tag/scatter-plot/
 # # 大家有需要的可以试试
 ```
+
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15330917100697.jpg)
 
 
