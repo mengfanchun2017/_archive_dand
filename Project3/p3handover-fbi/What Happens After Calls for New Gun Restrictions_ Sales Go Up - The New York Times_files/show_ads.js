@@ -1,1 +1,0 @@
-TAGX.adBlockDetected = false;
