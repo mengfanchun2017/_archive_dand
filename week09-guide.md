@@ -87,6 +87,16 @@
     - 2 探索性数据分析
     - 3 得出结论
 
+    # 彩蛋CheetSheet（比较大，耐心，少年）
+    ## Pandas Basic
+    
+    ![-c](http://pb6cho8f0.bkt.clouddn.com/Pandas Cheat Sheet for Data Science in Python.jpg)
+    
+    ## Pandas
+    
+    ## Mapplotlib
+    
+    
 
 
 
