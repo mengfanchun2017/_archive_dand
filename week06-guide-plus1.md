@@ -1,31 +1,44 @@
-# week6/12 plus1
+# Week6/12 项目3 Part1/4 Plus1
+## 酒品质分析案例
 
-## 本周知识点
+[TOC]
 
-- 数据分析的应用场景
-- 数据分析过程
-- pandas读入csv文件
-- dataframe的loc和iloc
-- pandas的.value_count()方法
-- dataframe的空值处理
-- pandas绘图
+# 任务说明
 
-## 扩展说明
+本周是数据分析课项目3的第一个案例红酒质量分析，请大家跟上节奏，来一波啊来一波！
+
+## 学习地图
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/GMTm7iL1RMivZIBZuPruIg_thumb_13f.jpg)
+
+## 学习重点
+
+- 重命名列
+- 写入CSV的index参数
+- 使用可视化探索数据
+- Pandas Groupby
+- 由值生成分类数据
+- Pandas Query
+- 图形展示入门
+
+## 学习目标
 
 本文件对应的是本周的目标2，目标列表：
 > /目标1/：数据分析过程（week6-guide文件）
-> /目标2/：P3案例研究1（本文件）
+> /目标2/：酒品质分析案例（本文件）
 
-**请注意：由于下载的csv文件和空间中调用的再columns name 有些不同，请选择本地完成或者在working space上完成，二选其一！！！**
+**请注意：由于下载的csv文件和空间中调用的再columns name 有些不同，请选择本地完成或者在working space上完成，二选其一。**
 
-### /P3案例研究1/
+# /目标2/：酒品质分析案例
 
 案例1是关于白酒和红酒品质的分析。其中新接触的一些数据处理方式会在以下内容中介绍。数据文件分为白酒和红酒两个文件：winequality-red.csv，winequality-white.csv。数据来源依然是UCI的数据集：https://archive.ics.uci.edu/ml/datasets/Wine+Quality
 
-#### *{6.理解numpy库为什么很快}
+**请注意：为了对应课程中的小节，每个二级标题中的|x 的x对应课程中的小节编号。**
+
+## *|6 理解numpy库为什么很快
 再次强调了python原生和numpy（pandas里的数学运算很多是从numpy中来的）后者更快.{6}中差了100倍！这种原因是C没有自动垃圾回收动态数据什么的功能（而这些功能是要消耗性能的），具体解释：https://stackoverflow.com/questions/418914/why-is-c-so-fast-and-why-arent-other-languages-as-fast-or-faster
 
-#### *{7.如何用numpy增加一列数据}
+## *|7 如何用numpy增加一列数据
 
 在{7}中介绍了在numpy中增加列的方法：
 
@@ -69,7 +82,7 @@ red_df['color'] = 'red'
 # 多么简洁！！！我爱大熊猫！！！
 ```
 
-#### *{9.重命名列}
+## *|9 重命名列
 
 接下来发现了数据很奇怪，根据检查white和red的列发现是有一列名字不同，那么我们来修改（ps：这节看下就好，如果是本地下载的数据两列名字是一样的）：
 
@@ -88,13 +101,13 @@ red_df = red_df.rename(columns = {'total_sulfer-dioxide':'total_sulfer_dioxide'}
 # https://stackoverflow.com/questions/20868394/changing-a-specific-column-name-in-pandas-dataframe
 ```
 
-#### *{10.附加数据续}
+## *|10 附加数据续（写入CSV的index参数）
 
 这里大家请回顾一下之前讲的讲数据写入csv时候的index参数，如果不加index = False，默认会加一列作为行号，对比如下：
 
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15321293190296.jpg)
 
-#### **{11.使用可视化探索数据}
+## **|11 使用可视化探索数据
 
 这里就是把本周课程中的作图方法使用一遍：首先是所有列的hist（我把figsize调整了下）：
 
@@ -112,7 +125,7 @@ red_df = red_df.rename(columns = {'total_sulfer-dioxide':'total_sulfer_dioxide'}
 
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15321390062591.jpg)
 
-#### *{Pandas Groupby}
+## *|Pandas Groupby
 
 这一节我们来使用实际数据复习下groupby函数。在上一节我们试图用散点图的方式寻找和质量相关的参数（地毯式），这一节我们换个想法：我们把数据按照质量划分成小组，看看各组之间的各项指标有什么变化：
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15321404532846.jpg)
@@ -121,7 +134,7 @@ red_df = red_df.rename(columns = {'total_sulfer-dioxide':'total_sulfer_dioxide'}
 
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15321406462284.jpg)
 
-#### *{13.使用Groupby得出结论}
+## *|13 使用Groupby得出结论（由值生成分类数据）
 
 当使用groupby的时候，可以在后面指定要考察的列（而不是所有列），并且可以加上as_index = False指定不以groupby作为index（会按数字排列）：
 
@@ -186,7 +199,7 @@ Name: pH, dtype: float64
 
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15321442143769.jpg)
 
-#### **{14.15.Pandas Query}
+## **|14.15 Pandas Query
 
 就是如何过滤你要的数据，之前是使用filter的方法，也可以使用query的方法，代码对比如下：
 ```python
@@ -229,7 +242,7 @@ print(mean_quality_low)
 
 接下来糖分的内容一模一样的方法，就不赘述了。
 
-#### **{16.17.类型和质量图}
+## **|16.17 类型和质量图
 
 这两节就可以画图了，我们还是用回groupby方法
 
@@ -278,11 +291,11 @@ ps:seaborn可以画出超帅气的图来，我们将在下周进行讲解，有�
 - https://seaborn.pydata.org/
 - https://seaborn.pydata.org/examples/index.html
 
-#### *{18.Matplotlib示例}
+## *|18 Matplotlib示例
 
 {18}建议大家浏览并跑一遍工作空间中的文件，主要多了介绍怎么为轴的标签指定名字（比如说不是显示3、4、5而是显示质量3、质量4、质量5）
 
-#### *{19.20.Matplotlib绘图}
+## *|19.20 Matplotlib绘图
 
 此处作为扩展了解一下作图的更复杂操作，了解即可。
 
