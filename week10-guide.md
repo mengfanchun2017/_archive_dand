@@ -1,4 +1,4 @@
-# Week10 项目4 Part1/4
+# Week10 项目4 Part1/3
 ## 统计学
 
 [TOC]
@@ -9,7 +9,7 @@
 
 本周是统计学项目的Part1，是项目3的基础内容。导学分为两个部分，目标1、2、3是对统计学的讲解（本文件）。目标4是项目的第一部分完成（不用担心，这一部分大都是项目3中做过的）。统计学是本项目的重点，请不要被一堆公式吓一跳，项目中用到的都是基础知识。ps：课程里的内容挺多的 
 
-**！注意，*和2*的可以只看本导学，先大致理解就可以。3* 的和项目第一部分是本周重点！**
+**！注意，1星和2星的可以只看本导学，先大致理解就可以。3星的和项目第一部分是本周重点！**
 
 ## 本周知识点
 
@@ -86,7 +86,7 @@
     - 方法1 均值Mean：Sum of all values divided by the count of values（平均数）
     - 方法2 中位数Median：It is the middle value of a data set（中间那个数，如果是偶数的画，就是把中间两个的值取平均数）
     - 方法3 众数Mode：The most frequent number in a data set（出现次数最多的数；如果次数都相等，就出现无众数的情况；如果有两都出现最多，那么众数就是多个）
-- Spread 离散程度测量(第二部分讲）
+- Spread 离散程度测量
 - Shape 数据的形状
 - Outliers 异常值
 
@@ -227,7 +227,12 @@ Outliers: Data points that fall very far from the rest of the values in our data
 
 # /彩蛋/ 统计学深入资料
 
-各位同学如果对统计学感兴趣，想深入一些的话，强烈推荐Uda高级数据分析助教任悦大大的统计学系列：
+各位同学如果对统计学感兴趣，想深入一些的话，强烈推荐Uda高级数据分析助教任锐大大的统计学系列：
+
+https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project4/Statistics-Plus.zip
+
+也一并附上项目4文件打包：
+https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project4/p4files.zip
 
 
 
