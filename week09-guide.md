@@ -87,9 +87,11 @@
     - 2 探索性数据分析
     - 3 得出结论
 
-# 彩蛋CheetSheet
+# 彩蛋1 - CheetSheet
     
-找到了一套Python的CheatSheet，里面的Matplotlib、Pandas Basic、Pandas3个比较适合这个项目，也可以打印出来看：http://t.cn/RD2J9lj   
+找到了一套Python的CheatSheet，里面的Matplotlib、Pandas Basic、Pandas3个比较适合这个项目，也可以打印出来看：http://t.cn/RD2J9lj  
+
+ 
     
 
 
