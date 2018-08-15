@@ -1,13 +1,15 @@
-# Week10 项目4 Part1/3
+# Week11 项目4 Part2/3
 ## 统计学
 
 [TOC]
 
 # 学习地图
 
-![-c](http://pb6cho8f0.bkt.clouddn.com/15343016220547.jpg)
+![-c](http://pb6cho8f0.bkt.clouddn.com/15342616091047.jpg)
 
-本周是统计学项目的Part1，是项目3的基础内容。导学分为两个部分，目标1、2、3、4是对统计学的讲解（本文件）。目标5是项目的第一部分完成（不用担心，这一部分大都是项目3中做过的）。统计学是本项目的重点，请不要被一堆公式吓一跳，项目中用到的都是基础知识。ps：课程里的内容挺多的 
+本周是统计学项目的Part2，是项目3的推论统计学部分（上周的就是描述统计部分了）。
+
+导学分为两个部分，目标1、2、3是对推论统计学的讲解（本文件）。目标4是项目的第一部分完成（不用担心，这一部分大都是项目3中做过的）。统计学是本项目的重点，请不要被一堆公式吓一跳，项目中用到的都是基础知识。ps：课程里的内容挺多的 
 
 **！注意，1星和2星的可以只看本导学，先大致理解就可以。3星的和项目第一部分是本周重点！**
 
@@ -23,9 +25,6 @@
 - 概率
 - 二项式
 - 条件概率
-- 抽样分布
-- 中心极限定理
-- 大数法则
     
 ## 学习计划
 
@@ -41,9 +40,130 @@
 | 周1 | /小结/本周总结 | 总结、笔记、思考 |
 | 周2 | /选学/自主学习修养 | 自主学习（选学部分）或调休 |
 
-# /目标1 选修/ 课程1、2:描述统计学第一、二部分
+# /目标1/ 
 
-## *|5 数据类型
+在开始课程11之前，先简单的介绍下 课程10:抽样分布与中心极限定理，这一章的内容是延续课程2中的内容。首先要记住推论统计学的定义：Inferential Statistics - Drawing Conclusions about a population based on data collected from a sample of individuals from that population. 根据总体中的样本，得出关于总体的结论。
+
+那么既然是通过样本推算出总体，那么如果我们的样本不一样，结果会不会不同呢？当然会不一样，请看课程中下面的图：
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15342939100863.jpg)
+
+这张图特别的赞，我来解释一下：
+- 大家看图中有4个深浅不一的蓝色区域，每个区域的边缘都通过了5个咖啡杯。
+- 绿色的是不喝咖啡的，红色的是喝咖啡的
+- 所以在这5个杯子中，就可以算出不喝咖啡的比率
+- 比如有香蕉那个1个绿杯子，4个红杯子，所以不喝咖啡孩子的比率是1/5=0.2
+- 而左下角的就是0.6，以此类推
+- 那么，如果我们随机取很多次5个样本的话，每个样本就会有一个比率，抽象成下面的图：
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15342942296999.jpg)
+
+- 当我们把这些随机样本的比率做统计的话，会发现他们的分布是正态分布的（中间多，两边少，像个倒扣的钟一样～没见过？准你请假去看《邪不压正》里的彭于晏还不行）。
+- 这个规律就是中心极限定理：样本容量足够大，平均数的抽样分布越接近正态分布。适用于一下统计量中：
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15343002988921.jpg)
+
+- 有图有真相：
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15342944294937.jpg)
+
+代码练习在第18节，有一点要说一下：
+
+```python
+# 首先设定一个空list
+means_size_3 = []
+# 从总体中抽取3个，抽取10000次，把每次的mean存到上面的list里
+for i in range(10000):
+    mean_size_3 = np.random.choice(pop_data,size = 3).mean()
+    means_size_3.append(mean_size_3)
+```
+
+接下来是抽样分布的练习，这里请大家run一遍，熟悉随机数的代码运用（项目里要用的到）：
+
+```python
+# 导入numpy使用随机函数
+import numpy as np
+# 设定seed，seed的作用是设定了（n）以后，每次随机都能得到相同的抽样
+# 这种情况在还原分析过程时非常有用
+# 设定了之后就一直有效，直到被覆盖
+np.random.seed(42)
+students = np.array([1,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0])
+```
+
+```python
+# 注意在jupyter 中，seed的设置要和choice在一个代码框才生效
+# 所以再输入一遍
+np.random.seed(42)
+# 此处是用np.random.choice把学生进行抽样，（）为参数
+# 第1个参数是数据，就是students
+# 第2个参数是抽样的个数
+# 第3个参数replace默认= Ture，就是可以再次选中被取到的数
+# True的情况适合用在两个骰子。从1-6取，取到1之后还可以取到1
+# 学生这个例子要用False，因为一个学生被取走了，就不可以再取了
+# random.choice的官方文档
+# https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html
+sample = np.random.choice(students,size = 5 ,replace = True)
+sample
+```
+
+其实课程中在咖啡的例子里是抽样后再放回去的（就是可以再次选中），这种方法叫自展法（bootstrap），就是取出任一个元素，再次选中它的概率不变。这种方式的意义是在样本不变的情况下能够更好的推论出参数：No more data needed to gain a better understanding of the parameter. 自展法为什么有效的说明：https://stats.stackexchange.com/questions/26088/explaining-to-laypeople-why-bootstrapping-works
+
+接下来的一节对于项目4的所有统计学符号做了统计，参数是总体的指标，统计量是样本的指标，如下图，如果有疑问请参见（https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/4e7e2f82-e05e-4fbe-b29c-fe3169c6dd77/modules/0596b9e8-4a3a-41c3-a929-6c72c0c93925/lessons/4757541f-77eb-4df6-9ebf-9485a3383dd3/concepts/6802cfeb-3e8f-4218-b3e7-bbc535ae27f0#）：
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15342985047808.jpg)
+
+在之后，又出现一个新的定理，大数定理：Law of Large Numbers - The Larger our sample size, the closer our statistic gets to the parameter. 翻译过来有点废话的意思：随着样本容量增加，样本平均数越来越接近总体平均数。 接下来是介绍了3中最常见的估算技巧（知道名字就行，想深入点链接）：
+
+- 最大似然估计 https://en.wikipedia.org/wiki/Maximum_likelihood_estimation
+- 矩估计方法 https://onlinecourses.science.psu.edu/stat414/node/193/
+- 贝叶斯估计 https://en.wikipedia.org/wiki/Bayes_estimator
+
+后面的代码，先生成了3000个gamma分布的数据，分别取5，20，100样本，看看和参数的差距（非常明显的在缩小，符合大数定理）：
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+np.random.seed(42)
+
+# gamma是一种分布（官方有个图比较直观）
+# 参考：https://zh.wikipedia.org/zh-hans/%E4%BC%BD%E7%8E%9B%E5%88%86%E5%B8%83
+# 官方：https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.gamma.html
+pop_data = np.random.gamma(1,100,3000)
+plt.hist(pop_data)
+
+# 参数
+pop_data.mean()
+100.35978700795846
+
+# 取5个样本
+np.random.choice(pop_data,size = 5).mean()
+179.26530134867892
+
+# 取20个样本
+np.random.choice(pop_data,size = 20).mean()
+143.10974179021264
+
+# 取100个样本
+np.random.choice(pop_data,size = 100).mean()
+117.0757073569392
+```
+
+
+
+增加了一些练习。新增的内容有：
+
+- 抽样分布（非常重要）：
+
+有的有重叠，是从不同角度开展的。关于这一章
+
+
+
+## *|2 描述统计与推论统计
+
+
+
 
 明白统计学中的两种数量类型：
 - Quantitative Data 数值数据：数值数据采用允许我们执行数学运算（例如计算狗的数量）的数值。可以使用数学运算。数量数据又可以分为以下两类（|8 数据类型（连续与离散））
@@ -71,6 +191,8 @@
 | /数值/ | 连续：身高、年龄、收入 | 离散：书中的页数、咖啡店出现狗的只数 |
 | --- | --- | --- |
 | /分类/ | 定序：字母成绩等级、调查评级 | 定类：性别、婚姻状况、早餐食品 |
+
+# /目标1/ 课程12:置信区间
 
 ## *|12 概括统计简介
 
@@ -227,116 +349,6 @@ Outliers: Data points that fall very far from the rest of the values in our data
 - 这节其实就是把概率的内容落地到Python代码实现上，把所有内容和实例workspace的代码run一遍能看懂就可以了。
 - 这部分在项目中有用到，要求看懂能查。
 - 第7节的总结非常全面，推荐仔细看完：https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/4e7e2f82-e05e-4fbe-b29c-fe3169c6dd77/modules/0596b9e8-4a3a-41c3-a929-6c72c0c93925/lessons/33860189-96c0-40cf-8f12-5772c8b8c790/concepts/d05061c9-efe7-46bf-a135-011ee6773b6d
-
-# /目标4/ 课程10:抽样分布于中心极限定理
-
-在开始课程11之前（下周的），先简单的介绍下 课程10:抽样分布与中心极限定理，这一章的内容是延续课程2中的内容。首先要记住推论统计学的定义：Inferential Statistics - Drawing Conclusions about a population based on data collected from a sample of individuals from that population. 根据总体中的样本，得出关于总体的结论。
-
-那么既然是通过样本推算出总体，那么如果我们的样本不一样，结果会不会不同呢？当然会不一样，请看课程中下面的图：
-
-![-c](http://pb6cho8f0.bkt.clouddn.com/15342939100863.jpg)
-
-这张图特别的赞，我来解释一下：
-- 大家看图中有4个深浅不一的蓝色区域，每个区域的边缘都通过了5个咖啡杯。
-- 绿色的是不喝咖啡的，红色的是喝咖啡的
-- 所以在这5个杯子中，就可以算出不喝咖啡的比率
-- 比如有香蕉那个1个绿杯子，4个红杯子，所以不喝咖啡孩子的比率是1/5=0.2
-- 而左下角的就是0.6，以此类推
-- 那么，如果我们随机取很多次5个样本的话，每个样本就会有一个比率，抽象成下面的图：
-
-![-c](http://pb6cho8f0.bkt.clouddn.com/15342942296999.jpg)
-
-- 当我们把这些随机样本的比率做统计的话，会发现他们的分布是正态分布的（中间多，两边少，像个倒扣的钟一样～没见过？准你请假去看《邪不压正》里的彭于晏还不行）。
-- 这个规律就是中心极限定理：样本容量足够大，平均数的抽样分布越接近正态分布。适用于一下统计量中：
-
-![-c](http://pb6cho8f0.bkt.clouddn.com/15343002988921.jpg)
-
-- 有图有真相：
-
-![-c](http://pb6cho8f0.bkt.clouddn.com/15342944294937.jpg)
-
-代码练习在第18节，有一点要说一下：
-
-```python
-# 首先设定一个空list
-means_size_3 = []
-# 从总体中抽取3个，抽取10000次，把每次的mean存到上面的list里
-for i in range(10000):
-    mean_size_3 = np.random.choice(pop_data,size = 3).mean()
-    means_size_3.append(mean_size_3)
-```
-
-接下来是抽样分布的练习，这里请大家run一遍，熟悉随机数的代码运用（项目里要用的到）：
-
-```python
-# 导入numpy使用随机函数
-import numpy as np
-# 设定seed，seed的作用是设定了（n）以后，每次随机都能得到相同的抽样
-# 这种情况在还原分析过程时非常有用
-# 设定了之后就一直有效，直到被覆盖
-np.random.seed(42)
-students = np.array([1,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0])
-```
-
-```python
-# 注意在jupyter 中，seed的设置要和choice在一个代码框才生效
-# 所以再输入一遍
-np.random.seed(42)
-# 此处是用np.random.choice把学生进行抽样，（）为参数
-# 第1个参数是数据，就是students
-# 第2个参数是抽样的个数
-# 第3个参数replace默认= Ture，就是可以再次选中被取到的数
-# True的情况适合用在两个骰子。从1-6取，取到1之后还可以取到1
-# 学生这个例子要用False，因为一个学生被取走了，就不可以再取了
-# random.choice的官方文档
-# https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.choice.html
-sample = np.random.choice(students,size = 5 ,replace = True)
-sample
-```
-
-其实课程中在咖啡的例子里是抽样后再放回去的（就是可以再次选中），这种方法叫自展法（bootstrap），就是取出任一个元素，再次选中它的概率不变。这种方式的意义是在样本不变的情况下能够更好的推论出参数：No more data needed to gain a better understanding of the parameter. 自展法为什么有效的说明：https://stats.stackexchange.com/questions/26088/explaining-to-laypeople-why-bootstrapping-works
-
-接下来的一节对于项目4的所有统计学符号做了统计，参数是总体的指标，统计量是样本的指标，如下图，如果有疑问请参见（https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/4e7e2f82-e05e-4fbe-b29c-fe3169c6dd77/modules/0596b9e8-4a3a-41c3-a929-6c72c0c93925/lessons/4757541f-77eb-4df6-9ebf-9485a3383dd3/concepts/6802cfeb-3e8f-4218-b3e7-bbc535ae27f0#）：
-
-![-c](http://pb6cho8f0.bkt.clouddn.com/15342985047808.jpg)
-
-在之后，又出现一个新的定理，大数定理：Law of Large Numbers - The Larger our sample size, the closer our statistic gets to the parameter. 翻译过来有点废话的意思：随着样本容量增加，样本平均数越来越接近总体平均数。 接下来是介绍了3中最常见的估算技巧（知道名字就行，想深入点链接）：
-
-- 最大似然估计 https://en.wikipedia.org/wiki/Maximum_likelihood_estimation
-- 矩估计方法 https://onlinecourses.science.psu.edu/stat414/node/193/
-- 贝叶斯估计 https://en.wikipedia.org/wiki/Bayes_estimator
-
-后面的代码，先生成了3000个gamma分布的数据，分别取5，20，100样本，看看和参数的差距（非常明显的在缩小，符合大数定理）：
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-%matplotlib inline
-np.random.seed(42)
-
-# gamma是一种分布（官方有个图比较直观）
-# 参考：https://zh.wikipedia.org/zh-hans/%E4%BC%BD%E7%8E%9B%E5%88%86%E5%B8%83
-# 官方：https://docs.scipy.org/doc/numpy/reference/generated/numpy.random.gamma.html
-pop_data = np.random.gamma(1,100,3000)
-plt.hist(pop_data)
-
-# 参数
-pop_data.mean()
-100.35978700795846
-
-# 取5个样本
-np.random.choice(pop_data,size = 5).mean()
-179.26530134867892
-
-# 取20个样本
-np.random.choice(pop_data,size = 20).mean()
-143.10974179021264
-
-# 取100个样本
-np.random.choice(pop_data,size = 100).mean()
-117.0757073569392
-```
 
 # /彩蛋/ 统计学深入资料
 
