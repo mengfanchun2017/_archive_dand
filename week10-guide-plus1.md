@@ -179,8 +179,8 @@ round(newpage_rate,4)
 
 # 项目4数据集打包
 
-这次项目中有3个数据可以选择，如果任务完成了，可以看看项目说明，选一个可心的呦：
-https://github.com/udacity/new-dand-basic-china/blob/master/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%85%A5%E9%97%A8/%E9%A1%B9%E7%9B%AE-%E6%8E%A2%E7%B4%A2%E6%95%B0%E6%8D%AE%E9%9B%86/%E6%8E%A2%E7%B4%A2%E6%95%B0%E6%8D%AE%E9%9B%86%20-%20%E5%A4%87%E9%80%89%E6%95%B0%E6%8D%AE%E9%9B%86.md
+也一并附上项目4文件打包：
+https://github.com/mengfanchun2017/DAND-Basic/blob/master/Project4/p4files.zip
 
 
 
