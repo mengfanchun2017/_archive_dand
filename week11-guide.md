@@ -38,7 +38,7 @@
 | 周1 | /小结/本周总结 | 总结、笔记、思考 |
 | 周2 | /选学/自主学习修养 | 自主学习（选学部分）或调休 |
 
-# /目标1/ 置信区间和假设检验
+# /目标1、2/ 置信区间和假设检验
 
 > 课程11:置信区间
 > 课程12:假设检验
@@ -301,18 +301,191 @@ np.percentile(means_f, 2.5),np.percentile(means_f, 97.5)
 
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15347275686765.jpg)
 
-### // 如何选择假设检验
+### *// 如何选择假设检验
 
 在扩展假设检验的内容之前，请记住：Hypothesis tests and confidence intervals tell us about parameters, not statistics. 就是说，我们检验来检验去，是对参数（对应总体）进行判断，而不是对统计量（对应样本）进行判断。因为一个样本抽取出来，统计量就是定的了，我们想发现的是总体的规律。这也就是推论统计的重点了。
 
-那么我们接下来还看下咖啡的例子，我们怎么完成一次假设检验，首先使用置信区间的方法：
+那么我们接下来还看下咖啡的例子，课程中的练习可以在空间中通过open看到答案。这里举了两个例子：
 
+- 如果你感兴趣的是喝咖啡的人与不喝咖啡的人身高是否相同（觉得会不同），那么检验是这样的：
+    - $ H_0:\mu_{coff}−μ_{no}=0 $
+    - $ H_1:\mu_{coff}−μ_{no}\neq0 $
+- 如果你觉得喝咖啡的人要比不喝咖啡的人矮，那么检验是这样的（注意有个方向问题）：
+    - $ H_0:\mu_{coff}−μ_{no}\geq0 $
+    - $ H_1:\mu_{coff}−μ_{no}<0 $
 
-### // p值是什么
+本部分的代码还引入了一个np.random.normal的用法：
 
-p 值的定义是 如果零假设为真，观察到统计量 (或支持备择假设的更多极端) 的概率。
+```python
+np.random.normal(0, np.std(diffs), 10000)
+# 这个方法是对后面的数据进行复合正态分布的抽取
+# np.std(diffs)是数据
+# 10000是抽取次数
+# 0是中间值
+# 这个代码的结果就也是正态分布的，课程中有图
+# 看明白用法即可
+```
 
-### // 传统概率的t检验
+### *// p值是什么（第二种检验方式）
+
+前面我们讲的置信区间的判断方法是第一种验证方式，这里我们讲解另一种检验方式：p-value。p值的定义是：如果零假设为真，观察到统计量 (或支持备择假设的更多极端) 的概率。根据假设的不同，p对应的位置如下图区分：
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15348886338452.jpg)
+
+这里理解概念就好了，后面案例中随着代码实现（比较简单的）操作一遍就记住了。p值的好处是直接计算出一个值，可以比较准确的描述。
+
+### *//置信区间vs假设检验
+
+> 25.其他要考虑的事情：如何对比置信区间和假设检验？
+
+在本课程中对于置信区间喝假设检验，还有一些更新的观点：
+- 假设检验喝置信区间是可以互换的（本来置信区间就可以作为假设建议的方法）
+- 假设检验经常引起误解（对比起来假设检验描述比较复杂），而且还有I类错误的问题
+- 倾向于使用以下3个方法进行判断
+    - 置信区间（所以说是重点）
+    - 效应值（以后扩展）
+    - 机器学习技巧（以后扩展）
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15348897867767.jpg)
+
+# /目标3/ 案例研究：A/B测试
+
+> 课程13:案例研究：A/B测试
+
+## ***/ 什么是A/B测试
+
+既然叫A/B测试，肯定是要对比两个不同的东西了。比如说公司要测试应用的新特性或者某个网页页面的新版本时，会把用户分为两组。不变化的组叫对照组，变化的组呢叫实验组：
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15348907926404.jpg)
+
+为了量化的进行考量，就要用到上面讲到的假设检验了，设置如下：
+- 零假设： 新版本不比旧版本好，甚至比旧版本差
+- 对立假设：新版本比旧版本好
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15348908622821.jpg)
+
+需要注意的一点是，A/B测试并不适合所有变化（比如上产品A更好还是产品B更好），而且在A/B测试中也可能引入偏见，比如课程中关于两类用户，一类偏向保持原状、另一类偏向变化求新的例子：
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15348910269603.jpg)
+
+## */ Udacity的案例
+
+课程中居了Uda家自己的案例，对于最后能达到毕业环节的来说，有一句描述：少数人坚持到了最后。所以呢，为了提高学员参与度，提高每个阶段之间（见后一节漏斗模型）的转化率，Audacity 试着做出一些改动，并对改动进行了 A/B 测试。（开始鸡汤）同学们加油啊！我们的目标是按进度毕业！（成为/赢取白富美，走上人生巅峰！）
+
+### **// Udacity的漏斗模型
+
+漏斗模型用户流就是用户接触到了产品之后，用户在使用过程中的流转情况。以Uda为例：浏览主页 > 探索课程 > 浏览课程概述页面 > 注册课程 > 完成课程
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15348914752489.jpg)
+
+### **// 点击率CTR（代码）
+
+> 8.练习：点击率
+
+点击率 (CTR)通常是点击数与浏览数的比例。因为 Udacity 有用cookies，所以可以确认单独用户，确保不重复统计同一个用户的点击率。在考察新版本主页是否可以带来更多的点击时，我们使用CTR（click through rate）点击率进行衡量：CTR = 单独用户点击数 / # 单独用户浏览数。在指标确定之后，就可以写出假设了：
+
+$ H_0:CTR_{new} - CTR_{old} \le 0 $
+$ H_0:CTR_{new} - CTR_{old} > 0$
+
+这部分的代码主要是筛选和一个datetime的计算，对于过了p3的你来说完全能够胜任。
+
+### ***// 注册率（代码）
+
+> 10.指标-注册率
+
+注册率就是用户注册的比率，我们来串一下此处新出现的代码：
+- 先是把数据集分开为控制组和实验组。分别计算出两组的ctr，之后求差的出obs_diff。
+- 再就是用自展法抽样了10000遍，计算出这10000次的差异：
+
+```python
+# 设定空列表
+diffs = []
+# 循环1w遍
+for i in range(10000):
+    # 抽样每次抽样都是和df相同的数量（所以会比较慢）
+    # 使用自展法
+    b_samp = df.sample(df.shape[0],replace = True)
+    # 区分control组与experiment组
+    control_df = b_samp.query('group == "control"')
+    experiement_df = b_samp.query('group == "experiment"')
+    # 得出两个组的CTR
+    control_ctr = control_df.query('action == "enroll"').id.nunique() / control_df.query('action == "view"').id.nunique()
+    experiment_ctr = experiment_df.query('action == "enroll"').id.nunique() / experiment_df.query('action == "view"').id.nunique()
+    # 计算CTR的差值追加到diffs中
+    diffs.append(experiment_ctr - control_ctr)
+    
+# 之后将列表转为array格式（好用np的特性）
+diffs = np.array(diffs)
+# 画个图
+plt.hist(diffs)
+```
+
+注意，这时候的图是体现实际情况的（有0.03左右的差异，实验组的转化率更高，注意看x轴的标签）：
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15348943560825.jpg)
+
+接下来，我们用实际数据的标准差std模拟下$ H_0 $假设的时候，两个实验的偏差应该是什么样的：
+
+```python
+# Simulate distribution under the null hypothesis
+# 使用.random.normal模拟正态分布
+# 0为正态分布的中点（因为H0假设是没区别，所以中点为0）
+# 使用实际数据的diffs.std()进行模拟（std决定了正态分布的宽窄）
+# 数量依旧和实际保持一致（diffs.size)
+null_vals = np.random.normal(0,diffs.std(), diffs.size)
+
+# 再画个图呗
+plt.hist(null_vals)
+plt.axvline(x = obs_diff, color = 'red')
+```
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/15348948896131.jpg)
+
+如上图，看出区别了没啊？这次的中点在0，因为这是对 $ H_0 $ 假设的模拟。再往下，就可以把两个图做比较了，p值出场：
+
+```python
+# 直接比较 p值
+# null_vals > obs_diff 是直接使用的向量计算
+# 生成的是一个True False的 array
+# 直接使用mean就会得出True的比率
+# 因为True相当于1，False相当于0
+(null_vals > obs_diff).mean()
+```
+
+### *// 其他单项指标（代码）
+
+> 11.指标-平均浏览时长
+> 12.指标-平均教室逗留时长
+> 13.指标-完成率
+
+这几部分都大同小异了，大家按照逻辑自己完成就好（有的内容在讲解的视频里已经又了代码，可以暂停参考）
+
+### **// 分析多个指标
+
+你评估的指标越多，你观察到显著差异的偶然性就越高。这就多重比较问题（https://en.wikipedia.org/wiki/Multiple_comparisons_problem）。我们可以使用Bonferroni（邦弗朗尼）校正来修复，就是把p值再除以比较的指标数，再进行判断（比如说这个案例中有4个参数进行了比较，我们就除以4）。那么0.05的显著值就会变味0.0125的显著值。所以这4个指标中，就变成只有平均浏览时长有统计显著性了。
+
+在课程的最后答案中，其实对于这次的修正也表达了态度：虽然有待商榷，但考虑到结果没几个具有显著性的，而且指标之间具明显关联，所以我们可以认为的确太保守了。（正话反话都说了，所以说数据分析中的经验和直觉也很重要啊！）
+
+### ***// 得出结论
+
+那么我们怎么半，正常的检测4个指标有3个是显著性，但Bonferroni矫正以后关键指标就不显著了。其实这在正常中是经常发生的，好在我们还有其他不那么保守的方法进行修正：
+- 封闭测试程序 https://en.wikipedia.org/wiki/Closed_testing_procedure
+- Boole-Bonferroni联合校正 https://en.wikipedia.org/wiki/Boole%27s_inequality
+- Holm-Bonferroni方案 https://en.wikipedia.org/wiki/Holm%E2%80%93Bonferroni_method
+
+这中间的要点是不要为了显著性去凑p值（很容易的），而是为了真正的考察你的数据，否则就变成了作弊，看看这个就知道你是可以用数据干坏事的了：https://freakonometrics.hypotheses.org/19817
+
+对于A/B测试的难点，课程的最后一节总结非常到位，建议完成：https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/4e7e2f82-e05e-4fbe-b29c-fe3169c6dd77/modules/0596b9e8-4a3a-41c3-a929-6c72c0c93925/lessons/f3088061-6562-445e-b1a7-a86c9389c2b5/concepts/f6eae35d-536b-48d0-b97e-93e4fe93459d#
+
+# 彩蛋
+
+## */ 希腊数字的读法
+
+在刚开始学统计学的时候，最尴尬的就是看着一堆鬼画符他认识我，我不认识他。一张嘴就念错就糗大了，特意放上下面这张图，让大家想说就说，说的痛快：
+
+![-c](http://pb6cho8f0.bkt.clouddn.com/AF9DF022-F962-4B1A-B8F7-483A675A2A67.png)
+
+## */ 传统概率的t检验
 
 虽然我们在项目中将会使用自展法（替代传统的统计方法了）进行计算，但为了能够对课程中的偶尔蹦出的传统方式更好的理解，做一点点扩展，感兴趣的看一遍就好了。
 
@@ -332,16 +505,6 @@ p 值的定义是 如果零假设为真，观察到统计量 (或支持备择假
         - 再就有我们还可以发现上面的这个例子还是paired（配对的），因为每个学生都参与了2个测试（比equal还多个条件，一一对应）。对于paired t-test的详细说明：http://www.statstutor.ac.uk/resources/uploaded/paired-t-test.pdf
         - 我们来举个不是equal的测试例子：调查了很多人，根据吸烟和不吸烟分为两个样本，这里两个区分人数不同，所以就不是equal的了。详细的例子：https://onlinecourses.science.psu.edu/stat414/node/268/
         - 当然在计算机很发达的时候，是不是equal的并没有那么重要，使用工具（比如python）也就是一个参数的区别（几种的公式是有些区别的）。two-sample t-test的扩展：https://www.itl.nist.gov/div898/handbook/eda/section3/eda353.htm
-        
-
-# 彩蛋
-
-![-c](http://pb6cho8f0.bkt.clouddn.com/AF9DF022-F962-4B1A-B8F7-483A675A2A67.png)
-
-
-
-
-
 
 
 
