@@ -54,23 +54,23 @@ shift回车之后就会渲染（这是错的例子，请自行解决）：
 
 ### // a,b,c,d 数量计算
 
-这里和上一节基本一样，再按照空回答一遍就好了
+这里和上一节基本一样，再按照空回答一遍就好了，不过要注意，此处的假设已经变了：**“假定在零假设中，不管是新页面还是旧页面都具有等于成功率的“真”成功率”**
 
 ```python
-# 转化率
-control_rate = df2[(df2['group'] == 'control')&(df2['converted'] == 1)].shape[0] / df2[(df2['group'] == 'control')].shape[0]
-# 使用round保留4位小数
-round(control_rate,4)
+# “假定在零假设中，不管是新页面还是旧页面都具有等于成功率的“真”成功率”
+# 因为这句话，此处模拟0假设的时候要按照两个一样去计算
+# 都是收集样本的转化率
+p_new = df2.converted.mean()
+round(p_new, 4)
 ```
 
 ```python
-# 筛选出new的，并且记数
-df2[(df2['group'] == 'treatment')].shape[0]
+# 新旧相同的，自己解决
+p_old = 你的代码
 ```
 
 本部分得出的几个变量：
-- rnew = 0.1188 新页面的转化率
-- rold = 0.1204 旧页面的转化率
+- p_new = p_old = 0.1196 转化率
 - nnew = 145310 新页面的数量
 - nold = 145274 旧页面的数量
 **需要注意：上面的4个值是收集来的所有页面信息的统计数。**
@@ -78,7 +78,7 @@ df2[(df2['group'] == 'treatment')].shape[0]
 ### // e,f,g 生成new/old_page_converted和他们的差
 
 这里先拆解下要求：
-- 使用pnew转化率模拟nnew交易（在I部分得出的结果）
+- 使用pnew转化率模拟nnew交易
 - 将模拟的结果存为new_page_converted
 - 此处的意义应该是根据算出的pnew再模拟（每次运行都不一样）抽样分布
 
@@ -88,30 +88,20 @@ df2[(df2['group'] == 'treatment')].shape[0]
 # 参数1 - 2，表明随机选择的是0，1
 # 参数2 - nnew，就是上面的145310，代表抽取多少次
 # 此处可以这么理解：既然是要模拟nnew的情况，那么抽取次数要和nnew相同
-# 参数3 - p = [1-rnew,rnew]，就是对应参数1的两个值，各自取的概率
+# 参数3 - p = [1-p_new,p_new]，就是对应参数1的两个值，各自取的概率
 # rnew就是上面得出的0.1188，对应的是1的取值
-new_page_converted = np.random.choice(2,nnew, p = [1-rnew,rnew])
+new_page_converted = np.random.choice([0, 1],nnew, p = [1-p_new,p_new])
 # 输出是个array
 type(new_page_converted)
 # 结果是numpy.ndarray，内容是由0与1组成的array
 # 直接求均值就是转化率了
-new_page_conr = round(new_page_converted.mean(),4)
+new_page_conr = round(new_page_converted.mean(),6)
 new_page_conr
 ```
 
-那么就可以把这两个值相减了（g的任务）：
+把另一个算出来之后，就可以把这两个值相减了（g的任务），得出p_compare，请同学们自己完成（结果会有随机性）
 
-```python
-p_compare = new_page_conr - old_page_conr
-p_compare
-```
-
-本部分得出的几个变量：
-- new_page_conr = 0.1196 
-- old_page_conr = 0.1202
-- p_compare = -0.0013
-
-### // f 把上述模拟进行1万次
+### // h 把上述模拟进行1万次
 
 **重要提示：此处是进行10000遍模拟，大家可以在开始做的时候改为range（1000）改为1000次。等文件都写完了之后再改为10000，之后提交报告，可以缩短此处代码的运行时间。**
 
@@ -120,13 +110,9 @@ p_compare
 p_diffs = []
 # 将上面的代码循环1万遍，得出这1万遍模拟新旧转化率的差异
 for i in range(10000):
-    new_page_converted = np.random.choice(2,nnew, p = [1-rnew,rnew])
-    old_page_converted = np.random.choice(2,nold, p = [1-rold,rold])
+    new_page_converted = np.random.choice([0,1],nnew, p = [1-p_new,p_new])
+    old_page_converted = np.random.choice([0,1],nold, p = [1-p_old,p_old])
     p_diffs.append(new_page_converted.mean()-old_page_converted.mean())
-    
-# 将p_diffs转化为array，为了以后能用.std
-p_diffs = np.array(p_diffs)
-type(p_diffs)
 ```
 
 ### // i 绘制直方图
@@ -148,23 +134,13 @@ obs_diffs = \
 df2.query('landing_page == "new_page"')['converted'].mean()- \
 df2.query('landing_page == "old_page"')['converted'].mean()
 # 得出obs
-obs_diffs
-
-# 直接进行比较，输出是True和False
-# 再取平均值
-# 结果代表的是模拟的大于真实的比率
-# 肉眼观察接近50%
 (p_diffs > obs_diffs).mean()
 ```
-结果是：0.5013
 
 ### // k 对上面结果做描述
 
 - 此处应该转换为markdown框作答
-- 根据上面的答案0.5013（注意因为是模拟每次可能会有点不同）
-- 这个比率是模拟抽样（1万次）和真实值的对比
-- 接近0.5所以符合中心极限定律
-- 从数值上看转化率并没有区别
+- 根据上面的答案要明确回答是否有统计显著性
 
 ### // i 使用置信区间进行A/B假设的判定1
 
@@ -257,8 +233,12 @@ results = logit_mod.fit()
 results.summary()
 # 使用summary2的话P为4位小数
 ```
-根据结果，我们可以看出这里检查的是converted，使用的模型是Logit，结论是ab_page的p值是0.190:
+根据结果，我们可以看出这里检查的是converted，使用的模型是Logit，结论是ab_page的p_value是0.190:
 ![-c](http://pb6cho8f0.bkt.clouddn.com/15352516572225.jpg)
+
+此处还有一点要回答和上面II部分的p_value为什么是不一样的，提示考虑下：
+- II 中的p_value计算是单尾还是双尾的
+- 此处的p_value计算是单尾还是双尾的（结果中可是P>|z|呦）
 
 ### // e 给出你的答案
 
