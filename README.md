@@ -1,6 +1,7 @@
-# Uda DAND Basic Guide Packs
-## Notes：
+# DAND Basic Guide day1
+## / Notes：
 
+### // day0
 - 本git是在201805本人开始做uda助教时候创建，目的是为了方便进行教学和资源的分享。版权和使用权归Uda和贡献内容的助教大大们所有
 - 12周的任务分配和资源总结，见Celia大大的文档：https://docs.qq.com/sheet/BqI21X2yZIht154Jnf04HPOn3lM6ta0e9BhW0TKxvZ3IxTgZ4IQmKC2Cjyb92ReNT41C9Kls1VtkL32AdyDz3?opendocxfrom=admin#BB08J2
 - 根目录下导学文件按照week1-week12编号，为每周的导学文件
@@ -14,31 +15,12 @@
 - Uda slides、课程视频因为每次变化及保密原因不放出链接，需要的私戳
 - 从week5开始，导学md的所有图片都配置到了图床上，方便分享和加快访问
 
-## file lists：
+## / file lists：
 
-**导学文件：**
-
-以下是发布在git pages的html文件，分享链接或者当文件发布都可以：
-
-w11 http://t.cn/RkKTMxG
-w10-p1 http://t.cn/RkGodn1
-w10 http://t.cn/RDrH1im
-w9 http://t.cn/RD2V8uu
-w8-p1 http://t.cn/RDh36Sg
-w8 http://t.cn/ReQ2hxm
-w7-p1 http://t.cn/ReffqHI
-w7 http://t.cn/Re71w9t
-w6-p1 http://t.cn/RD2cANG
-w6 http://t.cn/ReUxOla
-w5 http://t.cn/Rk94U6L
-w4 http://t.cn/Rk9Umbi
-w3-p1 http://t.cn/Rk94Oj1
-w3 http://t.cn/Rk9USmn
-w2 http://t.cn/Rk9UqP3
-w1 http://t.cn/Rk9yIzM
-
-原始的md文件在git repo大家也可以下载或者fork：
-https://github.com/mengfanchun2017/DAND-Basic-P0/
+### // guide files：
+- 导学文件已经放在了静态blog上了，将会在第2期按周滚动订正一次：
+http://pf2mvmj0r.bkt.clouddn.com
+- 第一期的导学文件有个18万+字的pdf版本，如果不方便上网时可以先参考一下：
 
 **项目文件：**
 
