@@ -1,3 +1,18 @@
+# https://cn.udacity.com/course/shell-workshop--ud206
+def cylinder_volume(height, radius):
+    pi = 3.14159
+    return height * pi * radius ** 2
+print(cylinder_volume(10,3))
+
+def readable_timedelta(days):
+    """Print the number of weeks and days in a number of days."""
+    #to get the number of weeks we use integer division
+    weeks = days // 7
+    #to get the number of days that remain we use %, the modulus operator
+    remainder = days % 7
+    return "{} week(s) and {} day(s).".format(weeks, remainder)
+print(readable_timedelta(20)
+
 # https://classroom.udacity.com/nanodegrees/nd002-cn-basic-vip/parts/37aa085f-a2c7-48ac-8070-f17f5be7f2dd/modules/f0fc5dc7-15a0-41ea-acae-66eb3b761ae1/lessons/ee5eb8d0-dc89-4b42-8feb-9fbe35a5fecd/concepts/6f282eeb-c6fe-4ef3-a80b-c1fde200daeb#
 
 def population_density(population, land_area):
@@ -39,7 +54,7 @@ def create_cast_list(filename):
     #use the for loop syntax to process each line
     #and add the actor name to cast_list
         for l in f:
-            t = l.split(',')[0]
+            # t = l.split(',')[0]
             # print(t)
             cast_list.append(l.split(',')[0].strip())
     return cast_list
