@@ -24,7 +24,7 @@ if 0:
     #使用.apply将grouped_data分组后的value的值进行标准化计算
 
 # Find second largest value in each group
-if 1:
+if 0:
     def second_largest(xs):
         sorted_xs = xs.sort_values(inplace=False, ascending=False)
         #如果报错'Series' object has no attribute 'sort'
